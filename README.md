@@ -14,12 +14,18 @@ patterns/    structure guides, not code
 loom.json    unit index
 ```
 
-The first cut contains four filter operators:
+The catalog currently contains ten operators:
 
 - `operators/filters/clamp` — limit sample-to-sample change.
 - `operators/filters/median` — remove impulses with an N-sample median.
 - `operators/filters/moving-average` — smooth with an N-sample mean.
 - `operators/filters/ema` — first-order lag with a power-of-two shift.
+- `operators/filters/trimmed-mean` — drop min/max, then average a batch.
+- `operators/debounce` — stabilize a binary input.
+- `operators/hysteresis` — keep state across a threshold band.
+- `operators/key-fsm` — short and long key events.
+- `operators/crc16` — CRC-16/CCITT-FALSE.
+- `operators/ring-buffer` — fixed-size byte ring buffer.
 
 ## Contract
 

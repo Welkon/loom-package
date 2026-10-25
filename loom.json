@@ -46,6 +46,73 @@
         "adc"
       ],
       "summary": "First-order lag with a power-of-two shift."
+    },
+    {
+      "id": "trimmed-mean",
+      "kind": "operator",
+      "version": "0.1.0",
+      "path": "operators/filters/trimmed-mean",
+      "tags": [
+        "filter",
+        "adc"
+      ],
+      "summary": "Average a batch after dropping the minimum and maximum."
+    },
+    {
+      "id": "debounce",
+      "kind": "operator",
+      "version": "0.1.0",
+      "path": "operators/debounce",
+      "tags": [
+        "filter",
+        "key"
+      ],
+      "summary": "Delay a binary change until the input is stable."
+    },
+    {
+      "id": "hysteresis",
+      "kind": "operator",
+      "version": "0.1.0",
+      "path": "operators/hysteresis",
+      "tags": [
+        "control",
+        "battery"
+      ],
+      "summary": "Keep a binary state across a threshold band."
+    },
+    {
+      "id": "key-fsm",
+      "kind": "operator",
+      "version": "0.1.0",
+      "path": "operators/key-fsm",
+      "tags": [
+        "control",
+        "key"
+      ],
+      "summary": "Turn a key level into short and long events."
+    },
+    {
+      "id": "crc16",
+      "kind": "operator",
+      "version": "0.1.0",
+      "path": "operators/crc16",
+      "tags": [
+        "integrity",
+        "protocol"
+      ],
+      "summary": "CRC-16/CCITT-FALSE for frames and images."
+    },
+    {
+      "id": "ring-buffer",
+      "kind": "operator",
+      "version": "0.1.0",
+      "path": "operators/ring-buffer",
+      "tags": [
+        "buffer",
+        "uart"
+      ],
+      "summary": "Fixed-size byte ring buffer."
     }
-  ]
+  ],
+  "version": "0.2.0"
 }
