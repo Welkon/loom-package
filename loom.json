@@ -17,7 +17,13 @@
         "ADC step noise",
         "sensor dropout",
         "setpoint rate limit"
-      ]
+      ],
+      "compatibility": {
+        "language": "c99",
+        "alloc": false,
+        "float": false,
+        "blocking": false
+      }
     },
     {
       "id": "median",
@@ -33,7 +39,13 @@
         "PIR impulses",
         "ADC spikes",
         "key bounce"
-      ]
+      ],
+      "compatibility": {
+        "language": "c99",
+        "alloc": false,
+        "float": false,
+        "blocking": false
+      }
     },
     {
       "id": "moving-average",
@@ -49,7 +61,13 @@
         "battery voltage",
         "temperature",
         "slow ADC"
-      ]
+      ],
+      "compatibility": {
+        "language": "c99",
+        "alloc": false,
+        "float": false,
+        "blocking": false
+      }
     },
     {
       "id": "ema",
@@ -65,7 +83,13 @@
         "battery gauge",
         "control loop",
         "display smoothing"
-      ]
+      ],
+      "compatibility": {
+        "language": "c99",
+        "alloc": false,
+        "float": false,
+        "blocking": false
+      }
     },
     {
       "id": "trimmed-mean",
@@ -81,7 +105,13 @@
         "PIR 6-sample batch",
         "ADC burst with spikes",
         "sensor batch"
-      ]
+      ],
+      "compatibility": {
+        "language": "c99",
+        "alloc": false,
+        "float": false,
+        "blocking": false
+      }
     },
     {
       "id": "debounce",
@@ -97,7 +127,13 @@
         "key",
         "limit switch",
         "PIR digital output"
-      ]
+      ],
+      "compatibility": {
+        "language": "c99",
+        "alloc": false,
+        "float": false,
+        "blocking": false
+      }
     },
     {
       "id": "hysteresis",
@@ -113,7 +149,13 @@
         "battery threshold",
         "thermostat",
         "presence"
-      ]
+      ],
+      "compatibility": {
+        "language": "c99",
+        "alloc": false,
+        "float": false,
+        "blocking": false
+      }
     },
     {
       "id": "key-fsm",
@@ -129,7 +171,13 @@
         "power button",
         "single-key menu",
         "short and long action"
-      ]
+      ],
+      "compatibility": {
+        "language": "c99",
+        "alloc": false,
+        "float": false,
+        "blocking": false
+      }
     },
     {
       "id": "crc16",
@@ -145,7 +193,13 @@
         "config block",
         "firmware image",
         "serial frame"
-      ]
+      ],
+      "compatibility": {
+        "language": "c99",
+        "alloc": false,
+        "float": false,
+        "blocking": false
+      }
     },
     {
       "id": "ring-buffer",
@@ -161,7 +215,13 @@
         "UART receive",
         "IR edge queue",
         "event queue"
-      ]
+      ],
+      "compatibility": {
+        "language": "c99",
+        "alloc": false,
+        "float": false,
+        "blocking": false
+      }
     },
     {
       "id": "mean",
@@ -176,7 +236,13 @@
       "applications": [
         "short ADC burst",
         "calibration average"
-      ]
+      ],
+      "compatibility": {
+        "language": "c99",
+        "alloc": false,
+        "float": false,
+        "blocking": false
+      }
     },
     {
       "id": "clamp-average",
@@ -191,7 +257,13 @@
       "applications": [
         "noisy actuator feedback",
         "battery with spikes"
-      ]
+      ],
+      "compatibility": {
+        "language": "c99",
+        "alloc": false,
+        "float": false,
+        "blocking": false
+      }
     },
     {
       "id": "weighted-average",
@@ -207,7 +279,13 @@
         "trusted recent samples",
         "sensor fusion",
         "calibration weighting"
-      ]
+      ],
+      "compatibility": {
+        "language": "c99",
+        "alloc": false,
+        "float": false,
+        "blocking": false
+      }
     },
     {
       "id": "clamp-debounce",
@@ -222,7 +300,13 @@
       "applications": [
         "slow analog channel",
         "spike and drift rejection"
-      ]
+      ],
+      "compatibility": {
+        "language": "c99",
+        "alloc": false,
+        "float": false,
+        "blocking": false
+      }
     },
     {
       "id": "ir-nec-decode",
@@ -238,7 +322,13 @@
         "TV remote",
         "IR keypad",
         "appliance control"
-      ]
+      ],
+      "compatibility": {
+        "language": "c99",
+        "alloc": false,
+        "float": false,
+        "blocking": false
+      }
     },
     {
       "id": "i2c-master",
@@ -255,7 +345,13 @@
         "EEPROM",
         "OLED",
         "PMIC"
-      ]
+      ],
+      "compatibility": {
+        "language": "c99",
+        "alloc": false,
+        "float": false,
+        "blocking": true
+      }
     },
     {
       "id": "uart",
@@ -271,7 +367,13 @@
         "AT command module",
         "debug console",
         "GPS module"
-      ]
+      ],
+      "compatibility": {
+        "language": "c99",
+        "alloc": false,
+        "float": false,
+        "blocking": true
+      }
     },
     {
       "id": "ws2812",
@@ -287,7 +389,13 @@
         "status LED",
         "LED strip",
         "Padauk WS2812 example"
-      ]
+      ],
+      "compatibility": {
+        "language": "c99",
+        "alloc": false,
+        "float": false,
+        "blocking": true
+      }
     },
     {
       "id": "ir-capture",
@@ -303,8 +411,14 @@
         "NEC remote",
         "IR keypad",
         "protocol capture"
-      ]
+      ],
+      "compatibility": {
+        "language": "c99",
+        "alloc": false,
+        "float": false,
+        "blocking": false
+      }
     }
   ],
-  "version": "0.4.0"
+  "version": "0.4.1"
 }

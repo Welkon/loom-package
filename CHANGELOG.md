@@ -1,5 +1,11 @@
 # Changelog
 
+## 0.4.1
+
+- Add compatibility metadata to every unit: C99, no allocation, no float,
+  and blocking behavior.
+- Run the C unit tests in the release gate.
+
 ## 0.4.0
 
 - Add the `uart` driver with a port and timeout.
