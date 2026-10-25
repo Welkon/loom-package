@@ -28,7 +28,9 @@ TESTS := \
 	$(BUILD)/test_soft_pwm \
 	$(BUILD)/test_crc32 \
 	$(BUILD)/test_fixed_sqrt \
-	$(BUILD)/test_ds18b20
+	$(BUILD)/test_ds18b20 \
+	$(BUILD)/test_ssd1306 \
+	$(BUILD)/test_biquad
 
 all: test
 
@@ -112,6 +114,12 @@ $(BUILD)/test_fixed_sqrt: operators/fixed-sqrt/tests/test_fixed_sqrt.c operators
 
 $(BUILD)/test_ds18b20: drivers/ds18b20/tests/test_ds18b20.c drivers/ds18b20/ds18b20.c | $(BUILD)
 	$(CC) $(CFLAGS) -Idrivers/ds18b20 $^ -o $@
+
+$(BUILD)/test_ssd1306: drivers/ssd1306/tests/test_ssd1306.c drivers/ssd1306/ssd1306.c | $(BUILD)
+	$(CC) $(CFLAGS) -Idrivers/ssd1306 $^ -o $@
+
+$(BUILD)/test_biquad: operators/biquad/tests/test_biquad.c operators/biquad/biquad.c | $(BUILD)
+	$(CC) $(CFLAGS) -Ioperators/biquad $^ -o $@
 
 test: $(TESTS)
 	@for t in $(TESTS); do echo "== $$t"; ./$$t; done

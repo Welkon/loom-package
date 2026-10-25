@@ -570,7 +570,51 @@
         "float": false,
         "blocking": true
       }
+    },
+    {
+      "id": "biquad",
+      "kind": "operator",
+      "version": "0.1.0",
+      "path": "operators/biquad",
+      "tags": [
+        "dsp",
+        "filter"
+      ],
+      "summary": "Q15 direct-form I biquad section.",
+      "applications": [
+        "audio filter",
+        "sensor smoothing",
+        "DSP chain"
+      ],
+      "compatibility": {
+        "language": "c99",
+        "alloc": false,
+        "float": false,
+        "blocking": false
+      }
+    },
+    {
+      "id": "ssd1306",
+      "kind": "driver",
+      "version": "0.1.0",
+      "path": "drivers/ssd1306",
+      "tags": [
+        "display",
+        "oled"
+      ],
+      "summary": "Minimal SSD1306 128x64 I2C driver.",
+      "applications": [
+        "status display",
+        "menu",
+        "manufacturing test"
+      ],
+      "compatibility": {
+        "language": "c99",
+        "alloc": false,
+        "float": false,
+        "blocking": true
+      }
     }
   ],
-  "version": "0.5.0"
+  "version": "0.6.0"
 }

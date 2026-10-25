@@ -1,5 +1,10 @@
 # Changelog
 
+## 0.6.0
+
+- Add `biquad` from the CMSIS-DSP Q15 form.
+- Add `ssd1306` from the u8g2 128x64 init sequence.
+
 ## 0.5.0
 
 - Add `pid`, `gamma-lut`, `crc32`, and `fixed-sqrt` operators.
