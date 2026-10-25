@@ -3,9 +3,49 @@
   "name": "emb-loom",
   "license": "MIT",
   "units": [
-    {"id": "clamp", "kind": "operator", "version": "0.1.0", "path": "operators/filters/clamp", "tags": ["filter", "adc"]},
-    {"id": "median", "kind": "operator", "version": "0.1.0", "path": "operators/filters/median", "tags": ["filter", "adc"]},
-    {"id": "moving-average", "kind": "operator", "version": "0.1.0", "path": "operators/filters/moving-average", "tags": ["filter", "adc"]},
-    {"id": "ema", "kind": "operator", "version": "0.1.0", "path": "operators/filters/ema", "tags": ["filter", "adc"]}
+    {
+      "id": "clamp",
+      "kind": "operator",
+      "version": "0.1.0",
+      "path": "operators/filters/clamp",
+      "tags": [
+        "filter",
+        "adc"
+      ],
+      "summary": "Limit sample-to-sample change."
+    },
+    {
+      "id": "median",
+      "kind": "operator",
+      "version": "0.1.0",
+      "path": "operators/filters/median",
+      "tags": [
+        "filter",
+        "adc"
+      ],
+      "summary": "Remove impulses with an N-sample median."
+    },
+    {
+      "id": "moving-average",
+      "kind": "operator",
+      "version": "0.1.0",
+      "path": "operators/filters/moving-average",
+      "tags": [
+        "filter",
+        "adc"
+      ],
+      "summary": "Smooth with an N-sample mean."
+    },
+    {
+      "id": "ema",
+      "kind": "operator",
+      "version": "0.1.0",
+      "path": "operators/filters/ema",
+      "tags": [
+        "filter",
+        "adc"
+      ],
+      "summary": "First-order lag with a power-of-two shift."
+    }
   ]
 }
