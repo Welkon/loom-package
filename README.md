@@ -14,18 +14,29 @@ patterns/    structure guides, not code
 loom.json    unit index
 ```
 
-The catalog currently contains ten operators:
+The catalog currently contains sixteen units.
+
+Operators:
 
 - `operators/filters/clamp` — limit sample-to-sample change.
 - `operators/filters/median` — remove impulses with an N-sample median.
 - `operators/filters/moving-average` — smooth with an N-sample mean.
 - `operators/filters/ema` — first-order lag with a power-of-two shift.
 - `operators/filters/trimmed-mean` — drop min/max, then average a batch.
+- `operators/filters/mean` — arithmetic mean of a batch.
+- `operators/filters/clamp-average` — clamp, then moving average.
+- `operators/filters/weighted-average` — weighted mean of a batch.
+- `operators/filters/clamp-debounce` — clamp, then N-sample debounce.
 - `operators/debounce` — stabilize a binary input.
 - `operators/hysteresis` — keep state across a threshold band.
 - `operators/key-fsm` — short and long key events.
 - `operators/crc16` — CRC-16/CCITT-FALSE.
 - `operators/ring-buffer` — fixed-size byte ring buffer.
+- `operators/ir-nec-decode` — NEC IR frame decoder.
+
+Drivers:
+
+- `drivers/i2c-master` — blocking I2C master core with a port and fake bus.
 
 ## Contract
 

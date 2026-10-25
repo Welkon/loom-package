@@ -112,7 +112,73 @@
         "uart"
       ],
       "summary": "Fixed-size byte ring buffer."
+    },
+    {
+      "id": "mean",
+      "kind": "operator",
+      "version": "0.1.0",
+      "path": "operators/filters/mean",
+      "tags": [
+        "filter",
+        "adc"
+      ],
+      "summary": "Arithmetic mean of a batch."
+    },
+    {
+      "id": "clamp-average",
+      "kind": "operator",
+      "version": "0.1.0",
+      "path": "operators/filters/clamp-average",
+      "tags": [
+        "filter",
+        "adc"
+      ],
+      "summary": "Limit each step, then smooth with a moving average."
+    },
+    {
+      "id": "weighted-average",
+      "kind": "operator",
+      "version": "0.1.0",
+      "path": "operators/filters/weighted-average",
+      "tags": [
+        "filter",
+        "adc"
+      ],
+      "summary": "Weighted mean of a batch."
+    },
+    {
+      "id": "clamp-debounce",
+      "kind": "operator",
+      "version": "0.1.0",
+      "path": "operators/filters/clamp-debounce",
+      "tags": [
+        "filter",
+        "adc"
+      ],
+      "summary": "Limit each step, then accept after N stable samples."
+    },
+    {
+      "id": "ir-nec-decode",
+      "kind": "operator",
+      "version": "0.1.0",
+      "path": "operators/ir-nec-decode",
+      "tags": [
+        "ir",
+        "protocol"
+      ],
+      "summary": "Decode NEC falling-edge intervals."
+    },
+    {
+      "id": "i2c-master",
+      "kind": "driver",
+      "version": "0.1.0",
+      "path": "drivers/i2c-master",
+      "tags": [
+        "i2c",
+        "bus"
+      ],
+      "summary": "Blocking I2C master with a port and fake bus."
     }
   ],
-  "version": "0.2.0"
+  "version": "0.3.0"
 }

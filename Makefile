@@ -12,7 +12,13 @@ TESTS := \
 	$(BUILD)/test_hysteresis \
 	$(BUILD)/test_key_fsm \
 	$(BUILD)/test_crc16 \
-	$(BUILD)/test_ring_buffer
+	$(BUILD)/test_ring_buffer \
+	$(BUILD)/test_mean \
+	$(BUILD)/test_clamp_average \
+	$(BUILD)/test_weighted_average \
+	$(BUILD)/test_clamp_debounce \
+	$(BUILD)/test_ir_nec \
+	$(BUILD)/test_i2c_master
 
 all: test
 
@@ -48,6 +54,24 @@ $(BUILD)/test_crc16: operators/crc16/tests/test_crc16.c operators/crc16/crc16.c 
 
 $(BUILD)/test_ring_buffer: operators/ring-buffer/tests/test_ring_buffer.c operators/ring-buffer/ring_buffer.c | $(BUILD)
 	$(CC) $(CFLAGS) -Ioperators/ring-buffer $^ -o $@
+
+$(BUILD)/test_mean: operators/filters/mean/tests/test_mean.c operators/filters/mean/mean.c | $(BUILD)
+	$(CC) $(CFLAGS) -Ioperators/filters/mean $^ -o $@
+
+$(BUILD)/test_clamp_average: operators/filters/clamp-average/tests/test_clamp_average.c operators/filters/clamp-average/clamp_average.c | $(BUILD)
+	$(CC) $(CFLAGS) -Ioperators/filters/clamp-average $^ -o $@
+
+$(BUILD)/test_weighted_average: operators/filters/weighted-average/tests/test_weighted_average.c operators/filters/weighted-average/weighted_average.c | $(BUILD)
+	$(CC) $(CFLAGS) -Ioperators/filters/weighted-average $^ -o $@
+
+$(BUILD)/test_clamp_debounce: operators/filters/clamp-debounce/tests/test_clamp_debounce.c operators/filters/clamp-debounce/clamp_debounce.c | $(BUILD)
+	$(CC) $(CFLAGS) -Ioperators/filters/clamp-debounce $^ -o $@
+
+$(BUILD)/test_ir_nec: operators/ir-nec-decode/tests/test_ir_nec.c operators/ir-nec-decode/ir_nec.c | $(BUILD)
+	$(CC) $(CFLAGS) -Ioperators/ir-nec-decode $^ -o $@
+
+$(BUILD)/test_i2c_master: drivers/i2c-master/tests/test_i2c_master.c drivers/i2c-master/i2c_master.c | $(BUILD)
+	$(CC) $(CFLAGS) -Idrivers/i2c-master $^ -o $@
 
 test: $(TESTS)
 	@for t in $(TESTS); do echo "== $$t"; ./$$t; done
