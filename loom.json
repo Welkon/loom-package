@@ -614,7 +614,75 @@
         "float": false,
         "blocking": true
       }
+    },
+    {
+      "id": "dht",
+      "kind": "driver",
+      "version": "0.1.0",
+      "path": "drivers/dht",
+      "tags": [
+        "sensor",
+        "humidity",
+        "temperature"
+      ],
+      "summary": "DHT11 and DHT22 frame decoders.",
+      "applications": [
+        "room climate",
+        "greenhouse",
+        "enclosure monitoring"
+      ],
+      "compatibility": {
+        "language": "c99",
+        "alloc": false,
+        "float": false,
+        "blocking": false
+      }
+    },
+    {
+      "id": "rotary-encoder",
+      "kind": "driver",
+      "version": "0.1.0",
+      "path": "drivers/rotary-encoder",
+      "tags": [
+        "input",
+        "quadrature",
+        "knob"
+      ],
+      "summary": "Quadrature decoder for a mechanical rotary encoder.",
+      "applications": [
+        "menu knob",
+        "setpoint",
+        "manual stage"
+      ],
+      "compatibility": {
+        "language": "c99",
+        "alloc": false,
+        "float": false,
+        "blocking": false
+      }
+    },
+    {
+      "id": "fir",
+      "kind": "operator",
+      "version": "0.1.0",
+      "path": "operators/fir",
+      "tags": [
+        "dsp",
+        "filter"
+      ],
+      "summary": "Q15 finite-impulse-response filter.",
+      "applications": [
+        "audio filter",
+        "sensor smoothing",
+        "DSP chain"
+      ],
+      "compatibility": {
+        "language": "c99",
+        "alloc": false,
+        "float": false,
+        "blocking": false
+      }
     }
   ],
-  "version": "0.6.0"
+  "version": "0.7.0"
 }

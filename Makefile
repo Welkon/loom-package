@@ -30,7 +30,10 @@ TESTS := \
 	$(BUILD)/test_fixed_sqrt \
 	$(BUILD)/test_ds18b20 \
 	$(BUILD)/test_ssd1306 \
-	$(BUILD)/test_biquad
+	$(BUILD)/test_biquad \
+	$(BUILD)/test_dht \
+	$(BUILD)/test_rotary_encoder \
+	$(BUILD)/test_fir
 
 all: test
 
@@ -120,6 +123,15 @@ $(BUILD)/test_ssd1306: drivers/ssd1306/tests/test_ssd1306.c drivers/ssd1306/ssd1
 
 $(BUILD)/test_biquad: operators/biquad/tests/test_biquad.c operators/biquad/biquad.c | $(BUILD)
 	$(CC) $(CFLAGS) -Ioperators/biquad $^ -o $@
+
+$(BUILD)/test_dht: drivers/dht/tests/test_dht.c drivers/dht/dht.c | $(BUILD)
+	$(CC) $(CFLAGS) -Idrivers/dht $^ -o $@
+
+$(BUILD)/test_rotary_encoder: drivers/rotary-encoder/tests/test_rotary_encoder.c drivers/rotary-encoder/rotary_encoder.c | $(BUILD)
+	$(CC) $(CFLAGS) -Idrivers/rotary-encoder $^ -o $@
+
+$(BUILD)/test_fir: operators/fir/tests/test_fir.c operators/fir/fir.c | $(BUILD)
+	$(CC) $(CFLAGS) -Ioperators/fir $^ -o $@
 
 test: $(TESTS)
 	@for t in $(TESTS); do echo "== $$t"; ./$$t; done

@@ -1,5 +1,11 @@
 # Changelog
 
+## 0.7.0
+
+- Add `dht` from the Adafruit DHT library behavior and the datasheets.
+- Add `rotary-encoder` from the PaulStoffregen/Encoder state-table behavior.
+- Add `fir` from the CMSIS-DSP Q15 form.
+
 ## 0.6.0
 
 - Add `biquad` from the CMSIS-DSP Q15 form.

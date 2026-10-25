@@ -14,7 +14,7 @@ patterns/    structure guides, not code
 loom.json    unit index
 ```
 
-The catalog currently contains twenty-eight units.
+The catalog currently contains thirty-one units.
 
 Operators:
 
@@ -38,6 +38,7 @@ Operators:
 - `operators/crc32` — CRC-32/ISO-HDLC.
 - `operators/fixed-sqrt` — Q16.16 square root.
 - `operators/biquad` — Q15 direct-form I biquad.
+- `operators/fir` — Q15 finite-impulse-response filter.
 
 Drivers:
 
@@ -49,6 +50,8 @@ Drivers:
 - `drivers/soft-pwm` — software PWM on one pin.
 - `drivers/ds18b20` — DS18B20 temperature over 1-Wire.
 - `drivers/ssd1306` — SSD1306 128x64 I2C display.
+- `drivers/dht` — DHT11/DHT22 frame decoders.
+- `drivers/rotary-encoder` — Quadrature decoder.
 
 ## Contract
 
