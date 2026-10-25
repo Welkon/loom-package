@@ -1,5 +1,11 @@
 # Changelog
 
+## 0.3.1
+
+- Expand every unit README with application scenarios, parameters, memory,
+  timing, integration code, and when not to use.
+- Add `applications` metadata to `loom.json`.
+
 ## 0.3.0
 
 - Add `mean`, `clamp-average`, `weighted-average`, and `clamp-debounce`

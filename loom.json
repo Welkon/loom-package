@@ -12,7 +12,12 @@
         "filter",
         "adc"
       ],
-      "summary": "Limit sample-to-sample change."
+      "summary": "Limit sample-to-sample change.",
+      "applications": [
+        "ADC step noise",
+        "sensor dropout",
+        "setpoint rate limit"
+      ]
     },
     {
       "id": "median",
@@ -23,7 +28,12 @@
         "filter",
         "adc"
       ],
-      "summary": "Remove impulses with an N-sample median."
+      "summary": "Remove impulses with an N-sample median.",
+      "applications": [
+        "PIR impulses",
+        "ADC spikes",
+        "key bounce"
+      ]
     },
     {
       "id": "moving-average",
@@ -34,7 +44,12 @@
         "filter",
         "adc"
       ],
-      "summary": "Smooth with an N-sample mean."
+      "summary": "Smooth with an N-sample mean.",
+      "applications": [
+        "battery voltage",
+        "temperature",
+        "slow ADC"
+      ]
     },
     {
       "id": "ema",
@@ -45,7 +60,12 @@
         "filter",
         "adc"
       ],
-      "summary": "First-order lag with a power-of-two shift."
+      "summary": "First-order lag with a power-of-two shift.",
+      "applications": [
+        "battery gauge",
+        "control loop",
+        "display smoothing"
+      ]
     },
     {
       "id": "trimmed-mean",
@@ -56,7 +76,12 @@
         "filter",
         "adc"
       ],
-      "summary": "Average a batch after dropping the minimum and maximum."
+      "summary": "Average a batch after dropping the minimum and maximum.",
+      "applications": [
+        "PIR 6-sample batch",
+        "ADC burst with spikes",
+        "sensor batch"
+      ]
     },
     {
       "id": "debounce",
@@ -67,7 +92,12 @@
         "filter",
         "key"
       ],
-      "summary": "Delay a binary change until the input is stable."
+      "summary": "Delay a binary change until the input is stable.",
+      "applications": [
+        "key",
+        "limit switch",
+        "PIR digital output"
+      ]
     },
     {
       "id": "hysteresis",
@@ -78,7 +108,12 @@
         "control",
         "battery"
       ],
-      "summary": "Keep a binary state across a threshold band."
+      "summary": "Keep a binary state across a threshold band.",
+      "applications": [
+        "battery threshold",
+        "thermostat",
+        "presence"
+      ]
     },
     {
       "id": "key-fsm",
@@ -89,7 +124,12 @@
         "control",
         "key"
       ],
-      "summary": "Turn a key level into short and long events."
+      "summary": "Turn a key level into short and long events.",
+      "applications": [
+        "power button",
+        "single-key menu",
+        "short and long action"
+      ]
     },
     {
       "id": "crc16",
@@ -100,7 +140,12 @@
         "integrity",
         "protocol"
       ],
-      "summary": "CRC-16/CCITT-FALSE for frames and images."
+      "summary": "CRC-16/CCITT-FALSE for frames and images.",
+      "applications": [
+        "config block",
+        "firmware image",
+        "serial frame"
+      ]
     },
     {
       "id": "ring-buffer",
@@ -111,7 +156,12 @@
         "buffer",
         "uart"
       ],
-      "summary": "Fixed-size byte ring buffer."
+      "summary": "Fixed-size byte ring buffer.",
+      "applications": [
+        "UART receive",
+        "IR edge queue",
+        "event queue"
+      ]
     },
     {
       "id": "mean",
@@ -122,7 +172,11 @@
         "filter",
         "adc"
       ],
-      "summary": "Arithmetic mean of a batch."
+      "summary": "Arithmetic mean of a batch.",
+      "applications": [
+        "short ADC burst",
+        "calibration average"
+      ]
     },
     {
       "id": "clamp-average",
@@ -133,7 +187,11 @@
         "filter",
         "adc"
       ],
-      "summary": "Limit each step, then smooth with a moving average."
+      "summary": "Limit each step, then smooth with a moving average.",
+      "applications": [
+        "noisy actuator feedback",
+        "battery with spikes"
+      ]
     },
     {
       "id": "weighted-average",
@@ -144,7 +202,12 @@
         "filter",
         "adc"
       ],
-      "summary": "Weighted mean of a batch."
+      "summary": "Weighted mean of a batch.",
+      "applications": [
+        "trusted recent samples",
+        "sensor fusion",
+        "calibration weighting"
+      ]
     },
     {
       "id": "clamp-debounce",
@@ -155,7 +218,11 @@
         "filter",
         "adc"
       ],
-      "summary": "Limit each step, then accept after N stable samples."
+      "summary": "Limit each step, then accept after N stable samples.",
+      "applications": [
+        "slow analog channel",
+        "spike and drift rejection"
+      ]
     },
     {
       "id": "ir-nec-decode",
@@ -166,7 +233,12 @@
         "ir",
         "protocol"
       ],
-      "summary": "Decode NEC falling-edge intervals."
+      "summary": "Decode NEC falling-edge intervals.",
+      "applications": [
+        "TV remote",
+        "IR keypad",
+        "appliance control"
+      ]
     },
     {
       "id": "i2c-master",
@@ -177,8 +249,14 @@
         "i2c",
         "bus"
       ],
-      "summary": "Blocking I2C master with a port and fake bus."
+      "summary": "Blocking I2C master with a port and fake bus.",
+      "applications": [
+        "sensor",
+        "EEPROM",
+        "OLED",
+        "PMIC"
+      ]
     }
   ],
-  "version": "0.3.0"
+  "version": "0.3.1"
 }

@@ -2,6 +2,12 @@
 
 First-order lag filter with a power-of-two smoothing factor.
 
+## Application scenarios
+
+- Battery voltage or temperature needs a slow, memory-light smooth.
+- A control loop needs a first-order response with a known time constant.
+- A display value should follow a trend without jumping.
+
 ## Contract
 
 ```c
@@ -11,17 +17,33 @@ void ema_filter_reset(ema_filter_t *filter, int32_t value);
 ```
 
 - `shift` is 0..15; the smoothing factor is `2^shift`.
-- A larger shift gives more smoothing and more lag.
 - `shift = 0` follows the sample exactly.
 - Division truncates toward zero, so negative inputs round toward zero.
-- Cost is O(1); no allocation.
+- O(1); no allocation.
 
-## Use
+## Parameters
 
-Use it for battery voltage, temperature, or a control signal where a
-first-order response is enough.
+- Time constant is about `2^shift` samples.
+- Larger shift: smoother, more lag; smaller shift: faster, more noise.
 
-## Avoid
+## Memory and timing
 
-Do not use it when an impulse must be removed; a spike still moves the
-output. Use `median` or `trimmed-mean` first.
+- 8 bytes of state; one shift and one division per sample.
+
+## Integration
+
+```c
+ema_filter_t filter;
+ema_filter_init(&filter, 0, 3);   // factor 8
+int32_t smooth = ema_filter_step(&filter, adc_read());
+```
+
+## When not to use
+
+- Impulses must be removed; a spike still moves the output.
+- Exact linear-phase filtering is required; use a symmetric FIR.
+
+## Verification
+
+`make test` covers shift 0, positive and negative steps, reset, and shift clamping.
+Behavior reference: Padauk `Soft_Filter/AD_filter_07`.
