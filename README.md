@@ -14,7 +14,7 @@ patterns/    structure guides, not code
 loom.json    unit index
 ```
 
-The catalog currently contains sixteen units.
+The catalog currently contains nineteen units.
 
 Operators:
 
@@ -37,6 +37,9 @@ Operators:
 Drivers:
 
 - `drivers/i2c-master` — blocking I2C master core with a port and fake bus.
+- `drivers/uart` — blocking UART core with a port and timeout.
+- `drivers/ws2812` — RGB to GRB encoder with a timing port.
+- `drivers/ir-capture` — falling-edge interval collector for IR receivers.
 
 ## Contract
 

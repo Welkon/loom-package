@@ -18,7 +18,10 @@ TESTS := \
 	$(BUILD)/test_weighted_average \
 	$(BUILD)/test_clamp_debounce \
 	$(BUILD)/test_ir_nec \
-	$(BUILD)/test_i2c_master
+	$(BUILD)/test_i2c_master \
+	$(BUILD)/test_uart \
+	$(BUILD)/test_ws2812 \
+	$(BUILD)/test_ir_capture
 
 all: test
 
@@ -72,6 +75,15 @@ $(BUILD)/test_ir_nec: operators/ir-nec-decode/tests/test_ir_nec.c operators/ir-n
 
 $(BUILD)/test_i2c_master: drivers/i2c-master/tests/test_i2c_master.c drivers/i2c-master/i2c_master.c | $(BUILD)
 	$(CC) $(CFLAGS) -Idrivers/i2c-master $^ -o $@
+
+$(BUILD)/test_uart: drivers/uart/tests/test_uart.c drivers/uart/uart.c | $(BUILD)
+	$(CC) $(CFLAGS) -Idrivers/uart $^ -o $@
+
+$(BUILD)/test_ws2812: drivers/ws2812/tests/test_ws2812.c drivers/ws2812/ws2812.c | $(BUILD)
+	$(CC) $(CFLAGS) -Idrivers/ws2812 $^ -o $@
+
+$(BUILD)/test_ir_capture: drivers/ir-capture/tests/test_ir_capture.c drivers/ir-capture/ir_capture.c | $(BUILD)
+	$(CC) $(CFLAGS) -Idrivers/ir-capture $^ -o $@
 
 test: $(TESTS)
 	@for t in $(TESTS); do echo "== $$t"; ./$$t; done

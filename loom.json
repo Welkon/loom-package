@@ -256,7 +256,55 @@
         "OLED",
         "PMIC"
       ]
+    },
+    {
+      "id": "uart",
+      "kind": "driver",
+      "version": "0.1.0",
+      "path": "drivers/uart",
+      "tags": [
+        "uart",
+        "serial"
+      ],
+      "summary": "Blocking UART core with a port and timeout.",
+      "applications": [
+        "AT command module",
+        "debug console",
+        "GPS module"
+      ]
+    },
+    {
+      "id": "ws2812",
+      "kind": "driver",
+      "version": "0.1.0",
+      "path": "drivers/ws2812",
+      "tags": [
+        "led",
+        "protocol"
+      ],
+      "summary": "Encode RGB pixels into WS2812 GRB bytes.",
+      "applications": [
+        "status LED",
+        "LED strip",
+        "Padauk WS2812 example"
+      ]
+    },
+    {
+      "id": "ir-capture",
+      "kind": "driver",
+      "version": "0.1.0",
+      "path": "drivers/ir-capture",
+      "tags": [
+        "ir",
+        "capture"
+      ],
+      "summary": "Collect falling-edge intervals for an IR receiver.",
+      "applications": [
+        "NEC remote",
+        "IR keypad",
+        "protocol capture"
+      ]
     }
   ],
-  "version": "0.3.1"
+  "version": "0.4.0"
 }

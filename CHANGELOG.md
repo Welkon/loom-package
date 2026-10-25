@@ -1,5 +1,11 @@
 # Changelog
 
+## 0.4.0
+
+- Add the `uart` driver with a port and timeout.
+- Add the `ws2812` RGB/GRB driver with a timing port.
+- Add the `ir-capture` falling-edge interval collector.
+
 ## 0.3.1
 
 - Expand every unit README with application scenarios, parameters, memory,
