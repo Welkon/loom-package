@@ -1,0 +1,11 @@
+{
+  "schema": 1,
+  "name": "emb-loom",
+  "license": "MIT",
+  "units": [
+    {"id": "clamp", "kind": "operator", "version": "0.1.0", "path": "operators/filters/clamp", "tags": ["filter", "adc"]},
+    {"id": "median", "kind": "operator", "version": "0.1.0", "path": "operators/filters/median", "tags": ["filter", "adc"]},
+    {"id": "moving-average", "kind": "operator", "version": "0.1.0", "path": "operators/filters/moving-average", "tags": ["filter", "adc"]},
+    {"id": "ema", "kind": "operator", "version": "0.1.0", "path": "operators/filters/ema", "tags": ["filter", "adc"]}
+  ]
+}
