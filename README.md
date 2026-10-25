@@ -14,7 +14,7 @@ patterns/    structure guides, not code
 loom.json    unit index
 ```
 
-The catalog currently contains nineteen units.
+The catalog currently contains twenty-six units.
 
 Operators:
 
@@ -33,6 +33,10 @@ Operators:
 - `operators/crc16` — CRC-16/CCITT-FALSE.
 - `operators/ring-buffer` — fixed-size byte ring buffer.
 - `operators/ir-nec-decode` — NEC IR frame decoder.
+- `operators/pid` — integer PID controller.
+- `operators/gamma-lut` — interpolated lookup table.
+- `operators/crc32` — CRC-32/ISO-HDLC.
+- `operators/fixed-sqrt` — Q16.16 square root.
 
 Drivers:
 
@@ -40,6 +44,9 @@ Drivers:
 - `drivers/uart` — blocking UART core with a port and timeout.
 - `drivers/ws2812` — RGB to GRB encoder with a timing port.
 - `drivers/ir-capture` — falling-edge interval collector for IR receivers.
+- `drivers/adc-sampler` — averaged ADC reads.
+- `drivers/soft-pwm` — software PWM on one pin.
+- `drivers/ds18b20` — DS18B20 temperature over 1-Wire.
 
 ## Contract
 

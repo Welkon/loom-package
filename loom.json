@@ -418,7 +418,159 @@
         "float": false,
         "blocking": false
       }
+    },
+    {
+      "id": "pid",
+      "kind": "operator",
+      "version": "0.1.0",
+      "path": "operators/pid",
+      "tags": [
+        "control",
+        "motor"
+      ],
+      "summary": "Integer PID with integral clamping and output limits.",
+      "applications": [
+        "motor speed",
+        "heater control",
+        "fan control"
+      ],
+      "compatibility": {
+        "language": "c99",
+        "alloc": false,
+        "float": false,
+        "blocking": false
+      }
+    },
+    {
+      "id": "gamma-lut",
+      "kind": "operator",
+      "version": "0.1.0",
+      "path": "operators/gamma-lut",
+      "tags": [
+        "led",
+        "display"
+      ],
+      "summary": "Map an input through a lookup table with interpolation.",
+      "applications": [
+        "LED dimming",
+        "sensor linearization"
+      ],
+      "compatibility": {
+        "language": "c99",
+        "alloc": false,
+        "float": false,
+        "blocking": false
+      }
+    },
+    {
+      "id": "crc32",
+      "kind": "operator",
+      "version": "0.1.0",
+      "path": "operators/crc32",
+      "tags": [
+        "integrity",
+        "protocol"
+      ],
+      "summary": "CRC-32/ISO-HDLC for images and frames.",
+      "applications": [
+        "firmware image",
+        "config block",
+        "zlib-compatible frame"
+      ],
+      "compatibility": {
+        "language": "c99",
+        "alloc": false,
+        "float": false,
+        "blocking": false
+      }
+    },
+    {
+      "id": "fixed-sqrt",
+      "kind": "operator",
+      "version": "0.1.0",
+      "path": "operators/fixed-sqrt",
+      "tags": [
+        "math",
+        "fixed-point"
+      ],
+      "summary": "Q16.16 integer square root.",
+      "applications": [
+        "RMS",
+        "magnitude",
+        "sensor linearization"
+      ],
+      "compatibility": {
+        "language": "c99",
+        "alloc": false,
+        "float": false,
+        "blocking": false
+      }
+    },
+    {
+      "id": "adc-sampler",
+      "kind": "driver",
+      "version": "0.1.0",
+      "path": "drivers/adc-sampler",
+      "tags": [
+        "adc",
+        "sensor"
+      ],
+      "summary": "Average N ADC reads on a channel.",
+      "applications": [
+        "battery voltage",
+        "temperature",
+        "sensor channel"
+      ],
+      "compatibility": {
+        "language": "c99",
+        "alloc": false,
+        "float": false,
+        "blocking": true
+      }
+    },
+    {
+      "id": "soft-pwm",
+      "kind": "driver",
+      "version": "0.1.0",
+      "path": "drivers/soft-pwm",
+      "tags": [
+        "pwm",
+        "led"
+      ],
+      "summary": "Software PWM on a single pin.",
+      "applications": [
+        "status LED",
+        "heater",
+        "low-end MCU"
+      ],
+      "compatibility": {
+        "language": "c99",
+        "alloc": false,
+        "float": false,
+        "blocking": false
+      }
+    },
+    {
+      "id": "ds18b20",
+      "kind": "driver",
+      "version": "0.1.0",
+      "path": "drivers/ds18b20",
+      "tags": [
+        "sensor",
+        "onewire"
+      ],
+      "summary": "READ DS18B20 temperature over 1-Wire.",
+      "applications": [
+        "board temperature",
+        "enclosure probe"
+      ],
+      "compatibility": {
+        "language": "c99",
+        "alloc": false,
+        "float": false,
+        "blocking": true
+      }
     }
   ],
-  "version": "0.4.1"
+  "version": "0.5.0"
 }

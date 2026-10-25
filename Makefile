@@ -21,7 +21,14 @@ TESTS := \
 	$(BUILD)/test_i2c_master \
 	$(BUILD)/test_uart \
 	$(BUILD)/test_ws2812 \
-	$(BUILD)/test_ir_capture
+	$(BUILD)/test_ir_capture \
+	$(BUILD)/test_pid \
+	$(BUILD)/test_gamma_lut \
+	$(BUILD)/test_adc_sampler \
+	$(BUILD)/test_soft_pwm \
+	$(BUILD)/test_crc32 \
+	$(BUILD)/test_fixed_sqrt \
+	$(BUILD)/test_ds18b20
 
 all: test
 
@@ -84,6 +91,27 @@ $(BUILD)/test_ws2812: drivers/ws2812/tests/test_ws2812.c drivers/ws2812/ws2812.c
 
 $(BUILD)/test_ir_capture: drivers/ir-capture/tests/test_ir_capture.c drivers/ir-capture/ir_capture.c | $(BUILD)
 	$(CC) $(CFLAGS) -Idrivers/ir-capture $^ -o $@
+
+$(BUILD)/test_pid: operators/pid/tests/test_pid.c operators/pid/pid.c | $(BUILD)
+	$(CC) $(CFLAGS) -Ioperators/pid $^ -o $@
+
+$(BUILD)/test_gamma_lut: operators/gamma-lut/tests/test_gamma_lut.c operators/gamma-lut/gamma_lut.c | $(BUILD)
+	$(CC) $(CFLAGS) -Ioperators/gamma-lut $^ -o $@
+
+$(BUILD)/test_adc_sampler: drivers/adc-sampler/tests/test_adc_sampler.c drivers/adc-sampler/adc_sampler.c | $(BUILD)
+	$(CC) $(CFLAGS) -Idrivers/adc-sampler $^ -o $@
+
+$(BUILD)/test_soft_pwm: drivers/soft-pwm/tests/test_soft_pwm.c drivers/soft-pwm/soft_pwm.c | $(BUILD)
+	$(CC) $(CFLAGS) -Idrivers/soft-pwm $^ -o $@
+
+$(BUILD)/test_crc32: operators/crc32/tests/test_crc32.c operators/crc32/crc32.c | $(BUILD)
+	$(CC) $(CFLAGS) -Ioperators/crc32 $^ -o $@
+
+$(BUILD)/test_fixed_sqrt: operators/fixed-sqrt/tests/test_fixed_sqrt.c operators/fixed-sqrt/fixed_sqrt.c | $(BUILD)
+	$(CC) $(CFLAGS) -Ioperators/fixed-sqrt $^ -o $@
+
+$(BUILD)/test_ds18b20: drivers/ds18b20/tests/test_ds18b20.c drivers/ds18b20/ds18b20.c | $(BUILD)
+	$(CC) $(CFLAGS) -Idrivers/ds18b20 $^ -o $@
 
 test: $(TESTS)
 	@for t in $(TESTS); do echo "== $$t"; ./$$t; done

@@ -1,5 +1,12 @@
 # Changelog
 
+## 0.5.0
+
+- Add `pid`, `gamma-lut`, `crc32`, and `fixed-sqrt` operators.
+- Add `adc-sampler`, `soft-pwm`, and `ds18b20` drivers.
+- Sources and behavior references: Arduino PID (MIT), zlib (zlib license),
+  libfixmath (MIT), OneWire (MIT), Padauk examples, and the DS18B20 datasheet.
+
 ## 0.4.1
 
 - Add compatibility metadata to every unit: C99, no allocation, no float,
