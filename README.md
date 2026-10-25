@@ -14,7 +14,7 @@ patterns/    structure guides, not code
 loom.json    unit index
 ```
 
-The catalog currently contains thirty-one units.
+The catalog currently contains thirty-six units.
 
 Operators:
 
@@ -52,6 +52,11 @@ Drivers:
 - `drivers/ssd1306` — SSD1306 128x64 I2C display.
 - `drivers/dht` — DHT11/DHT22 frame decoders.
 - `drivers/rotary-encoder` — Quadrature decoder.
+- `drivers/at24cxx` — AT24Cxx I2C EEPROM.
+- `drivers/ds3231` — DS3231 I2C real-time clock.
+- `drivers/max7219` — MAX7219/MAX7221 SPI LED driver.
+- `drivers/pca9685` — PCA9685 16-channel I2C PWM.
+- `drivers/mpu6050` — MPU-6050 six-axis IMU.
 
 ## Contract
 

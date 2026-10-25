@@ -682,7 +682,122 @@
         "float": false,
         "blocking": false
       }
+    },
+    {
+      "id": "at24cxx",
+      "kind": "driver",
+      "version": "0.1.0",
+      "path": "drivers/at24cxx",
+      "tags": [
+        "storage",
+        "eeprom",
+        "i2c"
+      ],
+      "summary": "AT24Cxx I2C EEPROM driver.",
+      "applications": [
+        "calibration storage",
+        "serial numbers",
+        "settings"
+      ],
+      "compatibility": {
+        "language": "c99",
+        "alloc": false,
+        "float": false,
+        "blocking": true
+      }
+    },
+    {
+      "id": "ds3231",
+      "kind": "driver",
+      "version": "0.1.0",
+      "path": "drivers/ds3231",
+      "tags": [
+        "time",
+        "rtc",
+        "i2c"
+      ],
+      "summary": "DS3231 I2C real-time clock.",
+      "applications": [
+        "data logger timestamps",
+        "wall clock",
+        "scheduled actions"
+      ],
+      "compatibility": {
+        "language": "c99",
+        "alloc": false,
+        "float": false,
+        "blocking": true
+      }
+    },
+    {
+      "id": "max7219",
+      "kind": "driver",
+      "version": "0.1.0",
+      "path": "drivers/max7219",
+      "tags": [
+        "display",
+        "led",
+        "spi"
+      ],
+      "summary": "MAX7219/MAX7221 SPI LED driver.",
+      "applications": [
+        "seven-segment display",
+        "LED matrix",
+        "status panel"
+      ],
+      "compatibility": {
+        "language": "c99",
+        "alloc": false,
+        "float": false,
+        "blocking": true
+      }
+    },
+    {
+      "id": "pca9685",
+      "kind": "driver",
+      "version": "0.1.0",
+      "path": "drivers/pca9685",
+      "tags": [
+        "pwm",
+        "servo",
+        "i2c"
+      ],
+      "summary": "PCA9685 16-channel I2C PWM driver.",
+      "applications": [
+        "servo bank",
+        "LED dimming",
+        "fan bank"
+      ],
+      "compatibility": {
+        "language": "c99",
+        "alloc": false,
+        "float": false,
+        "blocking": true
+      }
+    },
+    {
+      "id": "mpu6050",
+      "kind": "driver",
+      "version": "0.1.0",
+      "path": "drivers/mpu6050",
+      "tags": [
+        "imu",
+        "motion",
+        "i2c"
+      ],
+      "summary": "MPU-6050 six-axis IMU driver.",
+      "applications": [
+        "tilt sensing",
+        "motion detection",
+        "acceleration logging"
+      ],
+      "compatibility": {
+        "language": "c99",
+        "alloc": false,
+        "float": false,
+        "blocking": true
+      }
     }
   ],
-  "version": "0.7.0"
+  "version": "0.8.0"
 }

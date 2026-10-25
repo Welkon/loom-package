@@ -1,5 +1,13 @@
 # Changelog
 
+## 0.8.0
+
+- Add `at24cxx` from LibDriver (MIT).
+- Add `ds3231` from Adafruit RTClib (MIT).
+- Add `max7219` from wayoda/LedControl (MIT).
+- Add `pca9685` from LibDriver (MIT).
+- Add `mpu6050` from jrowberg/i2cdevlib and LibDriver (MIT).
+
 ## 0.7.0
 
 - Add `dht` from the Adafruit DHT library behavior and the datasheets.

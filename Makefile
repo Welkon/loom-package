@@ -33,7 +33,12 @@ TESTS := \
 	$(BUILD)/test_biquad \
 	$(BUILD)/test_dht \
 	$(BUILD)/test_rotary_encoder \
-	$(BUILD)/test_fir
+	$(BUILD)/test_fir \
+	$(BUILD)/test_at24cxx \
+	$(BUILD)/test_ds3231 \
+	$(BUILD)/test_max7219 \
+	$(BUILD)/test_pca9685 \
+	$(BUILD)/test_mpu6050
 
 all: test
 
@@ -132,6 +137,21 @@ $(BUILD)/test_rotary_encoder: drivers/rotary-encoder/tests/test_rotary_encoder.c
 
 $(BUILD)/test_fir: operators/fir/tests/test_fir.c operators/fir/fir.c | $(BUILD)
 	$(CC) $(CFLAGS) -Ioperators/fir $^ -o $@
+
+$(BUILD)/test_at24cxx: drivers/at24cxx/tests/test_at24cxx.c drivers/at24cxx/at24cxx.c | $(BUILD)
+	$(CC) $(CFLAGS) -Idrivers/at24cxx $^ -o $@
+
+$(BUILD)/test_ds3231: drivers/ds3231/tests/test_ds3231.c drivers/ds3231/ds3231.c | $(BUILD)
+	$(CC) $(CFLAGS) -Idrivers/ds3231 $^ -o $@
+
+$(BUILD)/test_max7219: drivers/max7219/tests/test_max7219.c drivers/max7219/max7219.c | $(BUILD)
+	$(CC) $(CFLAGS) -Idrivers/max7219 $^ -o $@
+
+$(BUILD)/test_pca9685: drivers/pca9685/tests/test_pca9685.c drivers/pca9685/pca9685.c | $(BUILD)
+	$(CC) $(CFLAGS) -Idrivers/pca9685 $^ -o $@
+
+$(BUILD)/test_mpu6050: drivers/mpu6050/tests/test_mpu6050.c drivers/mpu6050/mpu6050.c | $(BUILD)
+	$(CC) $(CFLAGS) -Idrivers/mpu6050 $^ -o $@
 
 test: $(TESTS)
 	@for t in $(TESTS); do echo "== $$t"; ./$$t; done
