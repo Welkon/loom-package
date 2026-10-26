@@ -1,0 +1,244 @@
+{
+  "schema": 1,
+  "source": "https://git.pcbsmt.me/rh/emb-loom.git",
+  "ref": "main",
+  "commit": "1511b6a70712b1bdd149934a44607c567ac53cad",
+  "units": {
+    "clamp": {
+      "version": "0.1.0",
+      "sha256": "8a4e666e679d92417d7df511057c3452f3e82513e1006f5d439b40f2007fc678"
+    },
+    "median": {
+      "version": "0.1.0",
+      "sha256": "b365169e30cd95e97cb86e513fc6e55dae0759cc3cc09818cb3590ed23c0c201"
+    },
+    "moving-average": {
+      "version": "0.1.0",
+      "sha256": "7170330d33f6843735e4a088c90f345153e28a3ec475f72b98eb65bd348e5ca6"
+    },
+    "ema": {
+      "version": "0.1.0",
+      "sha256": "da8efc4b51e13d898f2563280a3e1bdce506c77913be70aaf6a07113c9f85aa9"
+    },
+    "trimmed-mean": {
+      "version": "0.1.0",
+      "sha256": "659dbd7ace6e0ce05de6a7c7a1630c1deb99f43a8a63986a57f3a6c543312986"
+    },
+    "debounce": {
+      "version": "0.1.0",
+      "sha256": "c48707cefbf138fae65b9e04f240039a6584f53ce8e773c2c03daabbf1858057"
+    },
+    "hysteresis": {
+      "version": "0.1.0",
+      "sha256": "0d84ead18377af20b54a5535dcf7a04a12f8d04766bcc8d7201c3aa04807a369"
+    },
+    "key-fsm": {
+      "version": "0.1.0",
+      "sha256": "c4704594e064fcef22baa07156ac1186bd3c1ecee2e9095c72d33d0b6d572318"
+    },
+    "crc16": {
+      "version": "0.1.0",
+      "sha256": "70e1f31b51955896a5086fa834f6e165667162806f0b5a7d360175e1197c4ea1"
+    },
+    "ring-buffer": {
+      "version": "0.1.0",
+      "sha256": "e8453e6841ea83cc86b93bbdd3c695f87489749f6528ee8eaa31e4a16c283349"
+    },
+    "mean": {
+      "version": "0.1.0",
+      "sha256": "478965267a6cdbf9a6db3c78a889026bc9c7035ca9846dbdf5175cb623f763d0"
+    },
+    "clamp-average": {
+      "version": "0.1.0",
+      "sha256": "75ee5a93cc9d0214b67672c70d14d54d378690ce81f736c6895cc90c30d93cbd"
+    },
+    "weighted-average": {
+      "version": "0.1.0",
+      "sha256": "6126593c2f05b1808077b8bdcdf53f0343112f5aa5d34adb41b1c0e0a5dcf6c6"
+    },
+    "clamp-debounce": {
+      "version": "0.1.0",
+      "sha256": "c0d56c2ccfd8bc6c604a6dc49fd054f1e25b3e197bd8ecbe0661e7c0a10c4b0c"
+    },
+    "ir-nec-decode": {
+      "version": "0.1.0",
+      "sha256": "7ba8fddd7d5fecc6b093228b381f95eeabb4b492bca7af94f36dbccc2ff2e23f"
+    },
+    "i2c-master": {
+      "version": "0.1.0",
+      "sha256": "f3b5813379b394763a2e2c89940e38c08b40f30a284b6ce8b514c960b46f2770"
+    },
+    "uart": {
+      "version": "0.1.0",
+      "sha256": "9397d0d7aa0f54a3b8702ef2ba24f0031d05a3b1398fba361e4c1858b3293056"
+    },
+    "ws2812": {
+      "version": "0.1.0",
+      "sha256": "306f3085982d372c46d1655b354d0cf98a7437c185eec1b3e9ac039cf3f4cef8"
+    },
+    "ir-capture": {
+      "version": "0.1.0",
+      "sha256": "75510deba5f9a53e1164f59ecf98997b23ae334b365a8bed49e5811a30dd9575"
+    },
+    "pid": {
+      "version": "0.1.0",
+      "sha256": "097a5e3ac914d916043bbf74e548de983eb5858bf2d805b93cd9c9c10a77023b"
+    },
+    "gamma-lut": {
+      "version": "0.1.0",
+      "sha256": "5068d3b4345aaa1b0047d6ab9d606f56052b35e2f0f05823b22bca0cbf74195a"
+    },
+    "crc32": {
+      "version": "0.1.0",
+      "sha256": "26d806600fae9028530b1dc03f58d8e3a2dfa5fe15877a323382e6d3f6b50402"
+    },
+    "fixed-sqrt": {
+      "version": "0.1.0",
+      "sha256": "3abe854c74b9db4845157d43f4d2e672f65001aa15822588f388c7b9da1295e1"
+    },
+    "adc-sampler": {
+      "version": "0.1.0",
+      "sha256": "347015e6e8dc42c661e272ea8b1324d84179a9548ac82b8a5154b5cbfe98c4e1"
+    },
+    "soft-pwm": {
+      "version": "0.1.0",
+      "sha256": "44d3cae101a1ed59bb5fe5bdb4d96ccd81f50ae261d87080c7b79f0f8c51b246"
+    },
+    "ds18b20": {
+      "version": "0.1.0",
+      "sha256": "8efd4c64c3f5eb240d042592ee8235f91ff434346d6eddbb175c5427a9e6a797"
+    },
+    "biquad": {
+      "version": "0.1.0",
+      "sha256": "9be3a4cba2ea1c9f62e07d25528c60fafddcbfe18e9efae635c67efc52406337"
+    },
+    "ssd1306": {
+      "version": "0.1.0",
+      "sha256": "e941944ef4a571191886b38d7c82b64612a73ca59785c122041695847d4fd5a1"
+    },
+    "dht": {
+      "version": "0.1.0",
+      "sha256": "da064b6bb432608774c81a344dfb69b1af307032f6eeeaa59730a47369aaf7c3"
+    },
+    "rotary-encoder": {
+      "version": "0.1.0",
+      "sha256": "630d094880fbbce68a0fba7a49261d2d3fc0e0cc3485285038ad17ffaa6ca3b9"
+    },
+    "fir": {
+      "version": "0.1.0",
+      "sha256": "0ac9aa10666d81677abe352ab7e7f412e90f4bfeedf504859d0b6618f465a338"
+    },
+    "at24cxx": {
+      "version": "0.1.0",
+      "sha256": "a59d2d2a78c343f8d48f85f3e67d65c7db130f6079589ec22697fe95b2bc63ad"
+    },
+    "ds3231": {
+      "version": "0.1.0",
+      "sha256": "2fbd0d7f92ce09f54fea0143eb29005ffc67cb63060f86c9dff83394f72277ec"
+    },
+    "max7219": {
+      "version": "0.1.0",
+      "sha256": "57c91abbd32a8030e5c4ba99255c0cb0574d825d4c784c9fc9e278148ce7a7eb"
+    },
+    "pca9685": {
+      "version": "0.1.0",
+      "sha256": "9694ba7f3c57b28871ea2e6c4efb9c469df0cf80418fb35d2ee4732b727b197e"
+    },
+    "mpu6050": {
+      "version": "0.1.0",
+      "sha256": "651006c7eee2a9f98c72e332874518a1a72c932c1b6950c88329e0c339623d83"
+    },
+    "sht3x": {
+      "version": "0.1.0",
+      "sha256": "f00987813662ede798a9dd4e7a34fc8ccf3d14710313e06479256c6f564afc4c"
+    },
+    "aht20": {
+      "version": "0.1.0",
+      "sha256": "11587b11cb321242a2de84a8488207e51af8ef7f6b93c3dcdb175044e9079af5"
+    },
+    "mcp2515": {
+      "version": "0.1.0",
+      "sha256": "ff2f8ff0a89dc7f2bcbc6aa5893f56dbfbd3035b7d235337c5b29a1806dd419e"
+    },
+    "stepper": {
+      "version": "0.1.0",
+      "sha256": "c0e5e2cd8e9520047c9521d9fe168bc190bd70912e60154fc734c8d07c58f7ff"
+    },
+    "hx711": {
+      "version": "0.1.0",
+      "sha256": "c23c3cec2392fca6be7997d39d7dd79a1d3d63abe4afb2c997cb56cad5972b84"
+    },
+    "max31855": {
+      "version": "0.1.0",
+      "sha256": "ae38b3bbfccf2c20a778aca4552c773353a0ea63d9cb00c9d0c96c84cd7cb8a9"
+    },
+    "bme280": {
+      "version": "0.1.0",
+      "sha256": "ae80e109cd883db269f2512706fb59eeff4487d024a3d1f9c403bf42e8f17c77"
+    },
+    "adxl345": {
+      "version": "0.1.0",
+      "sha256": "fee3af169440d600dd9437743845eaf6f7a0eaa49fb973fb13d2342a302a5b4f"
+    },
+    "mcp23017": {
+      "version": "0.1.0",
+      "sha256": "fbe26bd945d0591d89fefad8982b4fe4d821b951b850ffcd401ba6838a9cf5ee"
+    },
+    "ads1115": {
+      "version": "0.1.0",
+      "sha256": "cde64b244e458864215ad1375c6447059284806c87f3a83ead2d818d58be7450"
+    },
+    "sh1106": {
+      "version": "0.1.0",
+      "sha256": "de18ea2f78ada6c39fd0ca3d71f05cf77bfa9c58fc4b242f02d383227a27e30a"
+    },
+    "mcp4725": {
+      "version": "0.1.0",
+      "sha256": "7c542da25f12b5865991e38bd5541fa71c50c9ec91f4b5043a33af63f6fe174d"
+    },
+    "pcf8574": {
+      "version": "0.1.0",
+      "sha256": "c9583b9c66e5a159568f9e01bc1263e0e38c20c512223643665f33180434ccea"
+    },
+    "hc-sr04": {
+      "version": "0.1.0",
+      "sha256": "c6df3a32f3f5d27f645af25c8247128329d69f820e87ff35b2e785cf99f0946d"
+    },
+    "ina219": {
+      "version": "0.1.0",
+      "sha256": "95ac95e67f7612e709b0ef5a8b0255ecea3064d42241b9da9b7625ae1223f513"
+    },
+    "mcp9808": {
+      "version": "0.1.0",
+      "sha256": "aa4312081fdef20d245a44bc8f96fc7ad23a12ba48aa3bbf225c860d62ad22b6"
+    },
+    "nrf24l01": {
+      "version": "0.1.0",
+      "sha256": "e3a91bda7265d963923db3bd39c1c07b73d8257422f430793d42724acf0667cb"
+    },
+    "hd44780": {
+      "version": "0.1.0",
+      "sha256": "bf23fc8644911c942c4d2a4627122ce4647dfdbec4e44f8d38a07e48a901019a"
+    },
+    "mfrc522": {
+      "version": "0.1.0",
+      "sha256": "886e64ac05c61daccd804120126e481da12d6b01f1b36c47e418c641169b1363"
+    },
+    "modbus-rtu": {
+      "version": "0.1.0",
+      "sha256": "9bbc6b877bc97564e315c90934cb7ab021197717adbc3424d24a5e701b773c37"
+    },
+    "pir": {
+      "version": "0.1.0",
+      "sha256": "b474131a416938f148abca1c71b0cbe251bb41de957a75697285fb07e154de4b"
+    },
+    "scd4x": {
+      "version": "0.1.0",
+      "sha256": "a6d47b76bfdfd5f85696b7e54d43db3ef57666d16d450a0480a8507b6adc3fc7"
+    },
+    "sdcard": {
+      "version": "0.1.0",
+      "sha256": "0edd37b6466da074bad5608a342c45e8a9bffa624a2148e57dbd2ae2eb0d1b7a"
+    }
+  }
+}
