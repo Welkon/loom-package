@@ -1,16 +1,28 @@
 name: site
 on:
+  push:
+    paths:
+      - "site/**"
+      - "loom.json"
+      - "loom.lock"
   workflow_dispatch:
 jobs:
-  deploy:
+  build:
     runs-on: ubuntu-latest
     steps:
       - run: git clone --depth 1 http://forgejo:3000/rh/emb-loom.git repo
-      - name: Build and test
-        run: |
-          cd repo
-          node site/build.mjs
-          node --test site/build.test.mjs
+      - run: cd repo && node site/build.mjs
+      - run: cd repo && node --test site/build.test.mjs
+  deploy:
+    if: github.event_name == 'workflow_dispatch'
+    runs-on: ubuntu-latest
+    steps:
+      - run: git clone --depth 1 http://forgejo:3000/rh/emb-loom.git repo
+      - run: cd repo && node site/build.mjs
+      - run: cd repo && node --test site/build.test.mjs
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
       - name: Deploy
         env:
           CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
