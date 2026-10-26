@@ -28,7 +28,7 @@
     {
       "id": "median",
       "kind": "operator",
-      "version": "0.1.0",
+      "version": "0.2.0",
       "path": "operators/filters/median",
       "tags": [
         "filter",
@@ -1334,5 +1334,5 @@
       }
     }
   ],
-  "version": "0.22.0"
+  "version": "0.23.0"
 }
