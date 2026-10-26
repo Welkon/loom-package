@@ -1239,7 +1239,30 @@
         "float": false,
         "blocking": true
       }
+    },
+    {
+      "id": "modbus-rtu",
+      "kind": "operator",
+      "version": "0.1.0",
+      "path": "operators/modbus-rtu",
+      "tags": [
+        "protocol",
+        "industrial",
+        "uart"
+      ],
+      "summary": "Modbus RTU frame builder and parser.",
+      "applications": [
+        "RS-485 sensor bus",
+        "drive control",
+        "Modbus gateway"
+      ],
+      "compatibility": {
+        "language": "c99",
+        "alloc": false,
+        "float": false,
+        "blocking": false
+      }
     }
   ],
-  "version": "0.18.0"
+  "version": "0.19.0"
 }

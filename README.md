@@ -16,7 +16,7 @@ patterns/    structure guides, not code
 loom.json    unit index
 ```
 
-The catalog currently contains fifty-five units.
+The catalog currently contains fifty-six units.
 
 Operators:
 
@@ -41,6 +41,7 @@ Operators:
 - `operators/fixed-sqrt` — Q16.16 square root.
 - `operators/biquad` — Q15 direct-form I biquad.
 - `operators/fir` — Q15 finite-impulse-response filter.
+- `operators/modbus-rtu` — Modbus RTU frame builder and parser.
 
 Drivers:
 

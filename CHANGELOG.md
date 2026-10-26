@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.19.0
+
+- Add `modbus-rtu` from the Modbus serial-line specification.
+
 ## 0.18.0
 
 - Add `mfrc522` from LibDriver (MIT).
