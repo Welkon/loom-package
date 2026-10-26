@@ -15,7 +15,7 @@ const manifest = JSON.parse(fs.readFileSync(path.join(root, "loom.json"), "utf8"
 const lockPath = path.join(root, "loom.lock");
 const lock = fs.existsSync(lockPath)
   ? JSON.parse(fs.readFileSync(lockPath, "utf8"))
-  : {ref: git(["describe", "--tags", "--abbrev=0"]) || "main", commit: git(["rev-parse", "HEAD"])};
+  : {ref: git(["describe", "--tags", "--abbrev=0"]) || `v${manifest.version}`, commit: git(["rev-parse", "HEAD"])};
 const source = "https://git.pcbsmt.me/rh/emb-loom.git";
 const logo = `<svg viewBox="0 0 32 32" width="22" height="22" aria-hidden="true"><path d="M16 3c-4.4 0-8 3.6-8 8v3H6v4h2v11h4V18h3v11h4V18h3v11h4V14c0-4.4-3.6-8-8-8h-2z" fill="currentColor"/><circle cx="16" cy="8" r="2.2" fill="var(--paper)"/></svg>`;
 const favicon = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32"><rect width="32" height="32" rx="7" fill="#1d1b17"/><path d="M16 5c-4 0-7 3-7 7v2H7v4h2v9h4v-9h2v9h4v-9h2v9h4v-9h2v-4h-2v-2c0-4-3-7-7-7h-2z" fill="#f4a261"/><circle cx="16" cy="10" r="1.8" fill="#1d1b17"/></svg>`;
