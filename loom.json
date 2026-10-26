@@ -797,7 +797,78 @@
         "float": false,
         "blocking": true
       }
+    },
+    {
+      "id": "sht3x",
+      "kind": "driver",
+      "version": "0.1.0",
+      "path": "drivers/sht3x",
+      "tags": [
+        "sensor",
+        "humidity",
+        "temperature",
+        "i2c"
+      ],
+      "summary": "SHT30/SHT31/SHT35 temperature and humidity sensor.",
+      "applications": [
+        "room climate",
+        "greenhouse",
+        "enclosure monitoring"
+      ],
+      "compatibility": {
+        "language": "c99",
+        "alloc": false,
+        "float": false,
+        "blocking": true
+      }
+    },
+    {
+      "id": "aht20",
+      "kind": "driver",
+      "version": "0.1.0",
+      "path": "drivers/aht20",
+      "tags": [
+        "sensor",
+        "humidity",
+        "temperature",
+        "i2c"
+      ],
+      "summary": "AHT20 temperature and humidity sensor.",
+      "applications": [
+        "room climate",
+        "enclosure monitoring",
+        "low-cost sensing"
+      ],
+      "compatibility": {
+        "language": "c99",
+        "alloc": false,
+        "float": false,
+        "blocking": true
+      }
+    },
+    {
+      "id": "mcp2515",
+      "kind": "driver",
+      "version": "0.1.0",
+      "path": "drivers/mcp2515",
+      "tags": [
+        "can",
+        "bus",
+        "spi"
+      ],
+      "summary": "MCP2515 CAN controller over SPI.",
+      "applications": [
+        "vehicle CAN node",
+        "industrial bus",
+        "CAN bridge"
+      ],
+      "compatibility": {
+        "language": "c99",
+        "alloc": false,
+        "float": false,
+        "blocking": true
+      }
     }
   ],
-  "version": "0.8.0"
+  "version": "0.9.0"
 }

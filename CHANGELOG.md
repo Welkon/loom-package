@@ -1,5 +1,11 @@
 # Changelog
 
+## 0.9.0
+
+- Add `sht3x` from DFRobot_SHT3x (MIT).
+- Add `aht20` from LibDriver (MIT).
+- Add `mcp2515` from autowp/arduino-mcp2515 (MIT).
+
 ## 0.8.0
 
 - Add `at24cxx` from LibDriver (MIT).

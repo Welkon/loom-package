@@ -14,7 +14,7 @@ patterns/    structure guides, not code
 loom.json    unit index
 ```
 
-The catalog currently contains thirty-six units.
+The catalog currently contains thirty-nine units.
 
 Operators:
 
@@ -57,6 +57,9 @@ Drivers:
 - `drivers/max7219` — MAX7219/MAX7221 SPI LED driver.
 - `drivers/pca9685` — PCA9685 16-channel I2C PWM.
 - `drivers/mpu6050` — MPU-6050 six-axis IMU.
+- `drivers/sht3x` — SHT30/SHT31/SHT35 temperature and humidity.
+- `drivers/aht20` — AHT20 temperature and humidity.
+- `drivers/mcp2515` — MCP2515 CAN controller.
 
 ## Contract
 
