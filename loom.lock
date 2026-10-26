@@ -1,8 +1,8 @@
 {
   "schema": 1,
   "source": "https://git.pcbsmt.me/rh/emb-loom.git",
-  "ref": "main",
-  "commit": "1511b6a70712b1bdd149934a44607c567ac53cad",
+  "ref": "v0.22.0",
+  "commit": "86e159e04c8592d46cec2578858ab6e93389b3f1",
   "units": {
     "clamp": {
       "version": "0.1.0",
