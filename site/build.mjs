@@ -42,7 +42,7 @@ const units = manifest.units.map(unit => {
   };
 });
 
-const registry = buildRegistry(manifest, units);
+const registry = buildRegistry(manifest, units, new Set(manifest.yanked || []));
 fs.rmSync(out, {recursive: true, force: true});
 fs.mkdirSync(path.join(out, "units"), {recursive: true});
 fs.mkdirSync(path.join(out, "tarballs"), {recursive: true});
@@ -81,6 +81,7 @@ fs.writeFileSync(path.join(out, "index.json"), JSON.stringify({
     tags: unit.tags, applications: unit.applications, compatibility: unit.compatibility,
     requires: unit.requires || [], sha256: lock.units?.[unit.id]?.sha256 || "",
     tarball_sha256: registry.sha256.get(unit.id) || "",
+    yanked: (manifest.yanked || []).includes(`${unit.id}@${unit.version}`),
     path: unit.path,
   })),
 }, null, 2) + "\n");
@@ -93,7 +94,7 @@ function indexPath(id) {
   return `${id.slice(0, 2)}/${id.slice(2, 4)}/${id}`;
 }
 
-function buildRegistry(manifest, units) {
+function buildRegistry(manifest, units, yanked) {
   const index = new Map();
   const tarballs = new Map();
   const sha256 = new Map();
@@ -120,7 +121,8 @@ function buildRegistry(manifest, units) {
       if (info.version === unit.version) sha256.set(unit.id, sum);
       lines.push(JSON.stringify({
         id: info.id, version: info.version, kind: info.kind, path: info.path,
-        requires: info.requires, sha256: sum, commit: info.commit, yanked: false,
+        requires: info.requires, sha256: sum, commit: info.commit,
+        yanked: yanked.has(`${info.id}@${info.version}`),
       }));
     }
     lines.sort();

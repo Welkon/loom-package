@@ -251,7 +251,7 @@ test: $(TESTS)
 clean:
 	rm -rf $(BUILD)
 
-.PHONY: all test clean site deploy-site check-catalog check-lock check-tags
+.PHONY: all test clean site deploy-site check-catalog check-lock check-tags check-yanked yank
 
 site:
 	node site/build.mjs
@@ -266,6 +266,16 @@ check-lock:
 	node tools/loom/lock.mjs --check
 
 check-tags:
-	node tools/loom/tag-units.mjs --check
+	node tools/loom/tag-units.mjs
+
+check-yanked:
+	node tools/loom/yank.mjs --check
+yank:
+	node tools/loom/yank.mjs --check
 tags:
 	node tools/loom/tag-units.mjs
+
+check-yanked:
+	node tools/loom/yank.mjs --check
+yank:
+	node tools/loom/yank.mjs

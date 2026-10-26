@@ -11,4 +11,5 @@ jobs:
       - run: node repo/tools/loom/check-catalog.mjs repo
       - run: node repo/tools/loom/lock.mjs repo --check
       - run: node repo/tools/loom/tag-units.mjs repo --check
+      - run: node repo/tools/loom/yank.mjs repo --check
       - run: node --test repo/site/build.test.mjs

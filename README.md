@@ -103,7 +103,9 @@ the public API. Adapters for a specific MCU stay next to the product.
 
 The site also serves a Cargo-style static registry at
 <https://loom.pcbsmt.me>: use `loom add <id> --index https://loom.pcbsmt.me`
-to download only that unit and version.
+to download only that unit and version. A yanked version stays in the index
+and tarball history; `loom add` refuses an exact yanked version and skips it
+when selecting the latest version.
 
 ## Versioning
 
