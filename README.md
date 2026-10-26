@@ -16,7 +16,7 @@ patterns/    structure guides, not code
 loom.json    unit index
 ```
 
-The catalog currently contains fifty-two units.
+The catalog currently contains fifty-three units.
 
 Operators:
 
@@ -75,6 +75,7 @@ Drivers:
 - `drivers/hc-sr04` — HC-SR04 ultrasonic distance.
 - `drivers/ina219` — INA219 current/power monitor.
 - `drivers/mcp9808` — MCP9808 temperature sensor.
+- `drivers/nrf24l01` — nRF24L01+ 2.4 GHz SPI transceiver.
 
 ## Contract
 

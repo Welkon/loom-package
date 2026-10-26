@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.16.0
+
+- Add `nrf24l01` from LibDriver (MIT).
+
 ## 0.15.0
 
 - Add `ina219` from LibDriver (MIT).

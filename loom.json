@@ -1170,7 +1170,30 @@
         "float": false,
         "blocking": true
       }
+    },
+    {
+      "id": "nrf24l01",
+      "kind": "driver",
+      "version": "0.1.0",
+      "path": "drivers/nrf24l01",
+      "tags": [
+        "radio",
+        "wireless",
+        "spi"
+      ],
+      "summary": "nRF24L01+ 2.4 GHz SPI transceiver core.",
+      "applications": [
+        "short-range sensor link",
+        "remote control",
+        "low-power telemetry"
+      ],
+      "compatibility": {
+        "language": "c99",
+        "alloc": false,
+        "float": false,
+        "blocking": true
+      }
     }
   ],
-  "version": "0.15.0"
+  "version": "0.16.0"
 }
