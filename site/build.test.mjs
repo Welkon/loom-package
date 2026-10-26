@@ -17,7 +17,7 @@ test("builds one page per unit plus the catalog", () => {
     assert.ok(fs.existsSync(path.join(out, "units", `${unit.id}.html`)), unit.id);
   }
   const index = fs.readFileSync(path.join(out, "index.html"), "utf8");
-  assert.match(index, /Reusable drivers/);
+  assert.match(index, /Drivers and algorithms/);
   assert.match(index, /data-search/);
   const detail = fs.readFileSync(path.join(out, "units", "median.html"), "utf8");
   assert.match(detail, /\.\.\/style\.css/);

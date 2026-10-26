@@ -1,0 +1,4 @@
+name = "loom"
+compatibility_date = "2026-10-19"
+assets = { directory = "./dist" }
+routes = [{ pattern = "loom.pcbsmt.me", custom_domain = true }]
