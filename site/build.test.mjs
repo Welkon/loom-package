@@ -30,6 +30,13 @@ test("builds one page per unit plus the catalog", () => {
   const contribute = fs.readFileSync(path.join(out, "contribute.html"), "utf8");
   assert.match(contribute, /For AI agents/);
   assert.match(contribute, /llms\.txt/);
+  const docs = fs.readFileSync(path.join(out, "docs.html"), "utf8");
+  assert.match(docs, /Documentation/);
+  assert.match(docs, /median/);
+  const median = fs.readFileSync(path.join(out, "units", "median.html"), "utf8");
+  assert.match(median, /id="api"/);
+  assert.match(median, /median_filter_step/);
+  assert.match(median, /median_filter_t/);
   const detail = fs.readFileSync(path.join(out, "units", "median.html"), "utf8");
   assert.match(detail, /\.\.\/style\.css/);
   assert.match(detail, /\.\.\/index\.html/);

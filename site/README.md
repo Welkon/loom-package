@@ -24,7 +24,8 @@ secret.
 The pages include:
 
 - catalog search, kind filter, tags, applications, compatibility;
-- one page per unit with the full README;
+- one page per unit with the full README and an API section extracted from the header;
+- a Docs index grouped by operator and driver;
 - pinned source ref and commit;
 - `index.json` for a future registry client.
 

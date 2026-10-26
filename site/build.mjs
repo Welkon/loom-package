@@ -19,11 +19,20 @@ const lock = fs.existsSync(lockPath)
 const source = "https://git.pcbsmt.me/rh/emb-loom.git";
 const logo = `<svg viewBox="0 0 32 32" width="22" height="22" aria-hidden="true"><path d="M16 3c-4.4 0-8 3.6-8 8v3H6v4h2v11h4V18h3v11h4V18h3v11h4V14c0-4.4-3.6-8-8-8h-2z" fill="currentColor"/><circle cx="16" cy="8" r="2.2" fill="var(--paper)"/></svg>`;
 const favicon = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32"><rect width="32" height="32" rx="7" fill="#1d1b17"/><path d="M16 5c-4 0-7 3-7 7v2H7v4h2v9h4v-9h2v9h4v-9h2v9h4v-9h2v-4h-2v-2c0-4-3-7-7-7h-2z" fill="#f4a261"/><circle cx="16" cy="10" r="1.8" fill="#1d1b17"/></svg>`;
-const units = manifest.units.map(unit => ({
-  ...unit,
-  readme: readReadme(unit.path),
-  source_url: `${source.replace(/\.git$/, "")}/src/tag/${encodeURIComponent(lock.ref)}/${unit.path}`,
-}));
+const units = manifest.units.map(unit => {
+  const directory = path.join(root, unit.path);
+  const header = fs.readdirSync(directory).find(file => file.endsWith(".h"));
+  return {
+    ...unit,
+    readme: readReadme(unit.path),
+    header,
+    api: header ? parseApi(path.join(directory, header)) : {functions: [], types: []},
+    source_url: `${source.replace(/\.git$/, "")}/src/tag/${encodeURIComponent(lock.ref)}/${unit.path}`,
+    header_url: header
+      ? `${source.replace(/\.git$/, "")}/src/tag/${encodeURIComponent(lock.ref)}/${unit.path}/${header}`
+      : `${source.replace(/\.git$/, "")}/src/tag/${encodeURIComponent(lock.ref)}/${unit.path}`,
+  };
+});
 
 fs.rmSync(out, {recursive: true, force: true});
 fs.mkdirSync(path.join(out, "units"), {recursive: true});
@@ -33,6 +42,7 @@ for (const unit of units) {
   fs.writeFileSync(path.join(out, "units", `${unit.id}.html`), page(unit.id, unitBody(unit, lock), "../"));
 }
 fs.writeFileSync(path.join(out, "contribute.html"), page("Contribute", contributeBody(), ""));
+fs.writeFileSync(path.join(out, "docs.html"), page("Documentation", docsBody(units), ""));
 fs.writeFileSync(path.join(out, "llms.txt"), llmsBody(units, lock, source));
 fs.writeFileSync(path.join(out, "index.json"), JSON.stringify({
   schema: 1,
@@ -84,6 +94,7 @@ function page(title, body, prefix) {
   </div>
   <nav class="nav">
     <a href="${prefix}index.html">Browse</a>
+    <a href="${prefix}docs.html">Docs</a>
     <a href="${prefix}contribute.html">Contribute</a>
     <a href="#about">About</a>
     <a href="${escape(source)}" class="source-link">Source ↗</a>
@@ -91,11 +102,21 @@ function page(title, body, prefix) {
   </nav>
 </header>
 ${body}
+<script>
+const globalSearch = document.getElementById('search');
+if (globalSearch) {
+  globalSearch.addEventListener('keydown', event => {
+    if (event.key === 'Enter' && globalSearch.value.trim()) {
+      location.href = '${prefix}index.html?q=' + encodeURIComponent(globalSearch.value.trim());
+    }
+  });
+}
+</script>
 <footer class="footer">
   <div class="footer-inner">
     <div><strong>loom</strong> <span>${escape(manifest.version)}</span></div>
     <div>${units.length} packages · pinned by commit · no install scripts</div>
-    <div><a href="${escape(source)}">Repository</a> · <a href="${prefix}index.json">index.json</a> · <a href="${prefix}llms.txt">llms.txt</a> · <a href="${escape(source.replace(/\.git$/, ""))}/raw/branch/main/AGENTS.md">AGENTS.md</a></div>
+    <div><a href="${escape(source)}">Repository</a> · <a href="${prefix}index.json">index.json</a> · <a href="${prefix}docs.html">Docs</a> · <a href="${prefix}llms.txt">llms.txt</a> · <a href="${escape(source.replace(/\.git$/, ""))}/raw/branch/main/AGENTS.md">AGENTS.md</a></div>
   </div>
 </footer>
 </body>
@@ -221,7 +242,28 @@ function card(unit) {
 
 function llmsBody(units, lock, source) {
   const repo = source.replace(/\.git$/, "");
-  return `# loom\n\n> Reusable C drivers and algorithms for embedded systems. Every unit is pinned by source commit and SHA-256.\n\n## For AI agents\n\n- Read ${repo}/raw/branch/main/AGENTS.md before changing the catalog.\n- Search \`loom.json\` and the unit folders before writing. Reuse or extend an adapter; do not create a near-duplicate.\n- Scaffold with \`node tools/loom/new-unit.mjs <id> --kind driver|operator\`.\n- Do not copy GPL or vendor source. Cite the real behavior reference and license.\n- Run \`make test\` and \`node tools/loom/check-catalog.mjs\`. Report unverified bench behavior.\n- Do not tag, bump the catalog version, or commit generated \`site/dist\`.\n\n## Catalog\n\n${units.map(unit => `- [${unit.id}](https://loom.pcbsmt.me/units/${unit.id}.html) — ${unit.summary} (${unit.kind}, ${unit.version})`).join("\n")}\n\n## Registry\n\n- [index.json](https://loom.pcbsmt.me/index.json)\n- [Source](${repo})\n- [Catalog ref](${repo}/src/tag/${encodeURIComponent(lock.ref)})\n`;
+  return `# loom\n\n> Reusable C drivers and algorithms for embedded systems. Every unit is pinned by source commit and SHA-256.\n\n## For AI agents\n\n- Read ${repo}/raw/branch/main/AGENTS.md before changing the catalog.\n- Search \`loom.json\` and the unit folders before writing. Reuse or extend an adapter; do not create a near-duplicate.\n- Scaffold with \`node tools/loom/new-unit.mjs <id> --kind driver|operator\`.\n- Do not copy GPL or vendor source. Cite the real behavior reference and license.\n- Run \`make test\` and \`node tools/loom/check-catalog.mjs\`. Report unverified bench behavior.\n- Do not tag, bump the catalog version, or commit generated \`site/dist\`.\n\n## Catalog\n\n${units.map(unit => `- [${unit.id}](https://loom.pcbsmt.me/units/${unit.id}.html) — ${unit.summary} (${unit.kind}, ${unit.version})`).join("\n")}\n\n## Registry\n\n- [index.json](https://loom.pcbsmt.me/index.json)\n- [Documentation](https://loom.pcbsmt.me/docs.html)\n- [Source](${repo})\n- [Catalog ref](${repo}/src/tag/${encodeURIComponent(lock.ref)})\n`;
+}
+
+function docsBody(units) {
+  const group = kind => units
+    .filter(unit => unit.kind === kind)
+    .map(unit => `<div class="doc-row">
+      <a class="doc-name" href="units/${escape(unit.id)}.html">${escape(unit.id)}</a>
+      <span class="doc-summary">${escape(unit.summary)}</span>
+      <span class="doc-links"><a href="units/${escape(unit.id)}.html">Overview</a><span>·</span><a href="units/${escape(unit.id)}.html#api">API</a></span>
+    </div>`)
+    .join("\n");
+  return `<main class="docs">
+<p class="crumbs"><a href="index.html">Packages</a><span>/</span><strong>Documentation</strong></p>
+<section class="docs-head">
+  <p class="eyebrow">Reference documentation</p>
+  <h1>Every package,<br><em>its contract.</em></h1>
+  <p class="lede">Each page has the README overview and an API section extracted from the public header. The source link points at the same tagged revision the catalog uses.</p>
+</section>
+<section class="doc-section"><h2>Operators <span>${units.filter(unit => unit.kind === "operator").length}</span></h2><div class="doc-list">${group("operator")}</div></section>
+<section class="doc-section"><h2>Drivers <span>${units.filter(unit => unit.kind === "driver").length}</span></h2><div class="doc-list">${group("driver")}</div></section>
+</main>`;
 }
 
 function contributeBody() {
@@ -292,8 +334,9 @@ function unitBody(unit, lock) {
     <button id="copy" type="button">Copy</button>
   </div>
 </section>
+<nav class="unit-toc"><a href="#overview">Overview</a><a href="#api">API</a><a href="${escape(unit.header_url)}">Header ↗</a><a href="${escape(unit.source_url)}">Source ↗</a></nav>
 <div class="unit-grid">
-<article class="prose">${markdown(unit.readme)}</article>
+<article class="prose" id="overview">${markdown(unit.readme)}${apiBody(unit)}</article>
 <aside class="meta">
   <h2>Metadata</h2>
   <dl>
@@ -319,13 +362,43 @@ document.getElementById('copy').addEventListener('click', async event => {
   event.target.textContent = 'Copied';
   setTimeout(() => event.target.textContent = 'Copy', 1200);
 });
-const globalSearch = document.getElementById('search');
-globalSearch.addEventListener('keydown', event => {
-  if (event.key === 'Enter' && globalSearch.value.trim()) {
-    location.href = '../index.html?q=' + encodeURIComponent(globalSearch.value.trim());
-  }
-});
 </script>`;
+}
+
+function parseApi(file) {
+  const text = fs.readFileSync(file, "utf8");
+  const types = [];
+  const typePattern = /typedef\s+(struct|enum)\s*(?:\w+\s*)?\{([\s\S]*?)\}\s*(\w+)\s*;/g;
+  let match;
+  while ((match = typePattern.exec(text)) !== null) {
+    const fields = match[2].split("\n").map(line => line.trim()).filter(Boolean);
+    types.push({kind: match[1], name: match[3], fields});
+  }
+  const withoutTypes = text.replace(typePattern, "");
+  const functions = [];
+  const functionPattern = /(^|\n)\s*([A-Za-z_][\w\s*]+?)\s+([A-Za-z_]\w*)\s*\(([^;{}]*)\)\s*;/g;
+  while ((match = functionPattern.exec(withoutTypes)) !== null) {
+    if (match[2].includes("static") || match[2].includes("typedef")) continue;
+    functions.push(`${match[2].trim()} ${match[3]}(${match[4].replace(/\s+/g, " ").trim()});`);
+  }
+  return {functions, types};
+}
+
+function apiBody(unit) {
+  const functions = unit.api.functions.length
+    ? unit.api.functions.map(signature => `<div class="api-row"><code>${escape(signature)}</code></div>`).join("")
+    : `<p class="small">No public functions in this header.</p>`;
+  const types = unit.api.types.length
+    ? unit.api.types.map(type => `<div class="api-type"><code>${escape(type.name)}</code> <span>${escape(type.kind)}</span><pre><code>${escape(type.fields.join("\n"))}</code></pre></div>`).join("")
+    : `<p class="small">No public types in this header.</p>`;
+  return `<section id="api" class="api">
+  <div class="section-head"><h2>API</h2><a href="${escape(unit.header_url)}">${escape(unit.header)} ↗</a></div>
+  <p class="small">Extracted from the public header at the catalog tag. The README contract above is the behavior reference.</p>
+  <h3>Functions</h3>
+  <div class="api-list">${functions}</div>
+  <h3>Types</h3>
+  <div class="api-types">${types}</div>
+</section>`;
 }
 
 function compat(value = {}) {
