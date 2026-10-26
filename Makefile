@@ -191,4 +191,7 @@ test: $(TESTS)
 clean:
 	rm -rf $(BUILD)
 
-.PHONY: all test clean
+.PHONY: all test clean site
+
+site:
+	node site/build.mjs
