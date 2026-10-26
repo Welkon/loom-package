@@ -50,6 +50,8 @@ for (const unit of units) {
 fs.writeFileSync(path.join(out, "contribute.html"), page("Contribute", contributeBody(), ""));
 fs.writeFileSync(path.join(out, "docs.html"), page("Documentation", docsBody(units), ""));
 fs.writeFileSync(path.join(out, "history.html"), page("History", historyBody(), ""));
+fs.writeFileSync(path.join(out, "examples.html"), page("Examples", examplesBody(units), ""));
+fs.writeFileSync(path.join(out, "tests.html"), page("Compatibility", testsBody(units), ""));
 fs.writeFileSync(path.join(out, "llms.txt"), llmsBody(units, lock, source));
 fs.writeFileSync(path.join(out, "index.json"), JSON.stringify({
   schema: 1,
@@ -124,7 +126,7 @@ if (globalSearch) {
   <div class="footer-inner">
     <div><strong>loom</strong> <span>${escape(manifest.version)}</span></div>
     <div>${units.length} packages · pinned by commit · no install scripts</div>
-    <div><a href="${escape(source)}">Repository</a> · <a href="${prefix}index.json">index.json</a> · <a href="${prefix}docs.html">Docs</a> · <a href="${prefix}history.html">History</a> · <a href="${prefix}llms.txt">llms.txt</a> · <a href="${escape(source.replace(/\.git$/, ""))}/raw/branch/main/AGENTS.md">AGENTS.md</a></div>
+    <div><a href="${escape(source)}">Repository</a> · <a href="${prefix}index.json">index.json</a> · <a href="${prefix}docs.html">Docs</a> · <a href="${prefix}examples.html">Examples</a> · <a href="${prefix}tests.html">Compatibility</a> · <a href="${prefix}history.html">History</a> · <a href="${prefix}llms.txt">llms.txt</a> · <a href="${escape(source.replace(/\.git$/, ""))}/raw/branch/main/AGENTS.md">AGENTS.md</a></div>
   </div>
 </footer>
 </body>
@@ -250,7 +252,7 @@ function card(unit) {
 
 function llmsBody(units, lock, source) {
   const repo = source.replace(/\.git$/, "");
-  return `# loom\n\n> Reusable C drivers and algorithms for embedded systems. Every unit is pinned by source commit and SHA-256.\n\n## For AI agents\n\n- Read ${repo}/raw/branch/main/AGENTS.md before changing the catalog.\n- Search \`loom.json\` and the unit folders before writing. Reuse or extend an adapter; do not create a near-duplicate.\n- Scaffold with \`node tools/loom/new-unit.mjs <id> --kind driver|operator\`.\n- Do not copy GPL or vendor source. Cite the real behavior reference and license.\n- Run \`make test\` and \`node tools/loom/check-catalog.mjs\`. Report unverified bench behavior.\n- Do not tag, bump the catalog version, or commit generated \`site/dist\`.\n\n## Catalog\n\n${units.map(unit => `- [${unit.id}](https://loom.pcbsmt.me/units/${unit.id}.html) — ${unit.summary} (${unit.kind}, ${unit.version})`).join("\n")}\n\n## Registry\n\n- [index.json](https://loom.pcbsmt.me/index.json)\n- [Documentation](https://loom.pcbsmt.me/docs.html)\n- [Source](${repo})\n- [Catalog ref](${repo}/src/tag/${encodeURIComponent(lock.ref)})\n`;
+  return `# loom\n\n> Reusable C drivers and algorithms for embedded systems. Every unit is pinned by source commit and SHA-256.\n\n## For AI agents\n\n- Read ${repo}/raw/branch/main/AGENTS.md before changing the catalog.\n- Search \`loom.json\` and the unit folders before writing. Reuse or extend an adapter; do not create a near-duplicate.\n- Scaffold with \`node tools/loom/new-unit.mjs <id> --kind driver|operator\`.\n- Do not copy GPL or vendor source. Cite the real behavior reference and license.\n- Run \`make test\` and \`node tools/loom/check-catalog.mjs\`. Report unverified bench behavior.\n- Do not tag, bump the catalog version, or commit generated \`site/dist\`.\n\n## Catalog\n\n${units.map(unit => `- [${unit.id}](https://loom.pcbsmt.me/units/${unit.id}.html) — ${unit.summary} (${unit.kind}, ${unit.version})`).join("\n")}\n\n## Registry\n\n- [index.json](https://loom.pcbsmt.me/index.json)\n- [Documentation](https://loom.pcbsmt.me/docs.html)\n- [Examples](https://loom.pcbsmt.me/examples.html)\n- [Compatibility](https://loom.pcbsmt.me/tests.html)\n- [Source](${repo})\n- [Catalog ref](${repo}/src/tag/${encodeURIComponent(lock.ref)})\n`;
 }
 
 function integrationExample(readme) {
@@ -259,6 +261,49 @@ function integrationExample(readme) {
   const rest = readme.slice(marker);
   const match = /```(?:c)?\n([\s\S]*?)```/.exec(rest);
   return match ? match[1].trim() : "";
+}
+
+function docsTabs(active) {
+  const tabs = [["docs.html", "Documentation"], ["examples.html", "Examples"], ["tests.html", "Compatibility"]];
+  return `<nav class="docs-tabs">${tabs.map(([href, label]) => `<a href="${href}"${href === active ? ' class="is-active"' : ""}>${label}</a>`).join("")}</nav>`;
+}
+
+function examplesBody(units) {
+  const group = kind => units.filter(unit => unit.kind === kind).map(unit => `<article class="example-card">
+    <header><a class="example-name" href="units/${escape(unit.id)}.html">${escape(unit.id)}</a><span class="kind ${escape(unit.kind)}">${escape(unit.kind)}</span></header>
+    <p>${escape(unit.summary)}</p>
+    ${unit.example ? `<pre><code>${escape(unit.example)}</code></pre>` : `<p class="small">No integration example.</p>`}
+    <a class="example-link" href="units/${escape(unit.id)}.html#quickstart">Full contract and API →</a>
+  </article>`).join("\n");
+  return `<main class="docs">
+<p class="crumbs"><a href="index.html">Packages</a><span>/</span><strong>Examples</strong></p>
+${docsTabs("examples.html")}
+<section class="docs-head"><p class="eyebrow">Integration examples</p><h1>One file,<br><em>one adapter.</em></h1><p class="lede">Each example is the integration block from the package README. Board wiring stays in the project adapter; the catalog unit stays portable.</p></section>
+<section class="example-section"><h2>Operators <span>${units.filter(unit => unit.kind === "operator").length}</span></h2><div class="example-grid">${group("operator")}</div></section>
+<section class="example-section"><h2>Drivers <span>${units.filter(unit => unit.kind === "driver").length}</span></h2><div class="example-grid">${group("driver")}</div></section>
+</main>`;
+}
+
+function testsBody(units) {
+  const rows = units.map(unit => {
+    const compatibility = unit.compatibility || {};
+    return `<tr>
+      <td><a href="units/${escape(unit.id)}.html">${escape(unit.id)}</a></td>
+      <td><span class="kind ${escape(unit.kind)}">${escape(unit.kind)}</span></td>
+      <td>${compatibility.alloc ? "alloc" : "—"}</td>
+      <td>${compatibility.float ? "float" : "—"}</td>
+      <td>${compatibility.blocking ? "blocking" : "—"}</td>
+      <td><a href="${escape(unit.test_url)}">test ↗</a></td>
+    </tr>`;
+  }).join("\n");
+  return `<main class="docs">
+<p class="crumbs"><a href="index.html">Packages</a><span>/</span><strong>Compatibility</strong></p>
+${docsTabs("tests.html")}
+<section class="docs-head"><p class="eyebrow">Compatibility matrix</p><h1>Pick by<br><em>constraint.</em></h1><p class="lede">Every package is C99 and has a deterministic host test. The matrix shows the three compatibility constraints that change how a unit fits a target.</p></section>
+<section class="matrix-wrap">
+<table class="matrix"><thead><tr><th>Package</th><th>Kind</th><th>Alloc</th><th>Float</th><th>Blocking</th><th>Test</th></tr></thead><tbody>${rows}</tbody></table>
+</section>
+</main>`;
 }
 
 function historyBody() {
@@ -287,6 +332,7 @@ function docsBody(units) {
     .join("\n");
   return `<main class="docs">
 <p class="crumbs"><a href="index.html">Packages</a><span>/</span><strong>Documentation</strong></p>
+${docsTabs("docs.html")}
 <section class="docs-head">
   <p class="eyebrow">Reference documentation</p>
   <h1>Every package,<br><em>its contract.</em></h1>

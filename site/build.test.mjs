@@ -39,6 +39,12 @@ test("builds one page per unit plus the catalog", () => {
   assert.match(median, /median_filter_t/);
   assert.match(median, /id="quickstart"/);
   assert.match(median, /host test/);
+  const examples = fs.readFileSync(path.join(out, "examples.html"), "utf8");
+  assert.match(examples, /Integration examples/);
+  assert.match(examples, /median_filter_init/);
+  const tests = fs.readFileSync(path.join(out, "tests.html"), "utf8");
+  assert.match(tests, /Compatibility matrix/);
+  assert.match(tests, /host test|test ↗/);
   const history = fs.readFileSync(path.join(out, "history.html"), "utf8");
   assert.match(history, /Catalog history/);
   assert.match(history, /0\.14\.0/);
