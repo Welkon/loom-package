@@ -1,4 +1,5 @@
 import assert from "node:assert/strict";
+import crypto from "node:crypto";
 import fs from "node:fs";
 import os from "node:os";
 import path from "node:path";
@@ -64,4 +65,15 @@ test("writes a registry-shaped index", () => {
   assert.ok(index.units.every(unit => unit.id && unit.summary));
   assert.ok(index.units.every(unit => Array.isArray(unit.requires)));
   assert.ok(index.units.every(unit => typeof unit.sha256 === "string"));
+});
+
+test("writes a Cargo-style registry with tarballs", () => {
+  const config = JSON.parse(fs.readFileSync(path.join(out, "config.json"), "utf8"));
+  assert.equal(config.dl, "tarballs/{id}-{version}.tar.gz");
+  const index = fs.readFileSync(path.join(out, "me/di/median"), "utf8").trim().split("\n");
+  assert.ok(index.length >= 2);
+  const entry = index.map(line => JSON.parse(line)).find(item => item.version === "0.2.0");
+  assert.ok(entry);
+  const tarball = fs.readFileSync(path.join(out, "tarballs", "median-0.2.0.tar.gz"));
+  assert.equal(crypto.createHash("sha256").update(tarball).digest("hex"), entry.sha256);
 });

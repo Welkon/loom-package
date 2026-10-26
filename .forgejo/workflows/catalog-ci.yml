@@ -6,7 +6,7 @@ jobs:
   test:
     runs-on: ubuntu-latest
     steps:
-      - run: git clone --depth 1 http://forgejo:3000/rh/emb-loom.git repo
+      - run: git clone http://forgejo:3000/rh/emb-loom.git repo
       - run: make -C repo test
       - run: node repo/tools/loom/check-catalog.mjs repo
       - run: node repo/tools/loom/lock.mjs repo --check

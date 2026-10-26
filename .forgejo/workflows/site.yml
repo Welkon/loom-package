@@ -11,14 +11,14 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - run: git clone --depth 1 http://forgejo:3000/rh/emb-loom.git repo
+      - run: git clone http://forgejo:3000/rh/emb-loom.git repo
       - run: cd repo && node site/build.mjs
       - run: cd repo && node --test site/build.test.mjs
   deploy:
     needs: build
     runs-on: ubuntu-latest
     steps:
-      - run: git clone --depth 1 http://forgejo:3000/rh/emb-loom.git repo
+      - run: git clone http://forgejo:3000/rh/emb-loom.git repo
       - run: cd repo && node site/build.mjs
       - run: cd repo && node --test site/build.test.mjs
       - name: Deploy

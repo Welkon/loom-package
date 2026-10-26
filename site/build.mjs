@@ -4,6 +4,8 @@
 
 import {execFileSync} from "node:child_process";
 import fs from "node:fs";
+import crypto from "node:crypto";
+import zlib from "node:zlib";
 import path from "node:path";
 import {fileURLToPath} from "node:url";
 
@@ -40,8 +42,22 @@ const units = manifest.units.map(unit => {
   };
 });
 
+const registry = buildRegistry(manifest, units);
 fs.rmSync(out, {recursive: true, force: true});
 fs.mkdirSync(path.join(out, "units"), {recursive: true});
+fs.mkdirSync(path.join(out, "tarballs"), {recursive: true});
+fs.writeFileSync(path.join(out, "config.json"), JSON.stringify({
+  dl: "tarballs/{id}-{version}.tar.gz",
+  "auth-required": false,
+}, null, 2) + "\n");
+for (const [relative, content] of registry.index) {
+  const file = path.join(out, relative);
+  fs.mkdirSync(path.dirname(file), {recursive: true});
+  fs.writeFileSync(file, content);
+}
+for (const [file, content] of registry.tarballs) {
+  fs.writeFileSync(path.join(out, "tarballs", file), content);
+}
 fs.writeFileSync(path.join(out, "style.css"), fs.readFileSync(path.join(root, "site/style.css")));
 fs.writeFileSync(path.join(out, "index.html"), page("Catalog", indexBody(units, lock), ""));
 for (const unit of units) {
@@ -64,10 +80,140 @@ fs.writeFileSync(path.join(out, "index.json"), JSON.stringify({
     id: unit.id, kind: unit.kind, version: unit.version, summary: unit.summary,
     tags: unit.tags, applications: unit.applications, compatibility: unit.compatibility,
     requires: unit.requires || [], sha256: lock.units?.[unit.id]?.sha256 || "",
+    tarball_sha256: registry.sha256.get(unit.id) || "",
     path: unit.path,
   })),
 }, null, 2) + "\n");
 console.log(`loom site: ${units.length} units -> ${out}`);
+
+function indexPath(id) {
+  if (id.length === 1) return `1/${id}`;
+  if (id.length === 2) return `2/${id}`;
+  if (id.length === 3) return `3/${id[0]}/${id}`;
+  return `${id.slice(0, 2)}/${id.slice(2, 4)}/${id}`;
+}
+
+function buildRegistry(manifest, units) {
+  const index = new Map();
+  const tarballs = new Map();
+  const sha256 = new Map();
+  const license = git(["show", "HEAD:LICENSE"]);
+  for (const unit of units) {
+    const versions = new Map();
+    for (const tag of git(["tag", "-l", `unit/${unit.id}/v*`]).split("\n").filter(Boolean)) {
+      const info = readTagUnit(tag, unit.id);
+      if (info) versions.set(info.version, info);
+    }
+    versions.set(unit.version, {
+      id: unit.id, version: unit.version, kind: unit.kind, path: unit.path,
+      requires: unit.requires || [], commit: lock.commit,
+      files: readWorkingFiles(path.join(root, unit.path)), license,
+    });
+    const lines = [];
+    for (const info of versions.values()) {
+      if (!info.files.length) continue;
+      const tarball = makeTarball(info, license);
+      const sum = sha256Hex(tarball);
+      const file = `${info.id}-${info.version}.tar.gz`;
+      tarballs.set(file, tarball);
+      sha256.set(`${info.id}@${info.version}`, sum);
+      if (info.version === unit.version) sha256.set(unit.id, sum);
+      lines.push(JSON.stringify({
+        id: info.id, version: info.version, kind: info.kind, path: info.path,
+        requires: info.requires, sha256: sum, commit: info.commit, yanked: false,
+      }));
+    }
+    lines.sort();
+    index.set(indexPath(unit.id), lines.join("\n") + "\n");
+  }
+  return {index, tarballs, sha256};
+}
+
+function readTagUnit(tag, id) {
+  const raw = git(["show", `${tag}:loom.json`]);
+  if (!raw) return null;
+  let parsed;
+  try { parsed = JSON.parse(raw); } catch { return null; }
+  const unit = parsed.units?.find(item => item.id === id);
+  if (!unit) return null;
+  const pathName = unit.path;
+  const tree = git(["ls-tree", "-r", "--name-only", tag, "--", pathName])
+    .split("\n").filter(Boolean);
+  const files = tree.map(file => ({
+    relative: file.slice(pathName.length + 1),
+    bytes: gitBuffer(["show", `${tag}:${file}`]),
+  }));
+  return {
+    id, version: unit.version, kind: unit.kind, path: pathName,
+    requires: unit.requires || [],
+    commit: git(["rev-parse", `${tag}^{commit}`]),
+    files,
+    license: git(["show", `${tag}:LICENSE`]),
+  };
+}
+
+function readWorkingFiles(directory) {
+  const files = [];
+  const walk = (current, relative) => {
+    for (const entry of fs.readdirSync(current, {withFileTypes: true}).sort((a, b) => a.name.localeCompare(b.name))) {
+      if (entry.name === "build" || entry.name === ".git" || entry.name.startsWith(".")) continue;
+      const next = relative ? `${relative}/${entry.name}` : entry.name;
+      if (entry.isDirectory()) walk(path.join(current, entry.name), next);
+      else if (entry.isFile()) files.push({relative: next, bytes: fs.readFileSync(path.join(current, entry.name))});
+    }
+  };
+  walk(directory, "");
+  return files;
+}
+
+function makeTarball(info, license) {
+  const files = new Map();
+  for (const file of info.files) files.set(file.relative, file.bytes);
+  if (license && !files.has("LICENSE")) files.set("LICENSE", Buffer.from(license));
+  const rootName = `${info.id}-${info.version}`;
+  const blocks = [];
+  for (const [relative, bytes] of [...files].sort(([a], [b]) => a.localeCompare(b))) {
+    blocks.push(tarHeader(`${rootName}/${relative}`, bytes.length), bytes);
+    const pad = (512 - (bytes.length % 512)) % 512;
+    if (pad) blocks.push(Buffer.alloc(pad));
+  }
+  blocks.push(Buffer.alloc(1024));
+  return zlib.gzipSync(Buffer.concat(blocks), {level: 9});
+}
+
+function tarHeader(name, size) {
+  if (Buffer.byteLength(name) > 100) throw new Error(`tar path too long: ${name}`);
+  const block = Buffer.alloc(512);
+  const text = (value, offset, length) => block.write(value, offset, length, "utf8");
+  text(name, 0, 100);
+  text("0000644\0", 100, 8);
+  text("0000000\0", 108, 8);
+  text("0000000\0", 116, 8);
+  text(size.toString(8).padStart(11, "0") + "\0", 124, 12);
+  text("00000000000\0", 136, 12);
+  block.fill(0x20, 148, 156);
+  text("0", 156, 1);
+  text("ustar\0", 257, 6);
+  text("00", 263, 2);
+  block.fill(0x20, 265, 297);
+  block.fill(0x20, 297, 329);
+  let checksum = 0;
+  for (const byte of block) checksum += byte;
+  text(checksum.toString(8).padStart(6, "0") + "\0 ", 148, 8);
+  return block;
+}
+
+function sha256Hex(bytes) {
+  return crypto.createHash("sha256").update(bytes).digest("hex");
+}
+
+function gitBuffer(args) {
+  try {
+    return execFileSync("git", ["-C", root, ...args]);
+  } catch {
+    return Buffer.alloc(0);
+  }
+}
 
 function readReadme(relative) {
   const file = path.join(root, relative, "README.md");
