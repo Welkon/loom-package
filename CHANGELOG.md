@@ -1,5 +1,10 @@
 # Changelog
 
+## 0.13.0
+
+- Add `sh1106` from the u8g2 SH1106 sequence (BSD-2-Clause).
+- Add `mcp4725` from LibDriver (MIT).
+
 ## 0.12.0
 
 - Add `mcp23017` from blemasle/arduino-mcp23017 (MIT).

@@ -16,7 +16,7 @@ patterns/    structure guides, not code
 loom.json    unit index
 ```
 
-The catalog currently contains forty-six units.
+The catalog currently contains forty-eight units.
 
 Operators:
 
@@ -69,6 +69,8 @@ Drivers:
 - `drivers/adxl345` — ADXL345 three-axis accelerometer.
 - `drivers/mcp23017` — MCP23017 16-bit I/O expander.
 - `drivers/ads1115` — ADS1115 16-bit ADC.
+- `drivers/sh1106` — SH1106 128x64 I2C OLED.
+- `drivers/mcp4725` — MCP4725 12-bit DAC.
 
 ## Contract
 

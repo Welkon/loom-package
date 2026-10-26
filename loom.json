@@ -1031,7 +1031,53 @@
         "float": false,
         "blocking": true
       }
+    },
+    {
+      "id": "sh1106",
+      "kind": "driver",
+      "version": "0.1.0",
+      "path": "drivers/sh1106",
+      "tags": [
+        "display",
+        "oled",
+        "i2c"
+      ],
+      "summary": "Minimal SH1106 128x64 I2C OLED driver.",
+      "applications": [
+        "1.3-inch status display",
+        "handheld menu",
+        "bring-up display"
+      ],
+      "compatibility": {
+        "language": "c99",
+        "alloc": false,
+        "float": false,
+        "blocking": true
+      }
+    },
+    {
+      "id": "mcp4725",
+      "kind": "driver",
+      "version": "0.1.0",
+      "path": "drivers/mcp4725",
+      "tags": [
+        "dac",
+        "analog",
+        "i2c"
+      ],
+      "summary": "MCP4725 12-bit I2C digital-to-analog converter.",
+      "applications": [
+        "analog setpoint",
+        "sensor calibration",
+        "bias source"
+      ],
+      "compatibility": {
+        "language": "c99",
+        "alloc": false,
+        "float": false,
+        "blocking": true
+      }
     }
   ],
-  "version": "0.12.0"
+  "version": "0.13.0"
 }
