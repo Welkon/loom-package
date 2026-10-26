@@ -60,7 +60,8 @@ TESTS := \
 	$(BUILD)/test_mfrc522 \
 	$(BUILD)/test_modbus_rtu \
 	$(BUILD)/test_pir \
-	$(BUILD)/test_scd4x
+	$(BUILD)/test_scd4x \
+	$(BUILD)/test_sdcard
 
 all: test
 
@@ -240,6 +241,9 @@ $(BUILD)/test_pir: operators/pir/tests/test_pir.c operators/pir/pir.c | $(BUILD)
 
 $(BUILD)/test_scd4x: drivers/scd4x/tests/test_scd4x.c drivers/scd4x/scd4x.c | $(BUILD)
 	$(CC) $(CFLAGS) -Idrivers/scd4x $^ -o $@
+
+$(BUILD)/test_sdcard: drivers/sdcard/tests/test_sdcard.c drivers/sdcard/sdcard.c | $(BUILD)
+	$(CC) $(CFLAGS) -Idrivers/sdcard $^ -o $@
 
 test: $(TESTS)
 	@for t in $(TESTS); do echo "== $$t"; ./$$t; done

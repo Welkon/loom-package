@@ -16,7 +16,7 @@ patterns/    structure guides, not code
 loom.json    unit index
 ```
 
-The catalog currently contains fifty-eight units.
+The catalog currently contains fifty-nine units.
 
 Operators:
 
@@ -81,6 +81,7 @@ Drivers:
 - `drivers/hd44780` — HD44780 character LCD.
 - `drivers/mfrc522` — MFRC522 13.56 MHz RFID reader.
 - `drivers/scd4x` — SCD40/SCD41 CO2 sensor.
+- `drivers/sdcard` — SD card block device over SPI.
 
 ## Contract
 

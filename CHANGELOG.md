@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.22.0
+
+- Add `sdcard` from the SD SPI specification and an Apache-2.0 reference.
+
 ## 0.21.0
 
 - Add `scd4x` from LibDriver (MIT).

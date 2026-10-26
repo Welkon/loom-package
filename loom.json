@@ -1309,7 +1309,30 @@
         "float": false,
         "blocking": true
       }
+    },
+    {
+      "id": "sdcard",
+      "kind": "driver",
+      "version": "0.1.0",
+      "path": "drivers/sdcard",
+      "tags": [
+        "storage",
+        "flash",
+        "spi"
+      ],
+      "summary": "SD card block device over SPI.",
+      "applications": [
+        "data logger",
+        "config store",
+        "FatFs block layer"
+      ],
+      "compatibility": {
+        "language": "c99",
+        "alloc": false,
+        "float": false,
+        "blocking": true
+      }
     }
   ],
-  "version": "0.21.0"
+  "version": "0.22.0"
 }
