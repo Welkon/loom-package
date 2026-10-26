@@ -1,0 +1,12 @@
+name: smoke
+on:
+  push:
+    paths:
+      - ".forgejo/workflows/smoke.yml"
+jobs:
+  smoke:
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo "runner smoke ok"
+      - run: uname -a
+      - run: node --version || true
