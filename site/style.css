@@ -233,3 +233,12 @@ dd { margin: 0; font-family: var(--mono); overflow-wrap: anywhere; }
 .matrix td:first-child { font-family: var(--mono); font-weight: 650; }
 .matrix td:first-child a { color: var(--ink); }
 @media (max-width: 760px) { .example-grid { grid-template-columns: 1fr; } }
+
+.request-form { display: grid; gap: .8rem; max-width: 760px; margin-top: 2rem; }
+.request-form label { display: grid; gap: .3rem; font: .72rem var(--mono); color: var(--muted); }
+.request-form input, .request-form select, .request-form textarea { background: var(--card); border: 1px solid var(--line-strong); border-radius: 4px; padding: .65rem .7rem; font: .9rem var(--sans); color: var(--ink); }
+.request-form input:focus, .request-form select:focus, .request-form textarea:focus { outline: 2px solid rgba(217,83,43,.2); border-color: var(--brand); }
+.form-actions { display: flex; gap: .5rem; flex-wrap: wrap; }
+.form-actions button { background: var(--brand); color: #fff; border: 0; border-radius: 4px; padding: .6rem .8rem; font: .75rem var(--mono); cursor: pointer; }
+.form-actions button + button { background: var(--paper-deep); color: var(--ink); border: 1px solid var(--line-strong); }
+.request-preview { background: #24211c; color: #ece5d8; padding: 1rem; border-radius: 5px; max-width: 760px; margin-top: 1rem; font-size: .76rem; white-space: pre-wrap; }

@@ -45,6 +45,9 @@ test("builds one page per unit plus the catalog", () => {
   const tests = fs.readFileSync(path.join(out, "tests.html"), "utf8");
   assert.match(tests, /Compatibility matrix/);
   assert.match(tests, /host test|test ↗/);
+  const request = fs.readFileSync(path.join(out, "request.html"), "utf8");
+  assert.match(request, /Package request/);
+  assert.match(request, /issues\/new/);
   const history = fs.readFileSync(path.join(out, "history.html"), "utf8");
   assert.match(history, /Catalog history/);
   assert.match(history, /0\.14\.0/);

@@ -51,6 +51,7 @@ fs.writeFileSync(path.join(out, "contribute.html"), page("Contribute", contribut
 fs.writeFileSync(path.join(out, "docs.html"), page("Documentation", docsBody(units), ""));
 fs.writeFileSync(path.join(out, "history.html"), page("History", historyBody(), ""));
 fs.writeFileSync(path.join(out, "examples.html"), page("Examples", examplesBody(units), ""));
+fs.writeFileSync(path.join(out, "request.html"), page("Request a package", requestBody(), ""));
 fs.writeFileSync(path.join(out, "tests.html"), page("Compatibility", testsBody(units), ""));
 fs.writeFileSync(path.join(out, "llms.txt"), llmsBody(units, lock, source));
 fs.writeFileSync(path.join(out, "index.json"), JSON.stringify({
@@ -252,7 +253,7 @@ function card(unit) {
 
 function llmsBody(units, lock, source) {
   const repo = source.replace(/\.git$/, "");
-  return `# loom\n\n> Reusable C drivers and algorithms for embedded systems. Every unit is pinned by source commit and SHA-256.\n\n## For AI agents\n\n- Read ${repo}/raw/branch/main/AGENTS.md before changing the catalog.\n- Search \`loom.json\` and the unit folders before writing. Reuse or extend an adapter; do not create a near-duplicate.\n- Scaffold with \`node tools/loom/new-unit.mjs <id> --kind driver|operator\`.\n- Do not copy GPL or vendor source. Cite the real behavior reference and license.\n- Run \`make test\` and \`node tools/loom/check-catalog.mjs\`. Report unverified bench behavior.\n- Do not tag, bump the catalog version, or commit generated \`site/dist\`.\n\n## Catalog\n\n${units.map(unit => `- [${unit.id}](https://loom.pcbsmt.me/units/${unit.id}.html) — ${unit.summary} (${unit.kind}, ${unit.version})`).join("\n")}\n\n## Registry\n\n- [index.json](https://loom.pcbsmt.me/index.json)\n- [Documentation](https://loom.pcbsmt.me/docs.html)\n- [Examples](https://loom.pcbsmt.me/examples.html)\n- [Compatibility](https://loom.pcbsmt.me/tests.html)\n- [Source](${repo})\n- [Catalog ref](${repo}/src/tag/${encodeURIComponent(lock.ref)})\n`;
+  return `# loom\n\n> Reusable C drivers and algorithms for embedded systems. Every unit is pinned by source commit and SHA-256.\n\n## For AI agents\n\n- Read ${repo}/raw/branch/main/AGENTS.md before changing the catalog.\n- Search \`loom.json\` and the unit folders before writing. Reuse or extend an adapter; do not create a near-duplicate.\n- Scaffold with \`node tools/loom/new-unit.mjs <id> --kind driver|operator\`.\n- Do not copy GPL or vendor source. Cite the real behavior reference and license.\n- Run \`make test\` and \`node tools/loom/check-catalog.mjs\`. Report unverified bench behavior.\n- Do not tag, bump the catalog version, or commit generated \`site/dist\`.\n\n## Catalog\n\n${units.map(unit => `- [${unit.id}](https://loom.pcbsmt.me/units/${unit.id}.html) — ${unit.summary} (${unit.kind}, ${unit.version})`).join("\n")}\n\n## Registry\n\n- [index.json](https://loom.pcbsmt.me/index.json)\n- [Documentation](https://loom.pcbsmt.me/docs.html)\n- [Examples](https://loom.pcbsmt.me/examples.html)\n- [Compatibility](https://loom.pcbsmt.me/tests.html)\n- [Request a package](https://loom.pcbsmt.me/request.html)\n- [Source](${repo})\n- [Catalog ref](${repo}/src/tag/${encodeURIComponent(lock.ref)})\n`;
 }
 
 function integrationExample(readme) {
@@ -266,6 +267,55 @@ function integrationExample(readme) {
 function docsTabs(active) {
   const tabs = [["docs.html", "Documentation"], ["examples.html", "Examples"], ["tests.html", "Compatibility"]];
   return `<nav class="docs-tabs">${tabs.map(([href, label]) => `<a href="${href}"${href === active ? ' class="is-active"' : ""}>${label}</a>`).join("")}</nav>`;
+}
+
+function requestBody() {
+  return `<main class="docs request">
+<p class="crumbs"><a href="index.html">Packages</a><span>/</span><a href="contribute.html">Contribute</a><span>/</span><strong>Request</strong></p>
+<section class="docs-head">
+  <p class="eyebrow">Package request</p>
+  <h1>Ask for a<br><em>missing unit.</em></h1>
+  <p class="lede">Describe the device and the gap. The form opens a pre-filled Forgejo issue; you can also copy the text and send it another way.</p>
+</section>
+<form id="request-form" class="request-form">
+  <label>Package id <input name="id" placeholder="example-driver" required></label>
+  <label>Kind <select name="kind"><option>driver</option><option>operator</option></select></label>
+  <label>Device or source <input name="source" placeholder="part number, datasheet, or real project"></label>
+  <label>Use case <textarea name="use" rows="4" placeholder="What should a project be able to do?"></textarea></label>
+  <label>Why existing units do not fit <textarea name="gap" rows="3"></textarea></label>
+  <div class="form-actions"><button type="submit">Open Forgejo issue ↗</button><button type="button" id="copy-request">Copy text</button></div>
+</form>
+<pre id="request-preview" class="request-preview" aria-live="polite"></pre>
+<p class="small">Submitting an issue requires a Forgejo account at <a href="https://git.pcbsmt.me/user/login">git.pcbsmt.me</a>. Registration is currently disabled; ask the maintainer for an invite if you do not have one.</p>
+</main>
+<script>
+const form = document.getElementById('request-form');
+const preview = document.getElementById('request-preview');
+function text() {
+  const data = new FormData(form);
+  return [
+    '**Package id**', data.get('id') || '', '',
+    '**Kind**', data.get('kind') || '', '',
+    '**Device or source**', data.get('source') || '', '',
+    '**Use case**', data.get('use') || '', '',
+    '**Why existing units do not fit**', data.get('gap') || '',
+  ].join('\n');
+}
+function update() { preview.textContent = text(); }
+form.addEventListener('input', update);
+form.addEventListener('submit', event => {
+  event.preventDefault();
+  const data = new FormData(form);
+  const title = '[package] ' + (data.get('id') || 'request');
+  const url = 'https://git.pcbsmt.me/rh/emb-loom/issues/new?template=package-request.md&title=' +
+    encodeURIComponent(title) + '&body=' + encodeURIComponent(text());
+  window.location.href = url;
+});
+document.getElementById('copy-request').addEventListener('click', async () => {
+  try { await navigator.clipboard.writeText(text()); } catch {}
+});
+update();
+</script>`;
 }
 
 function examplesBody(units) {
@@ -376,7 +426,7 @@ function contributeBody() {
       <li>Open a pull request at <a href="https://git.pcbsmt.me/rh/emb-loom">git.pcbsmt.me/rh/emb-loom</a>.</li>
       <li>After review, tag a new version. The site is built from that tag.</li>
     </ol>
-    <a class="button" href="https://git.pcbsmt.me/rh/emb-loom/issues/new">Request or propose a package ↗</a>
+    <a class="button" href="request.html">Request or propose a package →</a>
   </div>
 </section>
 <section class="contract-note">
