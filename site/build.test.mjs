@@ -23,6 +23,13 @@ test("builds one page per unit plus the catalog", () => {
   const css = fs.readFileSync(path.join(out, "style.css"), "utf8");
   assert.match(css, /\[hidden\] \{ display: none !important; \}/);
   assert.match(index, /querySelectorAll\('\.filter\[data-kind\]'\)/);
+  assert.ok(fs.existsSync(path.join(out, "llms.txt")));
+  const llms = fs.readFileSync(path.join(out, "llms.txt"), "utf8");
+  assert.match(llms, /For AI agents/);
+  assert.match(llms, /AGENTS\.md/);
+  const contribute = fs.readFileSync(path.join(out, "contribute.html"), "utf8");
+  assert.match(contribute, /For AI agents/);
+  assert.match(contribute, /llms\.txt/);
   const detail = fs.readFileSync(path.join(out, "units", "median.html"), "utf8");
   assert.match(detail, /\.\.\/style\.css/);
   assert.match(detail, /\.\.\/index\.html/);

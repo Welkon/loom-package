@@ -163,3 +163,10 @@ dd { margin: 0; font-family: var(--mono); overflow-wrap: anywhere; }
   .contribute-grid { grid-template-columns: 1fr; gap: 1.5rem; }
 }
 @media (max-width: 500px) { .loop { grid-template-columns: 1fr; } }
+
+.ai-guide { max-width: 860px; margin-top: 2.5rem; padding: 2rem 0 0; border-top: 1px solid var(--line); }
+.ai-guide h2 { font-size: 1.6rem; letter-spacing: -.04em; margin: .2rem 0 .7rem; }
+.ai-guide p { color: #3f3c36; font-size: .9rem; }
+.ai-guide pre { background: #24211c; color: #ece5d8; padding: 1rem 1.1rem; border-radius: 6px; overflow-x: auto; font-size: .8rem; line-height: 1.6; }
+.ai-guide pre code { background: none; border: 0; padding: 0; color: inherit; }
+.ai-guide a { font-weight: 600; }

@@ -33,6 +33,7 @@ for (const unit of units) {
   fs.writeFileSync(path.join(out, "units", `${unit.id}.html`), page(unit.id, unitBody(unit, lock), "../"));
 }
 fs.writeFileSync(path.join(out, "contribute.html"), page("Contribute", contributeBody(), ""));
+fs.writeFileSync(path.join(out, "llms.txt"), llmsBody(units, lock, source));
 fs.writeFileSync(path.join(out, "index.json"), JSON.stringify({
   schema: 1,
   catalog: manifest.version,
@@ -94,7 +95,7 @@ ${body}
   <div class="footer-inner">
     <div><strong>loom</strong> <span>${escape(manifest.version)}</span></div>
     <div>${units.length} packages · pinned by commit · no install scripts</div>
-    <div><a href="${escape(source)}">Repository</a> · <a href="${prefix}index.json">index.json</a></div>
+    <div><a href="${escape(source)}">Repository</a> · <a href="${prefix}index.json">index.json</a> · <a href="${prefix}llms.txt">llms.txt</a> · <a href="${escape(source.replace(/\.git$/, ""))}/raw/branch/main/AGENTS.md">AGENTS.md</a></div>
   </div>
 </footer>
 </body>
@@ -218,6 +219,11 @@ function card(unit) {
 </article>`;
 }
 
+function llmsBody(units, lock, source) {
+  const repo = source.replace(/\.git$/, "");
+  return `# loom\n\n> Reusable C drivers and algorithms for embedded systems. Every unit is pinned by source commit and SHA-256.\n\n## For AI agents\n\n- Read ${repo}/raw/branch/main/AGENTS.md before changing the catalog.\n- Search \`loom.json\` and the unit folders before writing. Reuse or extend an adapter; do not create a near-duplicate.\n- Scaffold with \`node tools/loom/new-unit.mjs <id> --kind driver|operator\`.\n- Do not copy GPL or vendor source. Cite the real behavior reference and license.\n- Run \`make test\` and \`node tools/loom/check-catalog.mjs\`. Report unverified bench behavior.\n- Do not tag, bump the catalog version, or commit generated \`site/dist\`.\n\n## Catalog\n\n${units.map(unit => `- [${unit.id}](https://loom.pcbsmt.me/units/${unit.id}.html) — ${unit.summary} (${unit.kind}, ${unit.version})`).join("\n")}\n\n## Registry\n\n- [index.json](https://loom.pcbsmt.me/index.json)\n- [Source](${repo})\n- [Catalog ref](${repo}/src/tag/${encodeURIComponent(lock.ref)})\n`;
+}
+
 function contributeBody() {
   return `<main class="contribute">
 <p class="crumbs"><a href="index.html">Packages</a><span>/</span><strong>Contribute</strong></p>
@@ -257,6 +263,16 @@ function contributeBody() {
 <section class="contract-note">
   <h2>No silent forks</h2>
   <p>If a package is close but not exact, reuse the algorithm and document the difference in the project adapter. Do not edit a copied unit in place; record a local change in the project and keep the catalog contract intact.</p>
+</section>
+<section class="ai-guide" id="ai">
+  <p class="eyebrow">For AI agents</p>
+  <h2>Read the contract before you generate.</h2>
+  <p>Agents are welcome to contribute, but the catalog is not a prompt target. Search first, name the real source, write the host tests, and report what is still unverified. Do not copy vendor code or invent a register value.</p>
+  <pre><code>Read AGENTS.md. Follow the loom contribution rules.
+Search loom.json before writing. Use tools/loom/new-unit.mjs.
+Do not copy GPL or vendor source. Run make test and check-catalog.
+Report the source, license, tests, and any bench verification still missing.</code></pre>
+  <p><a href="${escape(source.replace(/\.git$/, ""))}/raw/branch/main/AGENTS.md">Read AGENTS.md</a> · <a href="llms.txt">Machine-readable llms.txt</a> · <a href="${escape(source.replace(/\.git$/, ""))}/issues/new">Propose a package</a></p>
 </section>
 </main>`;
 }
