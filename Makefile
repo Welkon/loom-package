@@ -251,7 +251,7 @@ test: $(TESTS)
 clean:
 	rm -rf $(BUILD)
 
-.PHONY: all test clean site deploy-site check-catalog
+.PHONY: all test clean site deploy-site check-catalog check-lock
 
 site:
 	node site/build.mjs
@@ -261,3 +261,6 @@ deploy-site:
 
 check-catalog:
 	node tools/loom/check-catalog.mjs
+
+check-lock:
+	node tools/loom/lock.mjs --check
