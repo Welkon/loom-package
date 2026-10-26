@@ -230,7 +230,7 @@ function contributeBody() {
   <article><span>01</span><h2>Search</h2><p><code>loom search "load cell"</code> or use the catalog filters. Read the contract and the “when not to use” section.</p></article>
   <article><span>02</span><h2>Add</h2><p><code>loom add ads1115</code> copies the pinned unit and writes <code>loom.toml</code> and <code>loom.lock</code>.</p></article>
   <article><span>03</span><h2>Verify</h2><p><code>loom verify</code> checks installed hashes. <code>loom guard --staged</code> blocks an unprovenanced driver in CI.</p></article>
-  <article><span>04</span><h2>Contribute</h2><p>Keep the contract, add host tests, and open a change against <a href="https://git.pcbsmt.me/rh/emb-loom">rh/emb-loom</a>. A new tag becomes a new catalog version.</p></article>
+  <article><span>04</span><h2>Contribute</h2><p><code>node tools/loom/new-unit.mjs &lt;id&gt;</code> scaffolds the contract and test. Run <code>make test</code>, then open a change against <a href="https://git.pcbsmt.me/rh/emb-loom">rh/emb-loom</a>. A new tag becomes a new catalog version.</p></article>
 </section>
 <section class="contribute-grid">
   <div>
@@ -246,8 +246,8 @@ function contributeBody() {
   <div>
     <h2>Contribution path</h2>
     <ol>
-      <li>Add the unit and its test under <code>drivers/</code> or <code>operators/</code>.</li>
-      <li>Run <code>make test</code> and <code>node tools/loom/sync.mjs --check</code>.</li>
+      <li>Run <code>node tools/loom/new-unit.mjs &lt;id&gt; --kind driver|operator</code>.</li>
+      <li>Fill the README contract and behavior tests; run <code>make test</code> and <code>make check-catalog</code>.</li>
       <li>Open a pull request at <a href="https://git.pcbsmt.me/rh/emb-loom">git.pcbsmt.me/rh/emb-loom</a>.</li>
       <li>After review, tag a new version. The site is built from that tag.</li>
     </ol>

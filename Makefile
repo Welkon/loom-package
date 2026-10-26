@@ -199,10 +199,13 @@ test: $(TESTS)
 clean:
 	rm -rf $(BUILD)
 
-.PHONY: all test clean site deploy-site
+.PHONY: all test clean site deploy-site check-catalog
 
 site:
 	node site/build.mjs
 
 deploy-site:
 	./site/deploy.sh
+
+check-catalog:
+	node tools/loom/check-catalog.mjs
