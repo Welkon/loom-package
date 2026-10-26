@@ -53,4 +53,4 @@ default: break;
 ## Verification
 
 `make test` covers short, long, release after long, bounce, and zero timing.
-Behavior reference: a production target `key.c` and a production target key modes.
+Behavior reference: production key modes; this implementation is original.

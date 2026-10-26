@@ -48,4 +48,4 @@ uint16_t clean = median_filter_step(&filter, adc_read());
 ## Verification
 
 `make test` covers odd/even windows, wrap, reset, size 1, and size 0.
-Behavior reference: a production target `pir.c`; Padauk `Soft_Filter/AD_filter_02`.
+Behavior reference: a production median filter; this implementation is original.

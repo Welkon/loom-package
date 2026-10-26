@@ -53,7 +53,7 @@ if (uart_read(&link, reply, 2) == UART_OK) { handle(reply); }
 ## Adapters
 
 - Keep baud rate, pin mux, FIFO, and error flags in the adapter.
-- Reference examples: a production target, a legacy demo `ca51m550`, a production target UART demos.
+- Reference examples: vendor UART demos.
 - Do not copy a vendor register sequence into the core.
 
 ## When not to use

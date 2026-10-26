@@ -1262,7 +1262,30 @@
         "float": false,
         "blocking": false
       }
+    },
+    {
+      "id": "pir",
+      "kind": "operator",
+      "version": "0.1.0",
+      "path": "operators/pir",
+      "tags": [
+        "motion",
+        "pir",
+        "filter"
+      ],
+      "summary": "PIR motion detector signal chain for sampled pyroelectric data.",
+      "applications": [
+        "raw PIR front end",
+        "battery motion sensor",
+        "warm-up and output lock"
+      ],
+      "compatibility": {
+        "language": "c99",
+        "alloc": false,
+        "float": false,
+        "blocking": false
+      }
     }
   ],
-  "version": "0.19.0"
+  "version": "0.20.0"
 }

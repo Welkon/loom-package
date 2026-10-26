@@ -58,7 +58,8 @@ TESTS := \
 	$(BUILD)/test_nrf24l01 \
 	$(BUILD)/test_hd44780 \
 	$(BUILD)/test_mfrc522 \
-	$(BUILD)/test_modbus_rtu
+	$(BUILD)/test_modbus_rtu \
+	$(BUILD)/test_pir
 
 all: test
 
@@ -232,6 +233,9 @@ $(BUILD)/test_mfrc522: drivers/mfrc522/tests/test_mfrc522.c drivers/mfrc522/mfrc
 
 $(BUILD)/test_modbus_rtu: operators/modbus-rtu/tests/test_modbus_rtu.c operators/modbus-rtu/modbus_rtu.c | $(BUILD)
 	$(CC) $(CFLAGS) -Ioperators/modbus-rtu $^ -o $@
+
+$(BUILD)/test_pir: operators/pir/tests/test_pir.c operators/pir/pir.c | $(BUILD)
+	$(CC) $(CFLAGS) -Ioperators/pir $^ -o $@
 
 test: $(TESTS)
 	@for t in $(TESTS); do echo "== $$t"; ./$$t; done

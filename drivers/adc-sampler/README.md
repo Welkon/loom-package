@@ -48,7 +48,7 @@ uint32_t mv = adc_sampler_mv(&battery, raw, 12, 3300);
 ## Adapters
 
 - Keep channel setup, reference selection, and sample timing in the adapter.
-- Reference examples: a production target `drivers.c`, ZX ADC examples.
+- Reference examples: vendor ADC demos.
 - Do not put vendor SFR writes in the core.
 
 ## When not to use

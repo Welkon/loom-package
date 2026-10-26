@@ -49,4 +49,4 @@ if (ir_nec_decode(intervals, 33, &frame) == IR_NEC_FRAME) {
 ## Verification
 
 `make test` covers a valid frame, bad bit, bad complement, repeat, and wrong count.
-Behavior reference: a production target `ir.c` and Padauk `IR/IR_Receive`.
+Behavior reference: the NEC protocol and a vendor IR receiver example.

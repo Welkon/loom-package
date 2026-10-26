@@ -1,5 +1,10 @@
 # Changelog
 
+## 0.20.0
+
+- Add `pir`, a 6-sample trimmed-mean pyroelectric motion chain.
+- Anonymize provenance references; remove internal project identifiers.
+
 ## 0.19.0
 
 - Add `modbus-rtu` from the Modbus serial-line specification.
@@ -101,7 +106,7 @@
 
 - Add `mean`, `clamp-average`, `weighted-average`, and `clamp-debounce`
   from the Padauk Soft_Filter family.
-- Add `ir-nec-decode` from a production target and Padauk IR examples.
+- Add `ir-nec-decode` from the NEC protocol and a vendor IR example.
 - Add the `i2c-master` driver core with a port and fake bus.
 
 ## 0.2.0

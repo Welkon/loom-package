@@ -16,7 +16,7 @@ patterns/    structure guides, not code
 loom.json    unit index
 ```
 
-The catalog currently contains fifty-six units.
+The catalog currently contains fifty-seven units.
 
 Operators:
 
@@ -42,6 +42,7 @@ Operators:
 - `operators/biquad` — Q15 direct-form I biquad.
 - `operators/fir` — Q15 finite-impulse-response filter.
 - `operators/modbus-rtu` — Modbus RTU frame builder and parser.
+- `operators/pir` — PIR motion signal chain.
 
 Drivers:
 

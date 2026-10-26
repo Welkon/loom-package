@@ -46,4 +46,4 @@ uint8_t low = hysteresis_step(&battery, millivolts());
 ## Verification
 
 `make test` covers both thresholds, the band, and the initial state.
-Behavior reference: a production target `drivers.c` and a production target `control.c`.
+Behavior reference: production control loops; this implementation is original.

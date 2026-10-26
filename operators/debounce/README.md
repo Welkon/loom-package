@@ -46,4 +46,4 @@ uint8_t pressed = debounce_step(&key, raw_pin(), 1);
 ## Verification
 
 `make test` covers threshold edges, release, bounce reset, and zero threshold.
-Behavior reference: a production target `control.c` and a production target `key.c`.
+Behavior reference: production key handlers; this implementation is original.

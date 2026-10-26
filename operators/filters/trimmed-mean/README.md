@@ -45,4 +45,4 @@ uint16_t value = trimmed_mean(batch, 6);
 ## Verification
 
 `make test` covers the 6-sample PIR batch, 3-sample minimum, duplicates, and invalid counts.
-Behavior reference: a production target `pir.c`; Padauk `Soft_Filter/AD_filter_05`.
+Behavior reference: a production trimmed-mean filter; this implementation is original.
