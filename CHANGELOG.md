@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.17.0
+
+- Add `hd44780` from the HD44780 datasheet and the MIT 4-bit sequence.
+
 ## 0.16.0
 
 - Add `nrf24l01` from LibDriver (MIT).

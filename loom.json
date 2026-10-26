@@ -1193,7 +1193,30 @@
         "float": false,
         "blocking": true
       }
+    },
+    {
+      "id": "hd44780",
+      "kind": "driver",
+      "version": "0.1.0",
+      "path": "drivers/hd44780",
+      "tags": [
+        "display",
+        "lcd",
+        "gpio"
+      ],
+      "summary": "HD44780-compatible character LCD, 4-bit parallel interface.",
+      "applications": [
+        "status display",
+        "parameter editor",
+        "legacy panel"
+      ],
+      "compatibility": {
+        "language": "c99",
+        "alloc": false,
+        "float": false,
+        "blocking": true
+      }
     }
   ],
-  "version": "0.16.0"
+  "version": "0.17.0"
 }

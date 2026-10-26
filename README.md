@@ -16,7 +16,7 @@ patterns/    structure guides, not code
 loom.json    unit index
 ```
 
-The catalog currently contains fifty-three units.
+The catalog currently contains fifty-four units.
 
 Operators:
 
@@ -76,6 +76,7 @@ Drivers:
 - `drivers/ina219` — INA219 current/power monitor.
 - `drivers/mcp9808` — MCP9808 temperature sensor.
 - `drivers/nrf24l01` — nRF24L01+ 2.4 GHz SPI transceiver.
+- `drivers/hd44780` — HD44780 character LCD.
 
 ## Contract
 

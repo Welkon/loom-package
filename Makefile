@@ -55,7 +55,8 @@ TESTS := \
 	$(BUILD)/test_hc_sr04 \
 	$(BUILD)/test_ina219 \
 	$(BUILD)/test_mcp9808 \
-	$(BUILD)/test_nrf24l01
+	$(BUILD)/test_nrf24l01 \
+	$(BUILD)/test_hd44780
 
 all: test
 
@@ -220,6 +221,9 @@ $(BUILD)/test_mcp9808: drivers/mcp9808/tests/test_mcp9808.c drivers/mcp9808/mcp9
 
 $(BUILD)/test_nrf24l01: drivers/nrf24l01/tests/test_nrf24l01.c drivers/nrf24l01/nrf24l01.c | $(BUILD)
 	$(CC) $(CFLAGS) -Idrivers/nrf24l01 $^ -o $@
+
+$(BUILD)/test_hd44780: drivers/hd44780/tests/test_hd44780.c drivers/hd44780/hd44780.c | $(BUILD)
+	$(CC) $(CFLAGS) -Idrivers/hd44780 $^ -o $@
 
 test: $(TESTS)
 	@for t in $(TESTS); do echo "== $$t"; ./$$t; done
