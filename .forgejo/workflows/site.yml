@@ -1,12 +1,6 @@
 name: site
 on:
-  push:
-    branches: [main]
-    paths:
-      - "site/**"
-      - "loom.json"
-      - "loom.lock"
-      - ".forgejo/workflows/site.yml"
+  workflow_dispatch:
 jobs:
   deploy:
     runs-on: ubuntu-latest
