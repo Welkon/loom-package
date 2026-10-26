@@ -63,6 +63,7 @@ fs.writeFileSync(path.join(out, "index.json"), JSON.stringify({
   units: units.map(unit => ({
     id: unit.id, kind: unit.kind, version: unit.version, summary: unit.summary,
     tags: unit.tags, applications: unit.applications, compatibility: unit.compatibility,
+    requires: unit.requires || [], sha256: lock.units?.[unit.id]?.sha256 || "",
     path: unit.path,
   })),
 }, null, 2) + "\n");

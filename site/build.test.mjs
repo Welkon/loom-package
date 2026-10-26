@@ -62,4 +62,6 @@ test("writes a registry-shaped index", () => {
   assert.equal(index.catalog, manifest.version);
   assert.equal(index.units.length, manifest.units.length);
   assert.ok(index.units.every(unit => unit.id && unit.summary));
+  assert.ok(index.units.every(unit => Array.isArray(unit.requires)));
+  assert.ok(index.units.every(unit => typeof unit.sha256 === "string"));
 });
