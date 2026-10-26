@@ -11,13 +11,14 @@ jobs:
   deploy:
     runs-on: ubuntu-latest
     steps:
-      - run: git clone --depth 1 http://forgejo:3000/rh/emb-loom.git .
+      - run: git clone --depth 1 http://forgejo:3000/rh/emb-loom.git repo
       - name: Build and test
         run: |
+          cd repo
           node site/build.mjs
           node --test site/build.test.mjs
       - name: Deploy
         env:
           CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           CLOUDFLARE_ACCOUNT_ID: "80857f4ead88b4e7dbddc1176d8f3350"
-        run: npx --yes wrangler deploy
+        run: cd repo && npx --yes wrangler deploy
