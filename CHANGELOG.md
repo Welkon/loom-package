@@ -1,5 +1,10 @@
 # Changelog
 
+## 0.14.0
+
+- Add `pcf8574` from LibDriver (MIT).
+- Add `hc-sr04` from LibDriver (MIT).
+
 ## 0.13.0
 
 - Add `sh1106` from the u8g2 SH1106 sequence (BSD-2-Clause).

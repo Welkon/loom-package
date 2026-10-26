@@ -1077,7 +1077,53 @@
         "float": false,
         "blocking": true
       }
+    },
+    {
+      "id": "pcf8574",
+      "kind": "driver",
+      "version": "0.1.0",
+      "path": "drivers/pcf8574",
+      "tags": [
+        "gpio",
+        "expander",
+        "i2c"
+      ],
+      "summary": "PCF8574 8-bit I2C GPIO expander.",
+      "applications": [
+        "buttons and relays",
+        "status LEDs",
+        "control panel"
+      ],
+      "compatibility": {
+        "language": "c99",
+        "alloc": false,
+        "float": false,
+        "blocking": true
+      }
+    },
+    {
+      "id": "hc-sr04",
+      "kind": "driver",
+      "version": "0.1.0",
+      "path": "drivers/hc-sr04",
+      "tags": [
+        "sensor",
+        "distance",
+        "ultrasonic"
+      ],
+      "summary": "HC-SR04 ultrasonic distance sensor.",
+      "applications": [
+        "obstacle sensing",
+        "tank level",
+        "presence detection"
+      ],
+      "compatibility": {
+        "language": "c99",
+        "alloc": false,
+        "float": false,
+        "blocking": true
+      }
     }
   ],
-  "version": "0.13.0"
+  "version": "0.14.0"
 }

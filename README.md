@@ -16,7 +16,7 @@ patterns/    structure guides, not code
 loom.json    unit index
 ```
 
-The catalog currently contains forty-eight units.
+The catalog currently contains fifty units.
 
 Operators:
 
@@ -71,6 +71,8 @@ Drivers:
 - `drivers/ads1115` — ADS1115 16-bit ADC.
 - `drivers/sh1106` — SH1106 128x64 I2C OLED.
 - `drivers/mcp4725` — MCP4725 12-bit DAC.
+- `drivers/pcf8574` — PCF8574 8-bit I/O expander.
+- `drivers/hc-sr04` — HC-SR04 ultrasonic distance.
 
 ## Contract
 
