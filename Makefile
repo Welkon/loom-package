@@ -52,7 +52,9 @@ TESTS := \
 	$(BUILD)/test_sh1106 \
 	$(BUILD)/test_mcp4725 \
 	$(BUILD)/test_pcf8574 \
-	$(BUILD)/test_hc_sr04
+	$(BUILD)/test_hc_sr04 \
+	$(BUILD)/test_ina219 \
+	$(BUILD)/test_mcp9808
 
 all: test
 
@@ -208,6 +210,12 @@ $(BUILD)/test_pcf8574: drivers/pcf8574/tests/test_pcf8574.c drivers/pcf8574/pcf8
 
 $(BUILD)/test_hc_sr04: drivers/hc-sr04/tests/test_hc_sr04.c drivers/hc-sr04/hc_sr04.c | $(BUILD)
 	$(CC) $(CFLAGS) -Idrivers/hc-sr04 $^ -o $@
+
+$(BUILD)/test_ina219: drivers/ina219/tests/test_ina219.c drivers/ina219/ina219.c | $(BUILD)
+	$(CC) $(CFLAGS) -Idrivers/ina219 $^ -o $@
+
+$(BUILD)/test_mcp9808: drivers/mcp9808/tests/test_mcp9808.c drivers/mcp9808/mcp9808.c | $(BUILD)
+	$(CC) $(CFLAGS) -Idrivers/mcp9808 $^ -o $@
 
 test: $(TESTS)
 	@for t in $(TESTS); do echo "== $$t"; ./$$t; done

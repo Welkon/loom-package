@@ -1123,7 +1123,54 @@
         "float": false,
         "blocking": true
       }
+    },
+    {
+      "id": "ina219",
+      "kind": "driver",
+      "version": "0.1.0",
+      "path": "drivers/ina219",
+      "tags": [
+        "sensor",
+        "current",
+        "power",
+        "i2c"
+      ],
+      "summary": "INA219 high-side current and power monitor.",
+      "applications": [
+        "battery current",
+        "load monitor",
+        "USB power budget"
+      ],
+      "compatibility": {
+        "language": "c99",
+        "alloc": false,
+        "float": false,
+        "blocking": true
+      }
+    },
+    {
+      "id": "mcp9808",
+      "kind": "driver",
+      "version": "0.1.0",
+      "path": "drivers/mcp9808",
+      "tags": [
+        "sensor",
+        "temperature",
+        "i2c"
+      ],
+      "summary": "MCP9808 high-accuracy I2C temperature sensor.",
+      "applications": [
+        "board temperature",
+        "enclosure logging",
+        "thermal monitor"
+      ],
+      "compatibility": {
+        "language": "c99",
+        "alloc": false,
+        "float": false,
+        "blocking": true
+      }
     }
   ],
-  "version": "0.14.0"
+  "version": "0.15.0"
 }

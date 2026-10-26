@@ -16,7 +16,7 @@ patterns/    structure guides, not code
 loom.json    unit index
 ```
 
-The catalog currently contains fifty units.
+The catalog currently contains fifty-two units.
 
 Operators:
 
@@ -73,6 +73,8 @@ Drivers:
 - `drivers/mcp4725` — MCP4725 12-bit DAC.
 - `drivers/pcf8574` — PCF8574 8-bit I/O expander.
 - `drivers/hc-sr04` — HC-SR04 ultrasonic distance.
+- `drivers/ina219` — INA219 current/power monitor.
+- `drivers/mcp9808` — MCP9808 temperature sensor.
 
 ## Contract
 

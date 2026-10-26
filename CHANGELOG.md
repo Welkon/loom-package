@@ -1,5 +1,10 @@
 # Changelog
 
+## 0.15.0
+
+- Add `ina219` from LibDriver (MIT).
+- Add `mcp9808` from LibDriver (MIT).
+
 ## 0.14.0
 
 - Add `pcf8574` from LibDriver (MIT).
