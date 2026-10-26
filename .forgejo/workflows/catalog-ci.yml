@@ -9,5 +9,5 @@ jobs:
     steps:
       - run: git clone --depth 1 http://forgejo:3000/rh/emb-loom.git repo
       - run: make -C repo test
-      - run: node repo/tools/loom/check-catalog.mjs
+      - run: node repo/tools/loom/check-catalog.mjs repo
       - run: node --test repo/site/build.test.mjs
