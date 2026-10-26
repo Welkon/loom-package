@@ -71,6 +71,6 @@ Stop and report instead of guessing when:
 ## Consumer loop
 
 Consumers discover on <https://loom.pcbsmt.me>, install with
-`loom add <id>`, check with `loom verify`, and block unprovenanced drivers with
-`loom guard --staged`. A catalog change is complete only when the unit, tests,
+`loom add <id>` (or `--index` for the static registry), check with
+`loom verify`, and block unprovenanced drivers with `loom guard --staged`. A catalog change is complete only when the unit, tests,
 metadata, and site data agree.

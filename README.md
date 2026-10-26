@@ -101,6 +101,10 @@ make test
 Copy the selected unit into the product tree, keep its provenance, and call
 the public API. Adapters for a specific MCU stay next to the product.
 
+The site also serves a Cargo-style static registry at
+<https://loom.pcbsmt.me>: use `loom add <id> --index https://loom.pcbsmt.me`
+to download only that unit and version.
+
 ## Versioning
 
 `loom.json` lists unit versions. A project pins exact versions and file
