@@ -16,7 +16,7 @@ patterns/    structure guides, not code
 loom.json    unit index
 ```
 
-The catalog currently contains fifty-seven units.
+The catalog currently contains fifty-eight units.
 
 Operators:
 
@@ -80,6 +80,7 @@ Drivers:
 - `drivers/nrf24l01` — nRF24L01+ 2.4 GHz SPI transceiver.
 - `drivers/hd44780` — HD44780 character LCD.
 - `drivers/mfrc522` — MFRC522 13.56 MHz RFID reader.
+- `drivers/scd4x` — SCD40/SCD41 CO2 sensor.
 
 ## Contract
 

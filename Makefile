@@ -59,7 +59,8 @@ TESTS := \
 	$(BUILD)/test_hd44780 \
 	$(BUILD)/test_mfrc522 \
 	$(BUILD)/test_modbus_rtu \
-	$(BUILD)/test_pir
+	$(BUILD)/test_pir \
+	$(BUILD)/test_scd4x
 
 all: test
 
@@ -236,6 +237,9 @@ $(BUILD)/test_modbus_rtu: operators/modbus-rtu/tests/test_modbus_rtu.c operators
 
 $(BUILD)/test_pir: operators/pir/tests/test_pir.c operators/pir/pir.c | $(BUILD)
 	$(CC) $(CFLAGS) -Ioperators/pir $^ -o $@
+
+$(BUILD)/test_scd4x: drivers/scd4x/tests/test_scd4x.c drivers/scd4x/scd4x.c | $(BUILD)
+	$(CC) $(CFLAGS) -Idrivers/scd4x $^ -o $@
 
 test: $(TESTS)
 	@for t in $(TESTS); do echo "== $$t"; ./$$t; done

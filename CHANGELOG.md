@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.21.0
+
+- Add `scd4x` from LibDriver (MIT).
+
 ## 0.20.0
 
 - Add `pir`, a 6-sample trimmed-mean pyroelectric motion chain.

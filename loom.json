@@ -1285,7 +1285,31 @@
         "float": false,
         "blocking": false
       }
+    },
+    {
+      "id": "scd4x",
+      "kind": "driver",
+      "version": "0.1.0",
+      "path": "drivers/scd4x",
+      "tags": [
+        "sensor",
+        "co2",
+        "environment",
+        "i2c"
+      ],
+      "summary": "Sensirion SCD40/SCD41 CO2, temperature, and humidity sensor.",
+      "applications": [
+        "indoor air quality",
+        "ventilation control",
+        "CO2 monitor"
+      ],
+      "compatibility": {
+        "language": "c99",
+        "alloc": false,
+        "float": false,
+        "blocking": true
+      }
     }
   ],
-  "version": "0.20.0"
+  "version": "0.21.0"
 }
