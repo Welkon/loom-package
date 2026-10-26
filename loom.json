@@ -937,7 +937,55 @@
         "float": false,
         "blocking": true
       }
+    },
+    {
+      "id": "bme280",
+      "kind": "driver",
+      "version": "0.1.0",
+      "path": "drivers/bme280",
+      "tags": [
+        "sensor",
+        "pressure",
+        "humidity",
+        "temperature",
+        "i2c"
+      ],
+      "summary": "BME280 temperature, pressure, and humidity sensor.",
+      "applications": [
+        "weather station",
+        "altitude",
+        "greenhouse"
+      ],
+      "compatibility": {
+        "language": "c99",
+        "alloc": false,
+        "float": false,
+        "blocking": true
+      }
+    },
+    {
+      "id": "adxl345",
+      "kind": "driver",
+      "version": "0.1.0",
+      "path": "drivers/adxl345",
+      "tags": [
+        "sensor",
+        "motion",
+        "i2c"
+      ],
+      "summary": "ADXL345 three-axis accelerometer.",
+      "applications": [
+        "tilt sensing",
+        "vibration logging",
+        "motion wake-up"
+      ],
+      "compatibility": {
+        "language": "c99",
+        "alloc": false,
+        "float": false,
+        "blocking": true
+      }
     }
   ],
-  "version": "0.10.0"
+  "version": "0.11.0"
 }

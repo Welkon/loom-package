@@ -1,5 +1,10 @@
 # Changelog
 
+## 0.11.0
+
+- Add `bme280` using the Bosch integer compensation formulas (BSD-3-Clause).
+- Add `adxl345` from LibDriver (MIT).
+
 ## 0.10.0
 
 - Add `stepper` from laurb9/StepperDriver (MIT).

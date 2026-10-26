@@ -14,7 +14,7 @@ patterns/    structure guides, not code
 loom.json    unit index
 ```
 
-The catalog currently contains forty-two units.
+The catalog currently contains forty-four units.
 
 Operators:
 
@@ -63,6 +63,8 @@ Drivers:
 - `drivers/stepper` — A4988/DRV8825 step/direction driver.
 - `drivers/hx711` — HX711 24-bit load-cell amplifier.
 - `drivers/max31855` — MAX31855 thermocouple amplifier.
+- `drivers/bme280` — BME280 temperature, pressure, and humidity.
+- `drivers/adxl345` — ADXL345 three-axis accelerometer.
 
 ## Contract
 
