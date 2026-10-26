@@ -1,5 +1,11 @@
 # Changelog
 
+## 0.10.0
+
+- Add `stepper` from laurb9/StepperDriver (MIT).
+- Add `hx711` from bogde/HX711 (MIT).
+- Add `max31855` from LibDriver (MIT).
+
 ## 0.9.0
 
 - Add `sht3x` from DFRobot_SHT3x (MIT).

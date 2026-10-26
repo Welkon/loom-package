@@ -14,7 +14,7 @@ patterns/    structure guides, not code
 loom.json    unit index
 ```
 
-The catalog currently contains thirty-nine units.
+The catalog currently contains forty-two units.
 
 Operators:
 
@@ -60,6 +60,9 @@ Drivers:
 - `drivers/sht3x` — SHT30/SHT31/SHT35 temperature and humidity.
 - `drivers/aht20` — AHT20 temperature and humidity.
 - `drivers/mcp2515` — MCP2515 CAN controller.
+- `drivers/stepper` — A4988/DRV8825 step/direction driver.
+- `drivers/hx711` — HX711 24-bit load-cell amplifier.
+- `drivers/max31855` — MAX31855 thermocouple amplifier.
 
 ## Contract
 

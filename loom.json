@@ -868,7 +868,76 @@
         "float": false,
         "blocking": true
       }
+    },
+    {
+      "id": "stepper",
+      "kind": "driver",
+      "version": "0.1.0",
+      "path": "drivers/stepper",
+      "tags": [
+        "motion",
+        "stepper",
+        "gpio"
+      ],
+      "summary": "Step/direction stepper driver for A4988 and DRV8825.",
+      "applications": [
+        "linear stage",
+        "pump actuator",
+        "camera slider"
+      ],
+      "compatibility": {
+        "language": "c99",
+        "alloc": false,
+        "float": false,
+        "blocking": true
+      }
+    },
+    {
+      "id": "hx711",
+      "kind": "driver",
+      "version": "0.1.0",
+      "path": "drivers/hx711",
+      "tags": [
+        "sensor",
+        "load-cell",
+        "gpio"
+      ],
+      "summary": "HX711 24-bit load-cell amplifier.",
+      "applications": [
+        "platform scale",
+        "force sensor",
+        "tension control"
+      ],
+      "compatibility": {
+        "language": "c99",
+        "alloc": false,
+        "float": false,
+        "blocking": true
+      }
+    },
+    {
+      "id": "max31855",
+      "kind": "driver",
+      "version": "0.1.0",
+      "path": "drivers/max31855",
+      "tags": [
+        "sensor",
+        "temperature",
+        "spi"
+      ],
+      "summary": "MAX31855 thermocouple amplifier.",
+      "applications": [
+        "reflow oven",
+        "kiln monitor",
+        "test bench"
+      ],
+      "compatibility": {
+        "language": "c99",
+        "alloc": false,
+        "float": false,
+        "blocking": true
+      }
     }
   ],
-  "version": "0.9.0"
+  "version": "0.10.0"
 }

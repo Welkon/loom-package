@@ -41,7 +41,10 @@ TESTS := \
 	$(BUILD)/test_mpu6050 \
 	$(BUILD)/test_sht3x \
 	$(BUILD)/test_aht20 \
-	$(BUILD)/test_mcp2515
+	$(BUILD)/test_mcp2515 \
+	$(BUILD)/test_stepper \
+	$(BUILD)/test_hx711 \
+	$(BUILD)/test_max31855
 
 all: test
 
@@ -164,6 +167,15 @@ $(BUILD)/test_aht20: drivers/aht20/tests/test_aht20.c drivers/aht20/aht20.c | $(
 
 $(BUILD)/test_mcp2515: drivers/mcp2515/tests/test_mcp2515.c drivers/mcp2515/mcp2515.c | $(BUILD)
 	$(CC) $(CFLAGS) -Idrivers/mcp2515 $^ -o $@
+
+$(BUILD)/test_stepper: drivers/stepper/tests/test_stepper.c drivers/stepper/stepper.c | $(BUILD)
+	$(CC) $(CFLAGS) -Idrivers/stepper $^ -o $@
+
+$(BUILD)/test_hx711: drivers/hx711/tests/test_hx711.c drivers/hx711/hx711.c | $(BUILD)
+	$(CC) $(CFLAGS) -Idrivers/hx711 $^ -o $@
+
+$(BUILD)/test_max31855: drivers/max31855/tests/test_max31855.c drivers/max31855/max31855.c | $(BUILD)
+	$(CC) $(CFLAGS) -Idrivers/max31855 $^ -o $@
 
 test: $(TESTS)
 	@for t in $(TESTS); do echo "== $$t"; ./$$t; done
