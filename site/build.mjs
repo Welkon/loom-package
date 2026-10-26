@@ -22,14 +22,20 @@ const favicon = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32"><re
 const units = manifest.units.map(unit => {
   const directory = path.join(root, unit.path);
   const header = fs.readdirSync(directory).find(file => file.endsWith(".h"));
+  const test = fs.readdirSync(path.join(directory, "tests")).find(file => file.endsWith(".c"));
   return {
     ...unit,
     readme: readReadme(unit.path),
     header,
+    test,
+    example: integrationExample(readReadme(unit.path)),
     api: header ? parseApi(path.join(directory, header)) : {functions: [], types: []},
     source_url: `${source.replace(/\.git$/, "")}/src/tag/${encodeURIComponent(lock.ref)}/${unit.path}`,
     header_url: header
       ? `${source.replace(/\.git$/, "")}/src/tag/${encodeURIComponent(lock.ref)}/${unit.path}/${header}`
+      : `${source.replace(/\.git$/, "")}/src/tag/${encodeURIComponent(lock.ref)}/${unit.path}`,
+    test_url: test
+      ? `${source.replace(/\.git$/, "")}/src/tag/${encodeURIComponent(lock.ref)}/${unit.path}/tests/${test}`
       : `${source.replace(/\.git$/, "")}/src/tag/${encodeURIComponent(lock.ref)}/${unit.path}`,
   };
 });
@@ -43,6 +49,7 @@ for (const unit of units) {
 }
 fs.writeFileSync(path.join(out, "contribute.html"), page("Contribute", contributeBody(), ""));
 fs.writeFileSync(path.join(out, "docs.html"), page("Documentation", docsBody(units), ""));
+fs.writeFileSync(path.join(out, "history.html"), page("History", historyBody(), ""));
 fs.writeFileSync(path.join(out, "llms.txt"), llmsBody(units, lock, source));
 fs.writeFileSync(path.join(out, "index.json"), JSON.stringify({
   schema: 1,
@@ -95,6 +102,7 @@ function page(title, body, prefix) {
   <nav class="nav">
     <a href="${prefix}index.html">Browse</a>
     <a href="${prefix}docs.html">Docs</a>
+    <a href="${prefix}history.html">History</a>
     <a href="${prefix}contribute.html">Contribute</a>
     <a href="#about">About</a>
     <a href="${escape(source)}" class="source-link">Source ↗</a>
@@ -116,7 +124,7 @@ if (globalSearch) {
   <div class="footer-inner">
     <div><strong>loom</strong> <span>${escape(manifest.version)}</span></div>
     <div>${units.length} packages · pinned by commit · no install scripts</div>
-    <div><a href="${escape(source)}">Repository</a> · <a href="${prefix}index.json">index.json</a> · <a href="${prefix}docs.html">Docs</a> · <a href="${prefix}llms.txt">llms.txt</a> · <a href="${escape(source.replace(/\.git$/, ""))}/raw/branch/main/AGENTS.md">AGENTS.md</a></div>
+    <div><a href="${escape(source)}">Repository</a> · <a href="${prefix}index.json">index.json</a> · <a href="${prefix}docs.html">Docs</a> · <a href="${prefix}history.html">History</a> · <a href="${prefix}llms.txt">llms.txt</a> · <a href="${escape(source.replace(/\.git$/, ""))}/raw/branch/main/AGENTS.md">AGENTS.md</a></div>
   </div>
 </footer>
 </body>
@@ -245,6 +253,29 @@ function llmsBody(units, lock, source) {
   return `# loom\n\n> Reusable C drivers and algorithms for embedded systems. Every unit is pinned by source commit and SHA-256.\n\n## For AI agents\n\n- Read ${repo}/raw/branch/main/AGENTS.md before changing the catalog.\n- Search \`loom.json\` and the unit folders before writing. Reuse or extend an adapter; do not create a near-duplicate.\n- Scaffold with \`node tools/loom/new-unit.mjs <id> --kind driver|operator\`.\n- Do not copy GPL or vendor source. Cite the real behavior reference and license.\n- Run \`make test\` and \`node tools/loom/check-catalog.mjs\`. Report unverified bench behavior.\n- Do not tag, bump the catalog version, or commit generated \`site/dist\`.\n\n## Catalog\n\n${units.map(unit => `- [${unit.id}](https://loom.pcbsmt.me/units/${unit.id}.html) — ${unit.summary} (${unit.kind}, ${unit.version})`).join("\n")}\n\n## Registry\n\n- [index.json](https://loom.pcbsmt.me/index.json)\n- [Documentation](https://loom.pcbsmt.me/docs.html)\n- [Source](${repo})\n- [Catalog ref](${repo}/src/tag/${encodeURIComponent(lock.ref)})\n`;
 }
 
+function integrationExample(readme) {
+  const marker = readme.indexOf("## Integration");
+  if (marker < 0) return "";
+  const rest = readme.slice(marker);
+  const match = /```(?:c)?\n([\s\S]*?)```/.exec(rest);
+  return match ? match[1].trim() : "";
+}
+
+function historyBody() {
+  const changelog = fs.existsSync(path.join(root, "CHANGELOG.md"))
+    ? fs.readFileSync(path.join(root, "CHANGELOG.md"), "utf8")
+    : "";
+  return `<main class="history">
+<p class="crumbs"><a href="index.html">Packages</a><span>/</span><strong>History</strong></p>
+<section class="docs-head">
+  <p class="eyebrow">Catalog history</p>
+  <h1>What changed,<br><em>release by release.</em></h1>
+  <p class="lede">The catalog is versioned by tag. Each release records the units added and the source references behind them.</p>
+</section>
+<article class="prose history-prose">${markdown(changelog)}</article>
+</main>`;
+}
+
 function docsBody(units) {
   const group = kind => units
     .filter(unit => unit.kind === kind)
@@ -334,7 +365,8 @@ function unitBody(unit, lock) {
     <button id="copy" type="button">Copy</button>
   </div>
 </section>
-<nav class="unit-toc"><a href="#overview">Overview</a><a href="#api">API</a><a href="${escape(unit.header_url)}">Header ↗</a><a href="${escape(unit.source_url)}">Source ↗</a></nav>
+<nav class="unit-toc"><a href="#overview">Overview</a><a href="#quickstart">Quick start</a><a href="#api">API</a><a href="${escape(unit.header_url)}">Header ↗</a><a href="${escape(unit.test_url)}">Tests ↗</a><a href="${escape(unit.source_url)}">Source ↗</a></nav>
+${unit.example ? `<section id="quickstart" class="quickstart"><div><p class="eyebrow">Quick start</p><h2>Use it in a project</h2></div><pre><code>${escape(unit.example)}</code></pre></section>` : ""}
 <div class="unit-grid">
 <article class="prose" id="overview">${markdown(unit.readme)}${apiBody(unit)}</article>
 <aside class="meta">
@@ -344,6 +376,8 @@ function unitBody(unit, lock) {
     <dt>Version</dt><dd>${escape(unit.version)}</dd>
     <dt>Catalog</dt><dd>${escape(manifest.version)}</dd>
     <dt>Path</dt><dd><code>${escape(unit.path)}</code></dd>
+    <dt>Header</dt><dd><a href="${escape(unit.header_url)}">${escape(unit.header)} ↗</a></dd>
+    <dt>Tests</dt><dd><a href="${escape(unit.test_url)}">host test ↗</a></dd>
     <dt>Commit</dt><dd><code>${escape((lock.commit || "").slice(0, 12))}</code></dd>
   </dl>
   <h2>Compatibility</h2>

@@ -201,3 +201,11 @@ dd { margin: 0; font-family: var(--mono); overflow-wrap: anywhere; }
 .doc-links { font: .68rem var(--mono); color: var(--faint); white-space: nowrap; }
 .doc-links a { color: var(--blue); }
 @media (max-width: 700px) { .doc-row { grid-template-columns: 1fr; gap: .2rem; } }
+
+.quickstart { display: grid; grid-template-columns: 220px minmax(0, 1fr); gap: 1.5rem; align-items: start; margin-top: 1.5rem; padding: 1rem 1.1rem; background: var(--card); border: 1px solid var(--line); border-radius: 6px; }
+.quickstart h2 { font-size: 1.05rem; margin: .2rem 0 0; letter-spacing: -.03em; }
+.quickstart pre { margin: 0; background: #24211c; color: #ece5d8; padding: .8rem 1rem; border-radius: 5px; overflow-x: auto; font-size: .76rem; line-height: 1.55; }
+.quickstart pre code { background: none; border: 0; padding: 0; color: inherit; }
+.history { padding: 2.2rem 0 5rem; }
+.history-prose { max-width: 760px; }
+@media (max-width: 700px) { .quickstart { grid-template-columns: 1fr; } }
