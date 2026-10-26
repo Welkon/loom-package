@@ -16,7 +16,7 @@ patterns/    structure guides, not code
 loom.json    unit index
 ```
 
-The catalog currently contains forty-four units.
+The catalog currently contains forty-six units.
 
 Operators:
 
@@ -67,6 +67,8 @@ Drivers:
 - `drivers/max31855` — MAX31855 thermocouple amplifier.
 - `drivers/bme280` — BME280 temperature, pressure, and humidity.
 - `drivers/adxl345` — ADXL345 three-axis accelerometer.
+- `drivers/mcp23017` — MCP23017 16-bit I/O expander.
+- `drivers/ads1115` — ADS1115 16-bit ADC.
 
 ## Contract
 

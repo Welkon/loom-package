@@ -46,7 +46,9 @@ TESTS := \
 	$(BUILD)/test_hx711 \
 	$(BUILD)/test_max31855 \
 	$(BUILD)/test_adxl345 \
-	$(BUILD)/test_bme280
+	$(BUILD)/test_bme280 \
+	$(BUILD)/test_mcp23017 \
+	$(BUILD)/test_ads1115
 
 all: test
 
@@ -184,6 +186,12 @@ $(BUILD)/test_adxl345: drivers/adxl345/tests/test_adxl345.c drivers/adxl345/adxl
 
 $(BUILD)/test_bme280: drivers/bme280/tests/test_bme280.c drivers/bme280/bme280.c | $(BUILD)
 	$(CC) $(CFLAGS) -Idrivers/bme280 $^ -o $@
+
+$(BUILD)/test_mcp23017: drivers/mcp23017/tests/test_mcp23017.c drivers/mcp23017/mcp23017.c | $(BUILD)
+	$(CC) $(CFLAGS) -Idrivers/mcp23017 $^ -o $@
+
+$(BUILD)/test_ads1115: drivers/ads1115/tests/test_ads1115.c drivers/ads1115/ads1115.c | $(BUILD)
+	$(CC) $(CFLAGS) -Idrivers/ads1115 $^ -o $@
 
 test: $(TESTS)
 	@for t in $(TESTS); do echo "== $$t"; ./$$t; done

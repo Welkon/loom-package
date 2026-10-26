@@ -985,7 +985,53 @@
         "float": false,
         "blocking": true
       }
+    },
+    {
+      "id": "mcp23017",
+      "kind": "driver",
+      "version": "0.1.0",
+      "path": "drivers/mcp23017",
+      "tags": [
+        "gpio",
+        "expander",
+        "i2c"
+      ],
+      "summary": "MCP23017 16-bit I2C GPIO expander.",
+      "applications": [
+        "buttons and relays",
+        "keypad",
+        "control panel"
+      ],
+      "compatibility": {
+        "language": "c99",
+        "alloc": false,
+        "float": false,
+        "blocking": true
+      }
+    },
+    {
+      "id": "ads1115",
+      "kind": "driver",
+      "version": "0.1.0",
+      "path": "drivers/ads1115",
+      "tags": [
+        "adc",
+        "sensor",
+        "i2c"
+      ],
+      "summary": "ADS1115 16-bit I2C analog-to-digital converter.",
+      "applications": [
+        "precision sensor",
+        "battery measurement",
+        "bridge front end"
+      ],
+      "compatibility": {
+        "language": "c99",
+        "alloc": false,
+        "float": false,
+        "blocking": true
+      }
     }
   ],
-  "version": "0.11.0"
+  "version": "0.12.0"
 }

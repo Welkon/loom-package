@@ -1,5 +1,10 @@
 # Changelog
 
+## 0.12.0
+
+- Add `mcp23017` from blemasle/arduino-mcp23017 (MIT).
+- Add `ads1115` from LibDriver (MIT).
+
 ## 0.11.0
 
 - Add `bme280` using the Bosch integer compensation formulas (BSD-3-Clause).
