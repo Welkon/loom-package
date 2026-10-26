@@ -191,7 +191,10 @@ test: $(TESTS)
 clean:
 	rm -rf $(BUILD)
 
-.PHONY: all test clean site
+.PHONY: all test clean site deploy-site
 
 site:
 	node site/build.mjs
+
+deploy-site:
+	./site/deploy.sh

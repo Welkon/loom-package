@@ -1,0 +1,26 @@
+name: site
+on:
+  push:
+    branches: [main]
+    paths:
+      - "site/**"
+      - "loom.json"
+      - "loom.lock"
+      - ".forgejo/workflows/site.yml"
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+      - name: Build and test
+        run: |
+          node site/build.mjs
+          node --test site/build.test.mjs
+      - name: Deploy
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          CLOUDFLARE_ACCOUNT_ID: "80857f4ead88b4e7dbddc1176d8f3350"
+        run: npx --yes wrangler deploy

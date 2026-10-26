@@ -14,8 +14,12 @@ deploys it as a Worker with static assets and the custom domain
 
 ```sh
 export CLOUDFLARE_API_TOKEN=<token>
-npx wrangler deploy
+make deploy-site
 ```
+
+`site/deploy.sh` builds, runs the site test, and deploys through Wrangler.
+Forgejo Actions uses the same path with a `CLOUDFLARE_API_TOKEN` repository
+secret.
 
 The pages include:
 
