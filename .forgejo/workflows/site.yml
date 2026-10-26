@@ -15,6 +15,7 @@ jobs:
       - run: cd repo && node site/build.mjs
       - run: cd repo && node --test site/build.test.mjs
   deploy:
+    if: github.event_name == 'workflow_dispatch'
     needs: build
     runs-on: ubuntu-latest
     steps:
