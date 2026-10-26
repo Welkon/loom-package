@@ -1,8 +1,8 @@
 {
   "schema": 1,
   "source": "https://git.pcbsmt.me/rh/emb-loom.git",
-  "ref": "v0.22.0",
-  "commit": "b275a637e3e0114ee98fdd70ea5e584569bc6fbb",
+  "ref": "v0.23.0",
+  "commit": "70ba18e8574bec15db7134a61dc9097e947a38c9",
   "units": {
     "adc-sampler": {
       "version": "0.1.0",
@@ -149,8 +149,8 @@
       "sha256": "478965267a6cdbf9a6db3c78a889026bc9c7035ca9846dbdf5175cb623f763d0"
     },
     "median": {
-      "version": "0.1.0",
-      "sha256": "b365169e30cd95e97cb86e513fc6e55dae0759cc3cc09818cb3590ed23c0c201"
+      "version": "0.2.0",
+      "sha256": "a661b84dea55170dc795c71ecbe38ac270b9765af8e3b5545f0f7c2d3db8d636"
     },
     "mfrc522": {
       "version": "0.1.0",
