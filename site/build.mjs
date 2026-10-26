@@ -32,6 +32,7 @@ fs.writeFileSync(path.join(out, "index.html"), page("Catalog", indexBody(units, 
 for (const unit of units) {
   fs.writeFileSync(path.join(out, "units", `${unit.id}.html`), page(unit.id, unitBody(unit, lock), "../"));
 }
+fs.writeFileSync(path.join(out, "contribute.html"), page("Contribute", contributeBody(), ""));
 fs.writeFileSync(path.join(out, "index.json"), JSON.stringify({
   schema: 1,
   catalog: manifest.version,
@@ -82,6 +83,7 @@ function page(title, body, prefix) {
   </div>
   <nav class="nav">
     <a href="${prefix}index.html">Browse</a>
+    <a href="${prefix}contribute.html">Contribute</a>
     <a href="#about">About</a>
     <a href="${escape(source)}" class="source-link">Source ↗</a>
     <span class="ref">${escape(lock.ref || "")}</span>
@@ -160,8 +162,8 @@ const title = document.getElementById('result-title');
 const params = new URLSearchParams(location.search);
 if (params.get('q')) search.value = params.get('q');
 const cards = [...document.querySelectorAll('.pkg')];
-const filters = [...document.querySelectorAll('[data-kind]')];
-const tags = [...document.querySelectorAll('[data-tag]')];
+const filters = [...document.querySelectorAll('.filter[data-kind]')];
+const tags = [...document.querySelectorAll('.tag[data-tag]')];
 let kind = '';
 let tag = '';
 function apply() {
@@ -214,6 +216,49 @@ function card(unit) {
     <p class="pkg-apps">${(unit.applications || []).slice(0, 2).map(escape).join(" · ")}</p>
   </div>
 </article>`;
+}
+
+function contributeBody() {
+  return `<main class="contribute">
+<p class="crumbs"><a href="index.html">Packages</a><span>/</span><strong>Contribute</strong></p>
+<section class="contribute-head">
+  <p class="eyebrow">Close the loop</p>
+  <h1>Discover. Add.<br><em>Give one back.</em></h1>
+  <p class="lede">loom is a catalog, not a black box. Every package has a source commit, tests, and a README. The same path that installs a package also feeds the next one.</p>
+</section>
+<section class="loop">
+  <article><span>01</span><h2>Search</h2><p><code>loom search "load cell"</code> or use the catalog filters. Read the contract and the “when not to use” section.</p></article>
+  <article><span>02</span><h2>Add</h2><p><code>loom add ads1115</code> copies the pinned unit and writes <code>loom.toml</code> and <code>loom.lock</code>.</p></article>
+  <article><span>03</span><h2>Verify</h2><p><code>loom verify</code> checks installed hashes. <code>loom guard --staged</code> blocks an unprovenanced driver in CI.</p></article>
+  <article><span>04</span><h2>Contribute</h2><p>Keep the contract, add host tests, and open a change against <a href="https://git.pcbsmt.me/rh/emb-loom">rh/emb-loom</a>. A new tag becomes a new catalog version.</p></article>
+</section>
+<section class="contribute-grid">
+  <div>
+    <h2>What a package contains</h2>
+    <ul>
+      <li><code>README.md</code> — purpose, parameters, memory, timing, integration, and when not to use.</li>
+      <li><code>&lt;id&gt;.h</code> / <code>&lt;id&gt;.c</code> — C99, no allocation, no hidden board dependencies.</li>
+      <li><code>tests/test_&lt;id&gt;.c</code> — host tests with a fake port.</li>
+      <li><code>loom.json</code> entry — kind, tags, applications, compatibility.</li>
+    </ul>
+    <p>Keep SFRs, pins, clocks, and board wiring in a project adapter. The catalog unit is the reusable core.</p>
+  </div>
+  <div>
+    <h2>Contribution path</h2>
+    <ol>
+      <li>Add the unit and its test under <code>drivers/</code> or <code>operators/</code>.</li>
+      <li>Run <code>make test</code> and <code>node tools/loom/sync.mjs --check</code>.</li>
+      <li>Open a pull request at <a href="https://git.pcbsmt.me/rh/emb-loom">git.pcbsmt.me/rh/emb-loom</a>.</li>
+      <li>After review, tag a new version. The site is built from that tag.</li>
+    </ol>
+    <a class="button" href="https://git.pcbsmt.me/rh/emb-loom/issues/new">Request or propose a package ↗</a>
+  </div>
+</section>
+<section class="contract-note">
+  <h2>No silent forks</h2>
+  <p>If a package is close but not exact, reuse the algorithm and document the difference in the project adapter. Do not edit a copied unit in place; record a local change in the project and keep the catalog contract intact.</p>
+</section>
+</main>`;
 }
 
 function unitBody(unit, lock) {

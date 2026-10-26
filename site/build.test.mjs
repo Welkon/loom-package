@@ -19,6 +19,10 @@ test("builds one page per unit plus the catalog", () => {
   const index = fs.readFileSync(path.join(out, "index.html"), "utf8");
   assert.match(index, /Drivers and algorithms/);
   assert.match(index, /data-search/);
+  assert.match(index, /contribute\.html/);
+  const css = fs.readFileSync(path.join(out, "style.css"), "utf8");
+  assert.match(css, /\[hidden\] \{ display: none !important; \}/);
+  assert.match(index, /querySelectorAll\('\.filter\[data-kind\]'\)/);
   const detail = fs.readFileSync(path.join(out, "units", "median.html"), "utf8");
   assert.match(detail, /\.\.\/style\.css/);
   assert.match(detail, /\.\.\/index\.html/);
