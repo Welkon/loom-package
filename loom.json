@@ -1216,7 +1216,30 @@
         "float": false,
         "blocking": true
       }
+    },
+    {
+      "id": "mfrc522",
+      "kind": "driver",
+      "version": "0.1.0",
+      "path": "drivers/mfrc522",
+      "tags": [
+        "rfid",
+        "nfc",
+        "spi"
+      ],
+      "summary": "MFRC522 13.56 MHz RFID reader over SPI.",
+      "applications": [
+        "UID reader",
+        "access control",
+        "tag presence"
+      ],
+      "compatibility": {
+        "language": "c99",
+        "alloc": false,
+        "float": false,
+        "blocking": true
+      }
     }
   ],
-  "version": "0.17.0"
+  "version": "0.18.0"
 }

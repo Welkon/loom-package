@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.18.0
+
+- Add `mfrc522` from LibDriver (MIT).
+
 ## 0.17.0
 
 - Add `hd44780` from the HD44780 datasheet and the MIT 4-bit sequence.

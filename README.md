@@ -16,7 +16,7 @@ patterns/    structure guides, not code
 loom.json    unit index
 ```
 
-The catalog currently contains fifty-four units.
+The catalog currently contains fifty-five units.
 
 Operators:
 
@@ -77,6 +77,7 @@ Drivers:
 - `drivers/mcp9808` — MCP9808 temperature sensor.
 - `drivers/nrf24l01` — nRF24L01+ 2.4 GHz SPI transceiver.
 - `drivers/hd44780` — HD44780 character LCD.
+- `drivers/mfrc522` — MFRC522 13.56 MHz RFID reader.
 
 ## Contract
 
