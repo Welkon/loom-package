@@ -248,10 +248,13 @@ $(BUILD)/test_sdcard: drivers/sdcard/tests/test_sdcard.c drivers/sdcard/sdcard.c
 test: $(TESTS)
 	@for t in $(TESTS); do echo "== $$t"; ./$$t; done
 
+test-tools:
+	node --test tools/loom/new-unit.test.mjs
+
 clean:
 	rm -rf $(BUILD)
 
-.PHONY: all test clean site deploy-site check-catalog check-lock check-tags check-yanked yank
+.PHONY: all test test-tools clean site deploy-site check-catalog check-lock check-tags check-yanked yank
 
 site:
 	node site/build.mjs
@@ -266,16 +269,13 @@ check-lock:
 	node tools/loom/lock.mjs --check
 
 check-tags:
-	node tools/loom/tag-units.mjs
+	node tools/loom/tag-units.mjs --check
 
 check-yanked:
 	node tools/loom/yank.mjs --check
-yank:
-	node tools/loom/yank.mjs --check
+
 tags:
 	node tools/loom/tag-units.mjs
 
-check-yanked:
-	node tools/loom/yank.mjs --check
 yank:
 	node tools/loom/yank.mjs

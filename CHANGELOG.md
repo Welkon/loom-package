@@ -1,5 +1,22 @@
 # Changelog
 
+## Unreleased
+
+- Move hosting and CI to GitHub (`Welkon/loom`); source, raw, blob, and issue
+  links follow the new remote.
+- Publish a Cargo-style static registry: `index.json` plus per-unit tarballs,
+  so `loom add <id> --index https://loom.pcbsmt.me` downloads one unit.
+- Yank a unit version without deleting history: the version is recorded in
+  `loom.json`, stays in the index and tarball history, and `loom add` refuses
+  an exact yanked version.
+
+## 0.23.0
+
+- Add `loom.lock`: a pinned catalog commit and a SHA-256 per unit.
+- Add immutable `unit/<id>/v<version>` tags, with `tag-units.mjs` to create
+  and check them.
+- Release `median` 0.2.0.
+
 ## 0.22.0
 
 - Add `sdcard` from the SD SPI specification and an Apache-2.0 reference.

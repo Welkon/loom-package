@@ -1,4 +1,4 @@
-# emb-loom
+# loom
 
 Catalog website: <https://loom.pcbsmt.me>
 Source: <https://github.com/Welkon/loom>
@@ -11,10 +11,11 @@ product repository.
 
 ```
 operators/   pure algorithms, no I/O
-drivers/     protocol/state-machine cores with a port.h
-adapters/    MCU-specific register implementations (not portable)
-patterns/    structure guides, not code
+drivers/     protocol or state-machine cores; I/O behind a port struct
+tools/loom/  catalog tooling: scaffold, lock, tags, yank
+site/        static catalog builder and registry index
 loom.json    unit index
+loom.lock    pinned catalog commit and per-unit SHA-256
 ```
 
 The catalog currently contains fifty-nine units.

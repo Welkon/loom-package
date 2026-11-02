@@ -17,6 +17,7 @@ jobs:
         with:
           node-version: "22"
       - run: make test
+      - run: make test-tools
       - run: node tools/loom/check-catalog.mjs
       - run: node tools/loom/lock.mjs --check
       - run: node tools/loom/tag-units.mjs --check
