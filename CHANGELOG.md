@@ -9,6 +9,11 @@
 - Yank a unit version without deleting history: the version is recorded in
   `loom.json`, stays in the index and tarball history, and `loom add` refuses
   an exact yanked version.
+- Check the published pin, not only the working tree: `lock.mjs --check`
+  rejects a unit whose content at the lock ref disagrees with its locked
+  hash, and refuses a lock whose ref does not exist.
+- Enforce the README contract in `check-catalog.mjs`: purpose paragraph,
+  sections, and `Adapters` for drivers.
 
 ## 0.23.0
 

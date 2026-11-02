@@ -40,7 +40,12 @@ Keep every unit general; board wiring stays in a project adapter.
 - Every port is a function-pointer struct with a `void *context`.
 - Every unit has a `README.md` with purpose, application scenarios, contract,
   parameters, memory and timing, integration, adapters, when not to use, and
-  verification.
+  verification. The purpose is the opening paragraph; the rest are `##`
+  sections. `check-catalog.mjs` enforces the sections, and `Adapters` for
+  drivers.
+- `loom.lock` must describe the tagged content: `lock.mjs --check` rejects a
+  unit whose hash at `loom.lock.ref` disagrees with the published hash. A unit
+  change needs a version bump and a re-tag, not just a regenerated lock.
 - Every unit has host tests with a fake port. A test that only compiles is not
   enough.
 - Keep `compatibility` accurate: language, allocation, floating point, blocking.
