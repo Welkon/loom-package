@@ -1,6 +1,6 @@
 # Changelog
 
-## Unreleased
+## 0.24.0
 
 - Move hosting and CI to GitHub (`Welkon/loom`); source, raw, blob, and issue
   links follow the new remote.
