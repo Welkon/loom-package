@@ -1,0 +1,82 @@
+name: Bug report
+description: Report a defect in a catalog unit, the site, or the tooling
+title: "[bug] "
+labels: ["needs-triage", "bug"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for reporting. A useful report names the unit version and shows
+        the smallest failing case. Remove secrets, private project code, and
+        vendor source you cannot redistribute.
+  - type: dropdown
+    id: area
+    attributes:
+      label: Area
+      options:
+        - Driver unit
+        - Operator unit
+        - Catalog site
+        - Registry / loom CLI
+        - Catalog tooling (tools/loom)
+    validations:
+      required: true
+  - type: input
+    id: unit
+    attributes:
+      label: Unit id and version
+      description: From `loom.json` or the unit README. Leave empty for site or tooling reports.
+      placeholder: "ads1115 0.1.0"
+  - type: textarea
+    id: expected
+    attributes:
+      label: Expected behavior
+      description: What should the unit, page, or command do?
+    validations:
+      required: true
+  - type: textarea
+    id: actual
+    attributes:
+      label: Actual behavior
+      description: What happens instead? Include the wrong value, state, or timing.
+    validations:
+      required: true
+  - type: textarea
+    id: reproduce
+    attributes:
+      label: Steps to reproduce
+      value: |
+        1.
+        2.
+        3.
+    validations:
+      required: true
+  - type: textarea
+    id: environment
+    attributes:
+      label: Environment
+      description: Host OS, compiler and flags, target MCU, and the commit or unit version.
+      value: |
+        - Host OS:
+        - Compiler and flags:
+        - Target MCU / board:
+        - Commit or unit version:
+    validations:
+      required: true
+  - type: textarea
+    id: evidence
+    attributes:
+      label: Evidence
+      description: Compiler output, host test output, a trace, or a minimal failing test.
+      render: text
+    validations:
+      required: false
+  - type: checkboxes
+    id: checks
+    attributes:
+      label: Checks
+      options:
+        - label: I searched `loom.json` and the existing units for this behavior.
+          required: true
+        - label: I removed secrets, private project code, and unlicensed vendor source from this report.
+          required: true

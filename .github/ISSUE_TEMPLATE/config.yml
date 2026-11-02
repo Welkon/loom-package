@@ -1,0 +1,11 @@
+blank_issues_enabled: false
+contact_links:
+  - name: Catalog and package documentation
+    url: https://loom.pcbsmt.me/docs.html
+    about: Contracts, integration notes, examples, and the static registry index.
+  - name: Contribution rules
+    url: https://github.com/Welkon/loom/blob/main/AGENTS.md
+    about: Search first, cite the real source, write host tests, report unverified bench behavior.
+  - name: Source tree
+    url: https://github.com/Welkon/loom
+    about: Drivers, operators, host tests, and catalog metadata.
