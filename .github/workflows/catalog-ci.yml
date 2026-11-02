@@ -1,6 +1,10 @@
 name: catalog-ci
+# main is the canonical check: a run on the release tag cannot pass the lock
+# check, because the lock names the release commit and is regenerated in the
+# commit after the tag.
 on:
   push:
+    branches: [main]
   pull_request:
   workflow_dispatch:
 permissions:
