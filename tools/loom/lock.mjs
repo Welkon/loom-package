@@ -43,7 +43,7 @@ for (const unit of [...manifest.units].sort((a, b) => a.id.localeCompare(b.id)))
 }
 const lock = {
   schema: 1,
-  source: "https://github.com/Welkon/emb-loom.git",
+  source: "https://github.com/Welkon/loom.git",
   ref,
   commit,
   units,

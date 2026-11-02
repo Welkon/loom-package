@@ -18,7 +18,7 @@ const lockPath = path.join(root, "loom.lock");
 const lock = fs.existsSync(lockPath)
   ? JSON.parse(fs.readFileSync(lockPath, "utf8"))
   : {ref: git(["describe", "--tags", "--abbrev=0"]) || `v${manifest.version}`, commit: git(["rev-parse", "HEAD"])};
-const source = "https://github.com/Welkon/emb-loom.git";
+const source = "https://github.com/Welkon/loom.git";
 const web = source.replace(/\.git$/, "");
 const logo = `<svg viewBox="0 0 32 32" width="22" height="22" aria-hidden="true"><path d="M16 3c-4.4 0-8 3.6-8 8v3H6v4h2v11h4V18h3v11h4V18h3v11h4V14c0-4.4-3.6-8-8-8h-2z" fill="currentColor"/><circle cx="16" cy="8" r="2.2" fill="var(--paper)"/></svg>`;
 const favicon = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32"><rect width="32" height="32" rx="7" fill="#1d1b17"/><path d="M16 5c-4 0-7 3-7 7v2H7v4h2v9h4v-9h2v9h4v-9h2v9h4v-9h2v-4h-2v-2c0-4-3-7-7-7h-2z" fill="#f4a261"/><circle cx="16" cy="10" r="1.8" fill="#1d1b17"/></svg>`;
@@ -321,7 +321,7 @@ function indexBody(units, lock) {
     <div class="filter-block about" id="about">
       <h2>About</h2>
       <p>loom is a curated catalog, not a package manager service. Units are copied into a project and pinned in <code>loom.lock</code>.</p>
-      <p>Source: <a href="${escape(web)}">github.com/Welkon/emb-loom</a></p>
+      <p>Source: <a href="${escape(web)}">github.com/Welkon/loom</a></p>
     </div>
   </aside>
 
@@ -457,7 +457,7 @@ form.addEventListener('submit', event => {
   event.preventDefault();
   const data = new FormData(form);
   const title = '[package] ' + (data.get('id') || 'request');
-  const url = 'https://github.com/Welkon/emb-loom/issues/new?template=package-request.md&title=' +
+  const url = 'https://github.com/Welkon/loom/issues/new?template=package-request.md&title=' +
     encodeURIComponent(title) + '&body=' + encodeURIComponent(text());
   window.location.href = url;
 });
@@ -555,7 +555,7 @@ function contributeBody() {
   <article><span>01</span><h2>Search</h2><p><code>loom search "load cell"</code> or use the catalog filters. Read the contract and the “when not to use” section.</p></article>
   <article><span>02</span><h2>Add</h2><p><code>loom add ads1115</code> copies the pinned unit and writes <code>loom.toml</code> and <code>loom.lock</code>.</p></article>
   <article><span>03</span><h2>Verify</h2><p><code>loom verify</code> checks installed hashes. <code>loom guard --staged</code> blocks an unprovenanced driver in CI.</p></article>
-  <article><span>04</span><h2>Contribute</h2><p><code>node tools/loom/new-unit.mjs &lt;id&gt;</code> scaffolds the contract and test. Run <code>make test</code>, then open a change against <a href="https://github.com/Welkon/emb-loom">Welkon/emb-loom</a>. A new tag becomes a new catalog version.</p></article>
+  <article><span>04</span><h2>Contribute</h2><p><code>node tools/loom/new-unit.mjs &lt;id&gt;</code> scaffolds the contract and test. Run <code>make test</code>, then open a change against <a href="https://github.com/Welkon/loom">Welkon/loom</a>. A new tag becomes a new catalog version.</p></article>
 </section>
 <section class="contribute-grid">
   <div>
@@ -573,7 +573,7 @@ function contributeBody() {
     <ol>
       <li>Run <code>node tools/loom/new-unit.mjs &lt;id&gt; --kind driver|operator</code>.</li>
       <li>Fill the README contract and behavior tests; run <code>make test</code> and <code>make check-catalog</code>.</li>
-      <li>Open a pull request at <a href="https://github.com/Welkon/emb-loom">github.com/Welkon/emb-loom</a>.</li>
+      <li>Open a pull request at <a href="https://github.com/Welkon/loom">github.com/Welkon/loom</a>.</li>
       <li>After review, tag a new version. The site is built from that tag.</li>
     </ol>
     <a class="button" href="request.html">Request or propose a package →</a>
