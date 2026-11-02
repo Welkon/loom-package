@@ -68,7 +68,7 @@ function hashCommitDirectory(commit, directory) {
 }
 const lock = {
   schema: 1,
-  source: "https://github.com/Welkon/loom.git",
+  source: "https://github.com/Welkon/loom-package.git",
   ref,
   commit,
   units,

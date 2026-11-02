@@ -1,8 +1,13 @@
 # Changelog
 
+## 0.24.1
+
+- Rename the repository to `Welkon/loom-package`; the `loom` name belongs to
+  the CLI. Source, raw, blob, and issue links follow the new remote.
+
 ## 0.24.0
 
-- Move hosting and CI to GitHub (`Welkon/loom`); source, raw, blob, and issue
+- Move hosting and CI to GitHub; source, raw, blob, and issue
   links follow the new remote.
 - Publish a Cargo-style static registry: `index.json` plus per-unit tarballs,
   so `loom add <id> --index https://loom.pcbsmt.me` downloads one unit.

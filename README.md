@@ -1,7 +1,7 @@
 # loom
 
 Catalog website: <https://loom.pcbsmt.me>
-Source: <https://github.com/Welkon/loom>
+Source: <https://github.com/Welkon/loom-package>
 
 Reusable embedded drivers and algorithms. `loom` is a supply of tested
 building blocks: weave them into firmware, and keep product logic in the
@@ -119,8 +119,8 @@ hashes in its own lock file.
 Read [`AGENTS.md`](AGENTS.md) before changing the catalog: search `loom.json`
 first, and extend an existing unit's adapter instead of adding a near-duplicate.
 
-- Propose a unit with a [package request](https://github.com/Welkon/loom/issues/new?template=package-request.md).
-- Report a defect with a [bug report](https://github.com/Welkon/loom/issues/new?template=bug-report.yml).
+- Propose a unit with a [package request](https://github.com/Welkon/loom-package/issues/new?template=package-request.md).
+- Report a defect with a [bug report](https://github.com/Welkon/loom-package/issues/new?template=bug-report.yml).
 - Send a change as a pull request; the template lists the review gate.
 
 Before pushing, run `make test`, `node tools/loom/check-catalog.mjs`, and
