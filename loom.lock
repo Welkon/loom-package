@@ -1,8 +1,8 @@
 {
   "schema": 1,
-  "source": "https://github.com/Welkon/loom.git",
-  "ref": "v0.24.0",
-  "commit": "390c8e3d01602ab24fef5857bbaaef7ef1ec27dd",
+  "source": "https://github.com/Welkon/loom-package.git",
+  "ref": "v0.24.1",
+  "commit": "1014ae30fdff09766cdb7811361b697aa739b697",
   "units": {
     "adc-sampler": {
       "version": "0.1.0",
