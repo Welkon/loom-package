@@ -18,8 +18,8 @@ make deploy-site
 ```
 
 `site/deploy.sh` builds, runs the site test, and deploys through Wrangler.
-Forgejo Actions uses the same path with a `CLOUDFLARE_API_TOKEN` repository
-secret.
+GitHub Actions uses the same path with a `CLOUDFLARE_API_TOKEN` repository
+secret; the deploy job skips itself when that secret is unset.
 
 The pages include:
 

@@ -1,0 +1,52 @@
+name: site
+on:
+  push:
+    branches: [main]
+    paths:
+      - "site/**"
+      - "loom.json"
+      - "loom.lock"
+      - ".github/workflows/site.yml"
+  pull_request:
+    paths:
+      - "site/**"
+      - "loom.json"
+      - "loom.lock"
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+      - run: node site/build.mjs
+      - run: node --test site/build.test.mjs
+  deploy:
+    needs: build
+    if: github.event_name != 'pull_request' && github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+      - run: node site/build.mjs
+      - run: node --test site/build.test.mjs
+      - name: Deploy
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+        run: |
+          if [ -z "$CLOUDFLARE_API_TOKEN" ]; then
+            echo "::notice::CLOUDFLARE_API_TOKEN is not configured; skipping deploy"
+            exit 0
+          fi
+          cd site
+          npx --yes wrangler deploy

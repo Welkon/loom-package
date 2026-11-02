@@ -18,7 +18,8 @@ const lockPath = path.join(root, "loom.lock");
 const lock = fs.existsSync(lockPath)
   ? JSON.parse(fs.readFileSync(lockPath, "utf8"))
   : {ref: git(["describe", "--tags", "--abbrev=0"]) || `v${manifest.version}`, commit: git(["rev-parse", "HEAD"])};
-const source = "https://git.pcbsmt.me/rh/emb-loom.git";
+const source = "https://github.com/Welkon/emb-loom.git";
+const web = source.replace(/\.git$/, "");
 const logo = `<svg viewBox="0 0 32 32" width="22" height="22" aria-hidden="true"><path d="M16 3c-4.4 0-8 3.6-8 8v3H6v4h2v11h4V18h3v11h4V18h3v11h4V14c0-4.4-3.6-8-8-8h-2z" fill="currentColor"/><circle cx="16" cy="8" r="2.2" fill="var(--paper)"/></svg>`;
 const favicon = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32"><rect width="32" height="32" rx="7" fill="#1d1b17"/><path d="M16 5c-4 0-7 3-7 7v2H7v4h2v9h4v-9h2v9h4v-9h2v9h4v-9h2v-4h-2v-2c0-4-3-7-7-7h-2z" fill="#f4a261"/><circle cx="16" cy="10" r="1.8" fill="#1d1b17"/></svg>`;
 const units = manifest.units.map(unit => {
@@ -32,13 +33,13 @@ const units = manifest.units.map(unit => {
     test,
     example: integrationExample(readReadme(unit.path)),
     api: header ? parseApi(path.join(directory, header)) : {functions: [], types: []},
-    source_url: `${source.replace(/\.git$/, "")}/src/tag/${encodeURIComponent(lock.ref)}/${unit.path}`,
+    source_url: `${web}/tree/${encodeURIComponent(lock.ref)}/${unit.path}`,
     header_url: header
-      ? `${source.replace(/\.git$/, "")}/src/tag/${encodeURIComponent(lock.ref)}/${unit.path}/${header}`
-      : `${source.replace(/\.git$/, "")}/src/tag/${encodeURIComponent(lock.ref)}/${unit.path}`,
+      ? `${web}/blob/${encodeURIComponent(lock.ref)}/${unit.path}/${header}`
+      : `${web}/tree/${encodeURIComponent(lock.ref)}/${unit.path}`,
     test_url: test
-      ? `${source.replace(/\.git$/, "")}/src/tag/${encodeURIComponent(lock.ref)}/${unit.path}/tests/${test}`
-      : `${source.replace(/\.git$/, "")}/src/tag/${encodeURIComponent(lock.ref)}/${unit.path}`,
+      ? `${web}/blob/${encodeURIComponent(lock.ref)}/${unit.path}/tests/${test}`
+      : `${web}/tree/${encodeURIComponent(lock.ref)}/${unit.path}`,
   };
 });
 
@@ -276,7 +277,7 @@ if (globalSearch) {
   <div class="footer-inner">
     <div><strong>loom</strong> <span>${escape(manifest.version)}</span></div>
     <div>${units.length} packages · pinned by commit · no install scripts</div>
-    <div><a href="${escape(source)}">Repository</a> · <a href="${prefix}index.json">index.json</a> · <a href="${prefix}docs.html">Docs</a> · <a href="${prefix}examples.html">Examples</a> · <a href="${prefix}tests.html">Compatibility</a> · <a href="${prefix}history.html">History</a> · <a href="${prefix}llms.txt">llms.txt</a> · <a href="${escape(source.replace(/\.git$/, ""))}/raw/branch/main/AGENTS.md">AGENTS.md</a></div>
+    <div><a href="${escape(web)}">Repository</a> · <a href="${prefix}index.json">index.json</a> · <a href="${prefix}docs.html">Docs</a> · <a href="${prefix}examples.html">Examples</a> · <a href="${prefix}tests.html">Compatibility</a> · <a href="${prefix}history.html">History</a> · <a href="${prefix}llms.txt">llms.txt</a> · <a href="${escape(source.replace(/\.git$/, ""))}/raw/main/AGENTS.md">AGENTS.md</a></div>
   </div>
 </footer>
 </body>
@@ -320,7 +321,7 @@ function indexBody(units, lock) {
     <div class="filter-block about" id="about">
       <h2>About</h2>
       <p>loom is a curated catalog, not a package manager service. Units are copied into a project and pinned in <code>loom.lock</code>.</p>
-      <p>Source: <a href="${escape(source)}">git.pcbsmt.me/rh/emb-loom</a></p>
+      <p>Source: <a href="${escape(web)}">github.com/Welkon/emb-loom</a></p>
     </div>
   </aside>
 
@@ -401,8 +402,8 @@ function card(unit) {
 }
 
 function llmsBody(units, lock, source) {
-  const repo = source.replace(/\.git$/, "");
-  return `# loom\n\n> Reusable C drivers and algorithms for embedded systems. Every unit is pinned by source commit and SHA-256.\n\n## For AI agents\n\n- Read ${repo}/raw/branch/main/AGENTS.md before changing the catalog.\n- Search \`loom.json\` and the unit folders before writing. Reuse or extend an adapter; do not create a near-duplicate.\n- Scaffold with \`node tools/loom/new-unit.mjs <id> --kind driver|operator\`.\n- Do not copy GPL or vendor source. Cite the real behavior reference and license.\n- Run \`make test\` and \`node tools/loom/check-catalog.mjs\`. Report unverified bench behavior.\n- Do not tag, bump the catalog version, or commit generated \`site/dist\`.\n\n## Catalog\n\n${units.map(unit => `- [${unit.id}](https://loom.pcbsmt.me/units/${unit.id}.html) — ${unit.summary} (${unit.kind}, ${unit.version})`).join("\n")}\n\n## Registry\n\n- [index.json](https://loom.pcbsmt.me/index.json)\n- [Documentation](https://loom.pcbsmt.me/docs.html)\n- [Examples](https://loom.pcbsmt.me/examples.html)\n- [Compatibility](https://loom.pcbsmt.me/tests.html)\n- [Request a package](https://loom.pcbsmt.me/request.html)\n- [Source](${repo})\n- [Catalog ref](${repo}/src/tag/${encodeURIComponent(lock.ref)})\n`;
+  const repo = web;
+  return `# loom\n\n> Reusable C drivers and algorithms for embedded systems. Every unit is pinned by source commit and SHA-256.\n\n## For AI agents\n\n- Read ${repo}/raw/main/AGENTS.md before changing the catalog.\n- Search \`loom.json\` and the unit folders before writing. Reuse or extend an adapter; do not create a near-duplicate.\n- Scaffold with \`node tools/loom/new-unit.mjs <id> --kind driver|operator\`.\n- Do not copy GPL or vendor source. Cite the real behavior reference and license.\n- Run \`make test\` and \`node tools/loom/check-catalog.mjs\`. Report unverified bench behavior.\n- Do not tag, bump the catalog version, or commit generated \`site/dist\`.\n\n## Catalog\n\n${units.map(unit => `- [${unit.id}](https://loom.pcbsmt.me/units/${unit.id}.html) — ${unit.summary} (${unit.kind}, ${unit.version})`).join("\n")}\n\n## Registry\n\n- [index.json](https://loom.pcbsmt.me/index.json)\n- [Documentation](https://loom.pcbsmt.me/docs.html)\n- [Examples](https://loom.pcbsmt.me/examples.html)\n- [Compatibility](https://loom.pcbsmt.me/tests.html)\n- [Request a package](https://loom.pcbsmt.me/request.html)\n- [Source](${repo})\n- [Catalog ref](${repo}/tree/${encodeURIComponent(lock.ref)})\n`;
 }
 
 function integrationExample(readme) {
@@ -424,7 +425,7 @@ function requestBody() {
 <section class="docs-head">
   <p class="eyebrow">Package request</p>
   <h1>Ask for a<br><em>missing unit.</em></h1>
-  <p class="lede">Describe the device and the gap. The form opens a pre-filled Forgejo issue; you can also copy the text and send it another way.</p>
+  <p class="lede">Describe the device and the gap. The form opens a pre-filled GitHub issue; you can also copy the text and send it another way.</p>
 </section>
 <form id="request-form" class="request-form">
   <label>Package id <input name="id" placeholder="example-driver" required></label>
@@ -432,10 +433,10 @@ function requestBody() {
   <label>Device or source <input name="source" placeholder="part number, datasheet, or real project"></label>
   <label>Use case <textarea name="use" rows="4" placeholder="What should a project be able to do?"></textarea></label>
   <label>Why existing units do not fit <textarea name="gap" rows="3"></textarea></label>
-  <div class="form-actions"><button type="submit">Open Forgejo issue ↗</button><button type="button" id="copy-request">Copy text</button></div>
+  <div class="form-actions"><button type="submit">Open GitHub issue ↗</button><button type="button" id="copy-request">Copy text</button></div>
 </form>
 <pre id="request-preview" class="request-preview" aria-live="polite"></pre>
-<p class="small">Submitting an issue requires a Forgejo account at <a href="https://git.pcbsmt.me/user/login">git.pcbsmt.me</a>. Registration is currently disabled; ask the maintainer for an invite if you do not have one.</p>
+<p class="small">Submitting an issue requires a GitHub account at <a href="https://github.com/login">github.com</a>. You can also copy the text and send it another way.</p>
 </main>
 <script>
 const form = document.getElementById('request-form');
@@ -456,7 +457,7 @@ form.addEventListener('submit', event => {
   event.preventDefault();
   const data = new FormData(form);
   const title = '[package] ' + (data.get('id') || 'request');
-  const url = 'https://git.pcbsmt.me/rh/emb-loom/issues/new?template=package-request.md&title=' +
+  const url = 'https://github.com/Welkon/emb-loom/issues/new?template=package-request.md&title=' +
     encodeURIComponent(title) + '&body=' + encodeURIComponent(text());
   window.location.href = url;
 });
@@ -554,7 +555,7 @@ function contributeBody() {
   <article><span>01</span><h2>Search</h2><p><code>loom search "load cell"</code> or use the catalog filters. Read the contract and the “when not to use” section.</p></article>
   <article><span>02</span><h2>Add</h2><p><code>loom add ads1115</code> copies the pinned unit and writes <code>loom.toml</code> and <code>loom.lock</code>.</p></article>
   <article><span>03</span><h2>Verify</h2><p><code>loom verify</code> checks installed hashes. <code>loom guard --staged</code> blocks an unprovenanced driver in CI.</p></article>
-  <article><span>04</span><h2>Contribute</h2><p><code>node tools/loom/new-unit.mjs &lt;id&gt;</code> scaffolds the contract and test. Run <code>make test</code>, then open a change against <a href="https://git.pcbsmt.me/rh/emb-loom">rh/emb-loom</a>. A new tag becomes a new catalog version.</p></article>
+  <article><span>04</span><h2>Contribute</h2><p><code>node tools/loom/new-unit.mjs &lt;id&gt;</code> scaffolds the contract and test. Run <code>make test</code>, then open a change against <a href="https://github.com/Welkon/emb-loom">Welkon/emb-loom</a>. A new tag becomes a new catalog version.</p></article>
 </section>
 <section class="contribute-grid">
   <div>
@@ -572,7 +573,7 @@ function contributeBody() {
     <ol>
       <li>Run <code>node tools/loom/new-unit.mjs &lt;id&gt; --kind driver|operator</code>.</li>
       <li>Fill the README contract and behavior tests; run <code>make test</code> and <code>make check-catalog</code>.</li>
-      <li>Open a pull request at <a href="https://git.pcbsmt.me/rh/emb-loom">git.pcbsmt.me/rh/emb-loom</a>.</li>
+      <li>Open a pull request at <a href="https://github.com/Welkon/emb-loom">github.com/Welkon/emb-loom</a>.</li>
       <li>After review, tag a new version. The site is built from that tag.</li>
     </ol>
     <a class="button" href="request.html">Request or propose a package →</a>
@@ -590,7 +591,7 @@ function contributeBody() {
 Search loom.json before writing. Use tools/loom/new-unit.mjs.
 Do not copy GPL or vendor source. Run make test and check-catalog.
 Report the source, license, tests, and any bench verification still missing.</code></pre>
-  <p><a href="${escape(source.replace(/\.git$/, ""))}/raw/branch/main/AGENTS.md">Read AGENTS.md</a> · <a href="llms.txt">Machine-readable llms.txt</a> · <a href="${escape(source.replace(/\.git$/, ""))}/issues/new">Propose a package</a></p>
+  <p><a href="${escape(source.replace(/\.git$/, ""))}/raw/main/AGENTS.md">Read AGENTS.md</a> · <a href="llms.txt">Machine-readable llms.txt</a> · <a href="${escape(web)}/issues/new">Propose a package</a></p>
 </section>
 </main>`;
 }

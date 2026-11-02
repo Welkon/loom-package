@@ -1,6 +1,7 @@
 # emb-loom
 
 Catalog website: <https://loom.pcbsmt.me>
+Source: <https://github.com/Welkon/emb-loom>
 
 Reusable embedded drivers and algorithms. `loom` is a supply of tested
 building blocks: weave them into firmware, and keep product logic in the

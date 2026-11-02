@@ -1,0 +1,24 @@
+name: catalog-ci
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      # Full history: lock/tag checks resolve v-tags that are not on the branch tip.
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+      - run: make test
+      - run: node tools/loom/check-catalog.mjs
+      - run: node tools/loom/lock.mjs --check
+      - run: node tools/loom/tag-units.mjs --check
+      - run: node tools/loom/yank.mjs --check
+      - run: node --test site/build.test.mjs
