@@ -1,5 +1,15 @@
 # Changelog
 
+## 0.25.0
+
+- Add `docs/ports.md`: every `*_port_t` struct and its functions, generated
+  from the unit headers by `tools/loom/ports.mjs`. `make check-ports` fails
+  when a port changes without a regeneration.
+- Add `docs/adapters.md`: the project-side `board/` layout, the single vendor
+  include header, and the host-side fake register file.
+- Add `docs/targets.md`: which targets have a reviewed port path, separating
+  host-verified from bench-verified.
+
 ## 0.24.1
 
 - Rename the repository to `Welkon/loom-package`; the `loom` name belongs to
