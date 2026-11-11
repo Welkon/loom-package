@@ -249,12 +249,12 @@ test: $(TESTS)
 	@for t in $(TESTS); do echo "== $$t"; ./$$t; done
 
 test-tools:
-	node --test tools/loom/new-unit.test.mjs
+	node --test tools/loom/new-unit.test.mjs tools/loom/ports.test.mjs
 
 clean:
 	rm -rf $(BUILD)
 
-.PHONY: all test test-tools clean site deploy-site check-catalog check-lock check-tags check-yanked yank
+.PHONY: all test test-tools clean site deploy-site check-catalog check-lock check-tags check-yanked ports check-ports yank
 
 site:
 	node site/build.mjs
@@ -264,6 +264,12 @@ deploy-site:
 
 check-catalog:
 	node tools/loom/check-catalog.mjs
+
+ports:
+	node tools/loom/ports.mjs
+
+check-ports:
+	node tools/loom/ports.mjs --check
 
 check-lock:
 	node tools/loom/lock.mjs --check

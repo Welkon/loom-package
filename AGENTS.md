@@ -25,6 +25,7 @@ Keep every unit general; board wiring stays in a project adapter.
 
    ```sh
    make test
+   make check-ports
    node tools/loom/check-catalog.mjs
    node --test site/build.test.mjs
    ```
@@ -48,6 +49,9 @@ Keep every unit general; board wiring stays in a project adapter.
   change needs a version bump and a re-tag, not just a regenerated lock.
 - Every unit has host tests with a fake port. A test that only compiles is not
   enough.
+- `docs/ports.md` is generated from unit headers. Run `make ports` after a port
+  struct changes; `make check-ports` fails when it is stale. Never hand-edit the
+  generated file.
 - Keep `compatibility` accurate: language, allocation, floating point, blocking.
 - Do not add a unit to grow the count. A smaller catalog with clear contracts
   is better than a large one with duplicated behavior.
