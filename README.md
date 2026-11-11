@@ -12,7 +12,8 @@ product repository.
 ```
 operators/   pure algorithms, no I/O
 drivers/     protocol or state-machine cores; I/O behind a port struct
-tools/loom/  catalog tooling: scaffold, lock, tags, yank
+tools/loom/  catalog tooling: scaffold, lock, tags, yank, ports
+docs/        adapter surface (generated), board convention, target index
 site/        static catalog builder and registry index
 loom.json    unit index
 loom.lock    pinned catalog commit and per-unit SHA-256
@@ -101,7 +102,9 @@ make test
 ## Use
 
 Copy the selected unit into the product tree, keep its provenance, and call
-the public API. Adapters for a specific MCU stay next to the product.
+the public API. Adapters for a specific MCU stay next to the product; see
+[`docs/adapters.md`](docs/adapters.md) for the board layout, the single vendor
+include point, and the host-side fake-register test.
 
 The site also serves a Cargo-style static registry at
 <https://loom.pcbsmt.me>: use `loom add <id> --index https://loom.pcbsmt.me`
@@ -123,7 +126,9 @@ first, and extend an existing unit's adapter instead of adding a near-duplicate.
 - Report a defect with a [bug report](https://github.com/Welkon/loom-package/issues/new?template=bug-report.yml).
 - Send a change as a pull request; the template lists the review gate.
 
-Before pushing, run `make test`, `node tools/loom/check-catalog.mjs`, and
-`node --test site/build.test.mjs`. The maintainer bumps the catalog version and
+Before pushing, run `make test`, `node tools/loom/check-catalog.mjs`,
+`make check-ports`, and `node --test site/build.test.mjs`. `make ports`
+regenerates `docs/ports.md` after a port struct changes. The maintainer bumps
+the catalog version and
 creates the tag after review; contributors do not tag or add generated
 `site/dist`.
