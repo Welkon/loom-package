@@ -15,6 +15,7 @@ Reading the table:
 | --- | --- | --- | --- | --- | --- |
 | SCMCU SC8F072 | XC8 | `volatile unsigned char REG @ 0xNN` | `emb-support/.../sources/scmcu/SC8F072.md` (map) and `...-gpio.md` (behaviour) | `hx711` (`loom/examples/sc8f072-hx711`) | — |
 | SCMCU SC8F072 | XC8 | same | `.../scmcu-sc8f072-registers.md` (timer, PWM, comparator, ADC) | — | — |
+| Padauk PMS15x/PFS15x | Padauk mini-C | `PAC`/`PAPH` register bits | `.../padauk-pms15x-gpio.md` | — (mini-C is not C, so the fake-register test does not apply) | — |
 | Padauk PMS150G | Padauk mini-C | project SFR header | `.../padauk-pms150g-registers.md` | — | — |
 | Padauk PMB180B | Padauk mini-C | project SFR header | `.../padauk-pmb180b-registers.md` | — | — |
 | ESP32-C3 | GCC (RISC-V) | ESP-IDF driver calls | `.../espressif-esp32-c3.md` | — | — |
